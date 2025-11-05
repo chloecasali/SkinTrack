@@ -10,3 +10,6 @@ run-android: ## Launch android device
 
 cache: ## Clear expo cache
 	expo start -c
+
+lint: ## Lint code
+	npm run lint

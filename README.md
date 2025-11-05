@@ -15,3 +15,7 @@
    ```bash
    make run-android
    ```
+### Before commit
+```bash
+   make lint
+   ```
