@@ -13,3 +13,13 @@ cache: ## Clear expo cache
 
 lint: ## Lint code
 	npm run lint
+
+prettier: ## Check and fix code format
+	-make prettier-check
+	make prettier-fix
+
+prettier-check: ## Check format code
+	npm run prettier:check
+
+prettier-fix: ## Fix format code
+	npm run prettier:fix
