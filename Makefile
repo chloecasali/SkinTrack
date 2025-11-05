@@ -7,3 +7,6 @@ run-ios: ## Launch ios device
 
 run-android: ## Launch android device
 	npm run android
+
+cache: ## Clear expo cache
+	expo start -c
