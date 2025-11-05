@@ -15,7 +15,7 @@ lint: ## Lint code
 	npm run lint
 
 prettier: ## Check and fix code format
-	make prettier-check
+	-make prettier-check
 	make prettier-fix
 
 prettier-check: ## Check format code
