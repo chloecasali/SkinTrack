@@ -4,34 +4,34 @@ import InputField from "../atoms/InputField";
 import PrimaryButton from "../atoms/PrimaryButton";
 
 export default function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleLogin = () => {
-        if (!email || !password) {
-            Alert.alert("Error", "Please enter both email and password.");
-            return;
-        }
-        Alert.alert("Login successful", `Welcome, ${email}!`);
-    };
+  const handleLogin = () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please enter both email and password.");
+      return;
+    }
+    Alert.alert("Login successful", `Welcome, ${email}!`);
+  };
 
-    return (
-        <>
-            <InputField
-                label="Email"
-                value={email}
-                onChangeText={setEmail}
-                placeholder="example@mail.com"
-                keyboardType="email-address"
-            />
-            <InputField
-                label="Password"
-                value={password}
-                onChangeText={setPassword}
-                placeholder="••••••••"
-                secureTextEntry
-            />
-            <PrimaryButton title="Sign In" onPress={handleLogin} />
-        </>
-    );
+  return (
+    <>
+      <InputField
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        placeholder="example@mail.com"
+        keyboardType="email-address"
+      />
+      <InputField
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        placeholder="••••••••"
+        secureTextEntry
+      />
+      <PrimaryButton title="Sign In" onPress={handleLogin} />
+    </>
+  );
 }
