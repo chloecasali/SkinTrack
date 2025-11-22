@@ -1,65 +1,78 @@
 import { useState } from "react";
-import { AUTH_BASE_URL } from "@/constants/api";
 import { useRouter } from "expo-router";
+import { register as registerService } from "@/services/auth/register";
+import { APP_AUTH_LOGIN } from "@/constants/app";
+import {
+  getErrorMessage,
+  isEmailValid,
+  normalizeEmail,
+  validatePassword,
+} from "@/hooks/default";
 
 export function useRegister() {
   const router = useRouter();
+
+  // Form state
+  const [firstname, setFirstname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
-  const register = async (
-    firstname: string,
-    email: string,
-    password: string,
-  ) => {
+  // Local validation for the form using shared helpers
+  const validate = () => {
+    if (!firstname.trim()) {
+      return "Firstname is required.";
+    }
+    if (!isEmailValid(email)) {
+      return "Please enter a valid email address.";
+    }
+    return validatePassword(password);
+  };
+
+  const register = async () => {
     setErrorMsg(null);
     setSuccessMsg(null);
 
+    // Basic empty check prior to full validation
     if (!firstname || !email || !password) {
       setErrorMsg("Please fill in all fields.");
+      return;
+    }
+
+    // Run full validation
+    const validationMsg = validate();
+    if (validationMsg) {
+      setErrorMsg(validationMsg);
       return;
     }
 
     try {
       setLoading(true);
 
-      const res = await fetch(`${AUTH_BASE_URL}/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstname,
-          email: email.toLowerCase(),
-          password,
-        }),
-      });
-
-      const text = await res.text();
-      let data = null;
-      try {
-        data = text ? JSON.parse(text) : null;
-      } catch {}
-
-      if (!res.ok) {
-        const message =
-          data?.message ||
-          data?.error ||
-          "Registration failed. Please try again.";
-        setErrorMsg(message);
-        return;
-      }
+      await registerService(firstname.trim(), normalizeEmail(email), password);
 
       setSuccessMsg("Account created successfully!");
-      router.replace("/(tabs)/auth/login");
+      router.replace(APP_AUTH_LOGIN);
     } catch (e: any) {
-      setErrorMsg(e?.message || "Unable to register right now.");
+      setErrorMsg(getErrorMessage(e, "Unable to register right now."));
     } finally {
       setLoading(false);
     }
   };
 
   return {
+    // values
+    firstname,
+    email,
+    password,
+    // setters (with normalization where it makes sense)
+    setFirstname: (t: string) => setFirstname(t.trim()),
+    setEmail: (t: string) => setEmail(normalizeEmail(t)),
+    setPassword,
+    // actions
     register,
     loading,
     errorMsg,
