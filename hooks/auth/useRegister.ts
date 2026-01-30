@@ -19,7 +19,6 @@ export function useRegister() {
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
   // Local validation for the form using shared helpers
   const validate = () => {
@@ -34,7 +33,6 @@ export function useRegister() {
 
   const register = async () => {
     setErrorMsg(null);
-    setSuccessMsg(null);
 
     // Basic empty check prior to full validation
     if (!firstname || !email || !password) {
@@ -51,10 +49,7 @@ export function useRegister() {
 
     try {
       setLoading(true);
-
       await registerService(firstname.trim(), normalizeEmail(email), password);
-
-      setSuccessMsg("Account created successfully!");
       router.replace(APP_AUTH_LOGIN);
     } catch (e: any) {
       setErrorMsg(getErrorMessage(e, "Unable to register right now."));
@@ -76,6 +71,5 @@ export function useRegister() {
     register,
     loading,
     errorMsg,
-    successMsg,
   };
 }

@@ -14,7 +14,7 @@ export default function LoginScreen() {
       <TouchableOpacity
         className="mt-4"
         onPress={() => {
-          return router.push(APP_AUTH_REGISTER);
+          router.push(APP_AUTH_REGISTER);
         }}
       >
         <Text className="text-blue-500 underline">Create an account</Text>

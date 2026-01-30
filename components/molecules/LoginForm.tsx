@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Text } from "react-native";
-import InputField from "../atoms/InputField";
-import PrimaryButton from "../atoms/PrimaryButton";
+import PrimaryButton from "@/components/atoms/PrimaryButton";
 import { useLogin } from "@/hooks/auth/useLogin";
+import InputField from "@/components/atoms/InputField";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");

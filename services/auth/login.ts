@@ -1,6 +1,6 @@
 import { apiUrl, ensureOk } from "@/services/default";
 
-export async function login(email: string, password: string) {
+export async function login(email: string, password: string): Promise<string> {
   const res = await fetch(apiUrl("/auth/login"), {
     method: "POST",
     headers: {

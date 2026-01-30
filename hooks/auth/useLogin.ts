@@ -3,6 +3,7 @@ import { login } from "@/services/auth/login";
 import { setToken } from "@/lib/auth";
 import { useRouter } from "expo-router";
 import { getErrorMessage, isEmailValid, normalizeEmail } from "@/hooks/default";
+import { APP_HOME } from "@/constants/app";
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,7 @@ export function useLogin() {
       const token = await login(normalizeEmail(email), password);
 
       setToken(token);
-      router.replace("/home");
+      router.replace(APP_HOME);
     } catch (error: any) {
       // API error (invalid credentials OR server error)
       setErrorMsg(getErrorMessage(error));
