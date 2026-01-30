@@ -14,7 +14,6 @@ export default function RegisterForm() {
     register,
     loading,
     errorMsg,
-    successMsg,
   } = useRegister();
 
   return (
@@ -43,10 +42,6 @@ export default function RegisterForm() {
       />
 
       {errorMsg && <Text className="text-red-500 mt-2 mb-2">{errorMsg}</Text>}
-
-      {successMsg && (
-        <Text className="text-green-600 mt-2 mb-2">{successMsg}</Text>
-      )}
 
       <PrimaryButton
         title={loading ? "Creating account..." : "Create Account"}

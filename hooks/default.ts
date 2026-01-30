@@ -7,7 +7,7 @@ export function normalizeEmail(value: string): string {
 }
 
 // Simple but solid email validation (no RFC rocket science)
-export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export function isEmailValid(email: string): boolean {
   return emailRegex.test(normalizeEmail(email));
 }
