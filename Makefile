@@ -7,3 +7,18 @@ run-ios: ## Launch ios device
 
 run-android: ## Launch android device
 	npm run android
+
+cache: ## Clear expo cache
+	npm run start -- -c
+lint: ## Lint code
+	npm run lint
+
+prettier: ## Check and fix code format
+	-make prettier-check
+	make prettier-fix
+
+prettier-check: ## Check format code
+	npm run prettier:check
+
+prettier-fix: ## Fix format code
+	npm run prettier:fix

@@ -11,7 +11,14 @@
    ```
 
 ### Launch on android
+
 1. Launch the app on your Android device by using :
    ```bash
    make run-android
    ```
+
+### Before commit
+
+```bash
+   make lint
+```
