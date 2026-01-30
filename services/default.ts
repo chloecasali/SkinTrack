@@ -9,10 +9,7 @@ export function apiUrl(path: string): string {
 // Detect if a response contains JSON
 export function isJsonResponse(res: Response): boolean {
   const contentType = res.headers.get("content-type") || "";
-  return (
-    contentType.includes("application/json") ||
-    contentType.includes("application/ld+json")
-  );
+  return contentType.includes("application/json");
 }
 
 // Safely parse JSON from a response, returning null on failure or non-JSON

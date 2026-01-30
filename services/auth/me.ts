@@ -11,7 +11,7 @@ export async function fetchMe(token: string): Promise<MeResponse> {
   const res = await fetch(apiUrl("/me"), {
     headers: {
       Authorization: `Bearer ${token}`,
-      Accept: "application/json, application/ld+json",
+      Accept: "application/ld+json",
     },
   });
 
