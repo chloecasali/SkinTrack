@@ -9,8 +9,7 @@ run-android: ## Launch android device
 	npm run android
 
 cache: ## Clear expo cache
-	expo start -c
-
+	npm run start -- -c
 lint: ## Lint code
 	npm run lint
 
