@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { login } from "@/services/auth/login";
-import { setToken } from "@/lib/auth";
 import { useRouter } from "expo-router";
 import { getErrorMessage, isEmailValid, normalizeEmail } from "@/hooks/default";
 import { APP_HOME } from "@/constants/app";
+import {setToken} from "@/services/auth/token";
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);

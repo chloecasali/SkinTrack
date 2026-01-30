@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import LoginForm from "@/components/molecules/LoginForm";
 import { useRouter } from "expo-router";
+import { Text, TouchableOpacity, View } from "react-native";
+import LoginForm from "@/components/molecules/LoginForm";
 import { APP_AUTH_REGISTER } from "@/constants/app";
 
-export default function LoginScreen() {
+export default function LoginPage() {
   const router = useRouter();
 
   return (

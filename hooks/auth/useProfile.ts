@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getToken } from "@/lib/auth";
 import { fetchMe, MeResponse } from "@/services/auth/me";
 import { extractFirstname, getErrorMessage } from "@/hooks/default";
+import {getToken} from "@/services/auth/token";
 
 export type { MeResponse };
 
