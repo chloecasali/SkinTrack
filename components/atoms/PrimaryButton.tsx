@@ -13,11 +13,21 @@ export default function PrimaryButton({
 }: PrimaryButtonProps) {
   return (
     <TouchableOpacity
-      className={`w-full bg-blue-500 rounded-xl py-3 active:bg-blue-600 ${disabled ? "opacity-50" : ""}`}
       onPress={onPress}
       disabled={disabled}
+      activeOpacity={0.85}
+      className={`
+        w-full h-12 rounded-xl
+        items-center justify-center
+        ${disabled ? "bg-slate-300" : "bg-slate-900"}
+      `}
     >
-      <Text className="text-white text-center text-lg font-semibold">
+      <Text
+        className={`
+          text-base font-medium
+          ${disabled ? "text-slate-500" : "text-white"}
+        `}
+      >
         {title}
       </Text>
     </TouchableOpacity>

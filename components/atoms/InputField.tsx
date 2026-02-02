@@ -18,16 +18,27 @@ export default function InputField({
   keyboardType = "default",
 }: InputFieldProps) {
   return (
-    <View className="w-full mb-4">
-      <Text className="text-gray-700 font-medium mb-2">{label}</Text>
+    <View className="w-full mb-5">
+      <Text className="text-sm font-medium text-slate-700 mb-2">{label}</Text>
+
       <TextInput
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor="#9ca3af"
+        placeholderTextColor="#94a3b8"
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
-        className="w-full border border-gray-300 rounded-xl px-4 py-3 text-base"
+        className="
+          w-full
+          h-12
+          rounded-xl
+          border
+          border-slate-200
+          px-4
+          text-base
+          text-slate-900
+          bg-white
+        "
       />
     </View>
   );
