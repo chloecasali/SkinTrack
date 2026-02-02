@@ -15,19 +15,18 @@ export default function HomeScreen() {
         Hello {firstname || "Guest"}!
       </Text>
 
-        <PrimaryButton
-            title="Disconnect"
-            onPress={async () => {
-                try {
-                    await clearToken();
-                } catch (err) {
-                    console.error("Failed to clear token", err);
-                } finally {
-                    router.replace(APP_AUTH_LOGIN);
-                }
-            }}
-        />
-
+      <PrimaryButton
+        title="Disconnect"
+        onPress={async () => {
+          try {
+            await clearToken();
+          } catch (err) {
+            console.error("Failed to clear token", err);
+          } finally {
+            router.replace(APP_AUTH_LOGIN);
+          }
+        }}
+      />
     </View>
   );
 }
