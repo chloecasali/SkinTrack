@@ -1,13 +1,38 @@
-let TOKEN: string | null = null;
+import { useEffect, useState } from "react";
+import * as SecureStore from "expo-secure-store";
 
-export function setToken(token: string) {
-  TOKEN = token;
-}
+const AUTH_TOKEN = "AUTH_TOKEN";
 
-export function getToken(): string | null {
-  return TOKEN;
-}
+let token: string | null | undefined = undefined;
+let notify: ((t: typeof token) => void) | null = null;
 
-export function clearToken() {
-  TOKEN = null;
-}
+export const initToken = async () => {
+  token = await SecureStore.getItemAsync(AUTH_TOKEN);
+  notify?.(token);
+};
+
+export const useToken = () => {
+  const [state, setState] = useState<typeof token>(token);
+
+  useEffect(() => {
+    notify = setState;
+    setState(token);
+    return () => {
+      notify = null;
+    };
+  }, []);
+
+  return state;
+};
+
+export const setToken = async (value: string) => {
+  token = value;
+  await SecureStore.setItemAsync(AUTH_TOKEN, value);
+  notify?.(value);
+};
+
+export const clearToken = async () => {
+  token = null;
+  await SecureStore.deleteItemAsync(AUTH_TOKEN);
+  notify?.(null);
+};

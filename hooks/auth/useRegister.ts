@@ -62,7 +62,7 @@ export function useRegister() {
     email,
     password,
     setFirstname,
-    setEmail: (t: string) => setEmail(t.toLowerCase()),
+    setEmail,
     setPassword,
     register,
     loading,
