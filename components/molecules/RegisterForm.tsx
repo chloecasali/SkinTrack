@@ -28,7 +28,7 @@ export default function RegisterForm() {
       <InputField
         label="Email"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(t) => setEmail(t.toLowerCase())}
         placeholder="example@mail.com"
         keyboardType="email-address"
       />
@@ -41,10 +41,12 @@ export default function RegisterForm() {
         secureTextEntry
       />
 
-      {errorMsg && <Text className="text-red-500 mt-2 mb-2">{errorMsg}</Text>}
+      {errorMsg && (
+        <Text className="text-sm text-red-500 mt-1 mb-3">{errorMsg}</Text>
+      )}
 
       <PrimaryButton
-        title={loading ? "Creating account..." : "Create Account"}
+        title={loading ? "Creating account..." : "Create account"}
         onPress={register}
         disabled={loading}
       />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
 import { useLogin } from "@/hooks/auth/useLogin";
 import InputField from "@/components/atoms/InputField";
@@ -11,7 +11,7 @@ export default function LoginForm() {
   const { loading, errorMsg, handleLogin } = useLogin();
 
   return (
-    <>
+    <View className="w-full">
       <InputField
         label="Email"
         value={email}
@@ -28,13 +28,15 @@ export default function LoginForm() {
         secureTextEntry
       />
 
-      {errorMsg && <Text className="text-red-500 mt-2 mb-2">{errorMsg}</Text>}
+      {errorMsg && (
+        <Text className="text-sm text-red-500 mt-2">{errorMsg}</Text>
+      )}
 
       <PrimaryButton
         title={loading ? "Signing in..." : "Sign In"}
         onPress={() => handleLogin(email, password)}
         disabled={loading}
       />
-    </>
+    </View>
   );
 }
