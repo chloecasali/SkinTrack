@@ -4,21 +4,21 @@ import * as SecureStore from "expo-secure-store";
 const AUTH_TOKEN = "AUTH_TOKEN";
 
 let token: string | null | undefined = undefined;
-let notify: ((t: typeof token) => void) | null = null;
+const subscribers = new Set<(t: typeof token) => void>();
 
 export const initToken = async () => {
   token = await SecureStore.getItemAsync(AUTH_TOKEN);
-  notify?.(token);
+  subscribers.forEach((callback) => callback(token));
 };
 
 export const useToken = () => {
   const [state, setState] = useState<typeof token>(token);
 
   useEffect(() => {
-    notify = setState;
+    subscribers.add(setState);
     setState(token);
     return () => {
-      notify = null;
+      subscribers.delete(setState);
     };
   }, []);
 
@@ -28,11 +28,11 @@ export const useToken = () => {
 export const setToken = async (value: string) => {
   token = value;
   await SecureStore.setItemAsync(AUTH_TOKEN, value);
-  notify?.(value);
+  subscribers.forEach((callback) => callback(value));
 };
 
 export const clearToken = async () => {
   token = null;
   await SecureStore.deleteItemAsync(AUTH_TOKEN);
-  notify?.(null);
+  subscribers.forEach((callback) => callback(null));
 };

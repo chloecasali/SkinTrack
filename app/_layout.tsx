@@ -13,7 +13,9 @@ import "@/global.css";
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   useEffect(() => {
-    initToken();
+    void initToken().catch((err) => {
+      console.error("Failed to initialize token:", err);
+    });
   }, []);
 
   return (
