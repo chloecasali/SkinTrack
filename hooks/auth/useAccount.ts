@@ -3,7 +3,6 @@ import { useRouter } from "expo-router";
 import { getErrorMessage, isEmailValid } from "@/hooks/default";
 import { APP_AUTH_PASSWORD, APP_AUTH_REGISTER } from "@/constants/app";
 import { getAccount } from "@/services/auth/login";
-import { error } from "@expo/fingerprint/cli/build/utils/log";
 
 export function useAccount() {
   const [loading, setLoading] = useState(false);
