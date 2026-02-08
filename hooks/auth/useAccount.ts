@@ -26,11 +26,11 @@ export function useAccount() {
     try {
       setLoading(true);
 
-      await getAccount(email);
+      await getAccount(normalizedEmail);
 
       router.replace({
         pathname: APP_AUTH_PASSWORD,
-        params: { email },
+        params: { normalizedEmail },
       });
     } catch (error: any) {
       if (error instanceof Error && error.message === "Account not found.") {

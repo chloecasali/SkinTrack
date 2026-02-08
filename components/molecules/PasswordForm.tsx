@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLogin } from "@/hooks/auth/useLogin";
 import InputField from "@/components/atoms/InputField";
 import { Text, View } from "react-native";
@@ -11,10 +11,11 @@ export default function PasswordForm() {
   const [password, setPassword] = useState("");
   const { loading, errorMsg, handleLogin } = useLogin();
 
-  if (!email) {
-    router.replace(APP_AUTH_LOGIN);
-    return null;
-  }
+  useEffect(() => {
+    if (!email) {
+      router.replace(APP_AUTH_LOGIN);
+    }
+  }, [email]);
 
   return (
     <View className="w-full">
