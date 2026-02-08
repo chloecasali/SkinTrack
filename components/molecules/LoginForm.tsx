@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { Text, View } from "react-native";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
-import { useLogin } from "@/hooks/auth/useLogin";
+import { useAccount } from "@/hooks/auth/useAccount";
 import InputField from "@/components/atoms/InputField";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const { loading, errorMsg, handleLogin } = useLogin();
-
+  const { loading, errorMsg, handleAccount } = useAccount();
   return (
     <View className="w-full">
       <InputField
@@ -19,22 +16,12 @@ export default function LoginForm() {
         placeholder="example@mail.com"
         keyboardType="email-address"
       />
-
-      <InputField
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        placeholder="••••••••"
-        secureTextEntry
-      />
-
       {errorMsg && (
-        <Text className="text-sm text-red-500 mt-2">{errorMsg}</Text>
+        <Text className="text-sm text-red-500 mb-4">{errorMsg}</Text>
       )}
-
       <PrimaryButton
-        title={loading ? "Signing in..." : "Sign In"}
-        onPress={() => handleLogin(email, password)}
+        title={loading ? "Finding account..." : "Continue"}
+        onPress={() => handleAccount(email)}
         disabled={loading}
       />
     </View>
