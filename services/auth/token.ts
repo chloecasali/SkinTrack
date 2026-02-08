@@ -10,12 +10,21 @@ let token: Token = undefined;
 const subscribers = new Set<(t: Token) => void>();
 
 export const initToken = async (): Promise<void> => {
+  if (token !== undefined) return;
+
+  let stored: string | null = null;
+  let shouldSet = false;
+
   try {
-    token = await SecureStore.getItemAsync(AUTH_TOKEN);
+    stored = await SecureStore.getItemAsync(AUTH_TOKEN);
+    shouldSet = token === undefined;
   } catch (err) {
     console.error("Failed to read token from SecureStore", err);
-    token = null;
-  } finally {
+    shouldSet = token === undefined;
+  }
+
+  if (shouldSet) {
+    token = stored;
     subscribers.forEach((callback) => callback(token));
   }
 };
