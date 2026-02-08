@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { getErrorMessage, isEmailValid } from "@/hooks/default";
+import { getErrorMessage, isEmailValid, normalizeEmail } from "@/hooks/default";
 import { APP_AUTH_PASSWORD, APP_AUTH_REGISTER } from "@/constants/app";
 import { getAccount } from "@/services/auth/login";
 
@@ -11,14 +11,23 @@ export function useAccount() {
 
   const handleAccount = async (email: string) => {
     setErrorMsg(null);
-    if (!email || !isEmailValid(email)) {
+    if (!email) {
+      setErrorMsg("Please enter an email.");
+      return;
+    }
+
+    const normalizedEmail = normalizeEmail(email);
+
+    if (!isEmailValid(normalizedEmail)) {
       setErrorMsg("Please enter a valid email.");
       return;
     }
 
     try {
       setLoading(true);
+
       await getAccount(email);
+
       router.replace({
         pathname: APP_AUTH_PASSWORD,
         params: { email },

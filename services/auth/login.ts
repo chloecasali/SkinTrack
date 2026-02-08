@@ -3,7 +3,6 @@ import { APP_AUTH_LOGIN } from "@/constants/app";
 
 type HydraCollection<T> = {
   totalItems: number;
-  member: T[];
 };
 
 export async function getAccount(email: string): Promise<void> {

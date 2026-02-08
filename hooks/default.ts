@@ -1,9 +1,8 @@
 // Shared auth helpers to keep hooks small and consistent
 import type { MeResponse } from "@/services/auth/me";
 
-// Lower-case and trim a potential email string
-export function normalizeEmail(value: string): string {
-  return (value || "").trim().toLowerCase();
+export function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase();
 }
 
 // Simple but solid email validation (no RFC rocket science)

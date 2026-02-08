@@ -3,12 +3,18 @@ import { useLogin } from "@/hooks/auth/useLogin";
 import InputField from "@/components/atoms/InputField";
 import { Text, View } from "react-native";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
+import { APP_AUTH_LOGIN } from "@/constants/app";
 
 export default function PasswordForm() {
   const { email } = useLocalSearchParams<{ email: string }>();
   const [password, setPassword] = useState("");
   const { loading, errorMsg, handleLogin } = useLogin();
+
+  if (!email) {
+    router.replace(APP_AUTH_LOGIN);
+    return null;
+  }
 
   return (
     <View className="w-full">

@@ -12,6 +12,11 @@ export function useLogin() {
 
   const handleLogin = async (email: string, password: string) => {
     setErrorMsg(null);
+
+    if (!email || !password) {
+      setErrorMsg("Missing credentials.");
+      return;
+    }
     try {
       setLoading(true);
       const token = await login(normalizeEmail(email), password);
