@@ -29,7 +29,7 @@ export function useProfile() {
       try {
         const data = await fetchMe(token);
         setFirstname(extractFirstname(data));
-        setEmail(data.email);
+        setEmail(data.email ?? null);
       } catch (error: any) {
         setErrorMsg(getErrorMessage(error, "Unable to fetch user profile."));
       } finally {

@@ -30,7 +30,7 @@ export function useAccount() {
 
       router.replace({
         pathname: APP_AUTH_PASSWORD,
-        params: { normalizedEmail },
+        params: { email },
       });
     } catch (error: any) {
       if (error instanceof Error && error.message === "Account not found.") {
