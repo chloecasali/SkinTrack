@@ -1,7 +1,7 @@
 import { apiUrl, ensureOk } from "@/services/default";
 import { APP_AUTH_LOGIN } from "@/constants/app";
 
-type HydraCollection<T> = {
+type HydraCollection = {
   totalItems: number;
 };
 
@@ -12,10 +12,7 @@ export async function getAccount(email: string): Promise<void> {
     },
   });
 
-  const data = await ensureOk<HydraCollection<unknown>>(
-    res,
-    "Failed to fetch account",
-  );
+  const data = await ensureOk<HydraCollection>(res, "Failed to fetch account");
 
   if (!data || data["totalItems"] === 0) {
     throw new Error("Account not found.");

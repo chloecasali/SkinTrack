@@ -1,16 +1,20 @@
 import { Platform } from "react-native";
 
-if (!process.env.EXPO_PUBLIC_AUTH_BASE_URL) {
+const authBaseUrl = process.env.EXPO_PUBLIC_AUTH_BASE_URL;
+const androidUrl = process.env.EXPO_PUBLIC_ANDROID_URL;
+
+if (!authBaseUrl && !(Platform.OS === "android" && androidUrl)) {
   console.warn(
-    "EXPO_PUBLIC_AUTH_BASE_URL is not set. On Android, falling back to EXPO_PUBLIC_ANDROID_URL; on other platforms, the app will fail to start if no auth base URL is configured.",
+    "No auth base URL is configured. " +
+      "Set EXPO_PUBLIC_AUTH_BASE_URL, " +
+      (Platform.OS === "android" ? "or EXPO_PUBLIC_ANDROID_URL " : "") +
+      "to avoid app startup errors.",
   );
 }
 
 const rawAuthBaseUrl =
-  process.env.EXPO_PUBLIC_AUTH_BASE_URL?.replace(/\/$/, "") ||
-  (Platform.OS === "android"
-    ? process.env.EXPO_PUBLIC_ANDROID_URL?.replace(/\/$/, "")
-    : undefined);
+  authBaseUrl?.replace(/\/$/, "") ||
+  (Platform.OS === "android" ? androidUrl?.replace(/\/$/, "") : undefined);
 
 if (!rawAuthBaseUrl) {
   throw new Error(
