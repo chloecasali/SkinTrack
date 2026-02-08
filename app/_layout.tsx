@@ -6,14 +6,17 @@ import {
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useEffect } from "react";
+import { initToken } from "@/services/auth/token";
 import "@/global.css";
-
-export const unstable_settings = {
-  anchor: "(tabs)",
-};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  useEffect(() => {
+    void initToken().catch((err) => {
+      console.error("Failed to initialize token:", err);
+    });
+  }, []);
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
