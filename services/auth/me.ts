@@ -1,6 +1,7 @@
 import { apiUrl, ensureOk } from "@/services/default";
 
 export type MeResponse = {
+  email?: string;
   firstname?: string;
   firstName?: string;
   givenName?: string;

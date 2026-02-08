@@ -3,20 +3,30 @@ import * as SecureStore from "expo-secure-store";
 
 const AUTH_TOKEN = "AUTH_TOKEN";
 
-let token: string | null | undefined = undefined;
-const subscribers = new Set<(t: typeof token) => void>();
+type Token = string | null | undefined;
 
-export const initToken = async () => {
-  token = await SecureStore.getItemAsync(AUTH_TOKEN);
-  subscribers.forEach((callback) => callback(token));
+let token: Token = undefined;
+
+const subscribers = new Set<(t: Token) => void>();
+
+export const initToken = async (): Promise<void> => {
+  try {
+    token = await SecureStore.getItemAsync(AUTH_TOKEN);
+  } catch (err) {
+    console.error("Failed to read token from SecureStore", err);
+    token = null;
+  } finally {
+    subscribers.forEach((callback) => callback(token));
+  }
 };
 
-export const useToken = () => {
-  const [state, setState] = useState<typeof token>(token);
+export const useToken = (): Token => {
+  const [state, setState] = useState<Token>(token);
 
   useEffect(() => {
     subscribers.add(setState);
     setState(token);
+
     return () => {
       subscribers.delete(setState);
     };
@@ -25,14 +35,26 @@ export const useToken = () => {
   return state;
 };
 
-export const setToken = async (value: string) => {
+export const setToken = async (value: string): Promise<void> => {
   token = value;
-  await SecureStore.setItemAsync(AUTH_TOKEN, value);
-  subscribers.forEach((callback) => callback(value));
+
+  subscribers.forEach((callback) => callback(token));
+
+  try {
+    await SecureStore.setItemAsync(AUTH_TOKEN, value);
+  } catch (err) {
+    console.error("Failed to persist token", err);
+  }
 };
 
-export const clearToken = async () => {
+export const clearToken = async (): Promise<void> => {
   token = null;
-  await SecureStore.deleteItemAsync(AUTH_TOKEN);
-  subscribers.forEach((callback) => callback(null));
+
+  subscribers.forEach((callback) => callback(token));
+
+  try {
+    await SecureStore.deleteItemAsync(AUTH_TOKEN);
+  } catch (err) {
+    console.error("Failed to delete token", err);
+  }
 };

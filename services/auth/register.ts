@@ -1,11 +1,12 @@
 import { apiUrl, ensureOk } from "@/services/default";
+import { APP_AUTH_REGISTER } from "@/constants/app";
 
 export async function register(
   firstname: string,
   email: string,
   password: string,
 ): Promise<void> {
-  const res = await fetch(apiUrl("/auth/register"), {
+  const res = await fetch(apiUrl(APP_AUTH_REGISTER), {
     method: "POST",
     headers: {
       "Content-Type": "application/ld+json",
