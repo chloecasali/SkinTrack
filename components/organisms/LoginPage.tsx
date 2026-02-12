@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import LoginForm from "@/components/molecules/LoginForm";
 import { APP_AUTH_REGISTER } from "@/constants/app";
+import GoogleAuth from "@/components/atoms/GoogleAuth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function LoginPage() {
 
       <LoginForm />
 
+      <GoogleAuth />
       <TouchableOpacity
         className="mt-6 self-center"
         activeOpacity={0.6}
