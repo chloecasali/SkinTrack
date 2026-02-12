@@ -1,9 +1,8 @@
-import { AUTH_BASE_URL } from "@/constants/api";
+import { API_URL } from "@/constants/api";
 
-// Build a full auth API URL from a relative path
 export function apiUrl(path: string): string {
   if (!path.startsWith("/")) path = `/${path}`;
-  return `${AUTH_BASE_URL}${path}`;
+  return `${API_URL}${path}`;
 }
 
 // Detect if a response contains JSON

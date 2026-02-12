@@ -6,7 +6,7 @@ type HydraCollection = {
 };
 
 export async function getAccount(email: string): Promise<void> {
-  const res = await fetch(apiUrl(`/users?email=${email}`), {
+  const res = await fetch(apiUrl(`users?email=${email}`), {
     headers: {
       Accept: "application/ld+json",
     },
