@@ -21,6 +21,10 @@ export default function LoginPage() {
 
       <LoginForm />
 
+      <Text className="text-sm text-gray-500 mt-4">
+        ———————————— Or continue with ———————————
+      </Text>
+
       <GoogleAuth />
       <TouchableOpacity
         className="mt-6 self-center"
