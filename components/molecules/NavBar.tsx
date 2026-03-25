@@ -29,7 +29,7 @@ export default function NavBar({ activeTab }: NavBarProps) {
         label="Search"
         icon="search-outline"
         active={activeTab === "search"}
-        onPress={() => router.push("/")}
+        onPress={() => router.push("/search")}
       />
 
       <NavButton
@@ -43,7 +43,7 @@ export default function NavBar({ activeTab }: NavBarProps) {
         label="Calendar"
         icon="calendar-outline"
         active={activeTab === "calendar"}
-        onPress={() => router.push("/")}
+        onPress={() => router.push("/calendar")}
       />
 
       <NavButton
