@@ -99,7 +99,7 @@ export function useGoogleAuth() {
     return () => {
       isMounted = false;
     };
-  }, [completeAuth, response]);
+  }, [completeAuth, response, t]);
 
   const handleGoogleAuth = async () => {
     setErrorMsg(null);
