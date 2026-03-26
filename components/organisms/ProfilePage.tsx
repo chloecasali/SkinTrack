@@ -9,8 +9,7 @@ import { router } from "expo-router";
 import DisconnectButton from "@/components/atoms/DisconnectButton";
 import { useProfile } from "@/hooks/auth/useProfile";
 import { setAppLanguage, useAppLanguage } from "@/services/language";
-
-const LANGUAGE_OPTIONS = ["en", "fr"] as const;
+import { SUPPORTED_LANGUAGES } from "@/i18n/resources";
 
 export default function ProfilePage() {
   const { firstname, email } = useProfile();
@@ -46,7 +45,7 @@ export default function ProfilePage() {
           </Text>
 
           <View className="gap-3">
-            {LANGUAGE_OPTIONS.map((option) => {
+            {SUPPORTED_LANGUAGES.map((option) => {
               const active = language === option;
 
               return (

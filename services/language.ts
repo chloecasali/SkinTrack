@@ -32,7 +32,10 @@ async function readStoredLanguage(): Promise<AppLanguage | null> {
       const stored = window.localStorage.getItem(APP_LANGUAGE_KEY);
       return isSupportedLanguage(stored) ? stored : null;
     } catch (error) {
-      console.error("Failed to read language preference from localStorage", error);
+      console.error(
+        "Failed to read language preference from localStorage",
+        error,
+      );
       return null;
     }
   }
