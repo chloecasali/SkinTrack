@@ -1,4 +1,5 @@
 import { Image, Platform, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
 type GoogleAuthProps = {
@@ -33,6 +34,7 @@ export default function GoogleAuth({
   disabled = false,
   loading = false,
 }: GoogleAuthProps) {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme();
   const platform = Platform.OS === "android" ? "android" : "ios";
   const theme = colorScheme === "dark" ? "dark" : "light";
@@ -49,7 +51,7 @@ export default function GoogleAuth({
       className="mt-4 self-center"
       style={{ opacity: isDisabled ? 0.5 : 1 }}
       accessibilityRole="button"
-      accessibilityLabel="Continue with Google"
+      accessibilityLabel={t("auth.login.googleButtonA11yLabel")}
     >
       <Image source={buttonSource} resizeMode="contain" style={buttonSize} />
     </TouchableOpacity>
