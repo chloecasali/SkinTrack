@@ -19,7 +19,6 @@ const GOOGLE_CLIENT_ID_PLACEHOLDER = "__missing_google_client_id__";
 const googleRedirectUri = AuthSession.makeRedirectUri({
   scheme: APP_SCHEME,
   path: "oauthredirect",
-  native: `${APP_SCHEME}:/oauthredirect`,
 });
 
 export function useGoogleAuth() {
