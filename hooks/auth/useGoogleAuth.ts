@@ -27,14 +27,21 @@ export function useGoogleAuth() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const platformGoogleClientId =
-    Platform.OS === "ios" ? GOOGLE_IOS_CLIENT_ID : GOOGLE_ANDROID_CLIENT_ID;
-  const googleConfigError = platformGoogleClientId
-    ? null
-    : `Google sign-in is not configured. Missing ${
-        Platform.OS === "ios"
-          ? "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID"
-          : "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID"
-      }.`;
+    Platform.OS === "ios"
+      ? GOOGLE_IOS_CLIENT_ID
+      : Platform.OS === "android"
+        ? GOOGLE_ANDROID_CLIENT_ID
+        : null;
+  const googleConfigError =
+    Platform.OS === "web"
+      ? "Google sign-in is only available on iOS and Android."
+      : platformGoogleClientId
+        ? null
+        : `Google sign-in is not configured. Missing ${
+            Platform.OS === "ios"
+              ? "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID"
+              : "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID"
+          }.`;
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     iosClientId: GOOGLE_IOS_CLIENT_ID,
     androidClientId: GOOGLE_ANDROID_CLIENT_ID,
