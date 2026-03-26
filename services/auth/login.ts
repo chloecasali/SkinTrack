@@ -1,4 +1,4 @@
-import { AUTH_PATHS, API_PATHS } from "@/constants/paths";
+import { API_PATHS } from "@/constants/paths";
 import { apiUrl, ensureOk } from "@/services/default";
 import {
   AUTH_ACCOUNT_NOT_FOUND_ERROR,
@@ -32,7 +32,7 @@ export async function getAccount(email: string): Promise<void> {
 }
 
 export async function login(email: string, password: string): Promise<string> {
-  const res = await fetch(apiUrl(AUTH_PATHS.login), {
+  const res = await fetch(apiUrl(API_PATHS.authLogin), {
     method: "POST",
     headers: {
       "Content-Type": "application/ld+json",

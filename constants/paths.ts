@@ -11,6 +11,8 @@ export const APP_PATHS = {
 } as const;
 
 export const API_PATHS = {
+  authLogin: "/auth/login",
+  authRegister: "/auth/register",
   googleAuth: "/auth/google",
   me: "/me",
   users: "/users",
