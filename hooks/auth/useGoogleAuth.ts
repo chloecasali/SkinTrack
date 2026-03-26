@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import { Platform } from "react-native";
 import { useTranslation } from "react-i18next";
-import { APP_SCHEME } from "@/constants/app";
 import {
   GOOGLE_ANDROID_CLIENT_ID,
   GOOGLE_IOS_CLIENT_ID,
@@ -13,11 +11,6 @@ import { loginWithGoogle } from "@/services/auth/google";
 import { useCompleteAuth } from "@/hooks/auth/useCompleteAuth";
 
 const GOOGLE_CLIENT_ID_PLACEHOLDER = "__missing_google_client_id__";
-
-const googleRedirectUri = AuthSession.makeRedirectUri({
-  scheme: APP_SCHEME,
-  path: "oauthredirect",
-});
 
 export function useGoogleAuth() {
   const completeAuth = useCompleteAuth();
@@ -45,7 +38,6 @@ export function useGoogleAuth() {
     iosClientId: GOOGLE_IOS_CLIENT_ID,
     androidClientId: GOOGLE_ANDROID_CLIENT_ID,
     clientId: platformGoogleClientId ?? GOOGLE_CLIENT_ID_PLACEHOLDER,
-    redirectUri: googleRedirectUri,
     scopes: ["openid", "profile", "email"],
     selectAccount: true,
   });
