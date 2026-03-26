@@ -35,15 +35,6 @@ export function useGoogleAuth() {
   });
 
   useEffect(() => {
-    if (!__DEV__) return;
-
-    if (Platform.OS === "ios") {
-      console.log("[GoogleAuth] Active iOS client ID:", GOOGLE_IOS_CLIENT_ID);
-      console.log("[GoogleAuth] Active redirect URI:", googleRedirectUri);
-    }
-  }, []);
-
-  useEffect(() => {
     if (!response) return;
 
     if (response.type === "error") {

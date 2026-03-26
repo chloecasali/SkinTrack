@@ -1,5 +1,8 @@
 import { API_AUTH_GOOGLE } from "@/constants/api";
-import { requireAuthToken, type AuthTokenResponse } from "@/services/auth/session";
+import {
+  requireAuthToken,
+  type AuthTokenResponse,
+} from "@/services/auth/session";
 import { apiUrl, ensureOk } from "@/services/default";
 
 export async function loginWithGoogle(idToken: string): Promise<string> {

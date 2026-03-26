@@ -1,8 +1,8 @@
+import { API_AUTH_LOGIN, API_USERS } from "@/constants/api";
 import {
-  API_AUTH_LOGIN,
-  API_USERS,
-} from "@/constants/api";
-import { requireAuthToken, type AuthTokenResponse } from "@/services/auth/session";
+  requireAuthToken,
+  type AuthTokenResponse,
+} from "@/services/auth/session";
 import { apiUrl, ensureOk } from "@/services/default";
 import {
   AUTH_ACCOUNT_NOT_FOUND_ERROR,
@@ -17,11 +17,14 @@ type HydraCollection = {
 };
 
 export async function getAccount(email: string): Promise<void> {
-  const res = await fetch(apiUrl(`${API_USERS}?email=${encodeURIComponent(email)}`), {
-    headers: {
-      Accept: "application/ld+json",
+  const res = await fetch(
+    apiUrl(`${API_USERS}?email=${encodeURIComponent(email)}`),
+    {
+      headers: {
+        Accept: "application/ld+json",
+      },
     },
-  });
+  );
 
   const data = await ensureOk<HydraCollection>(
     res,

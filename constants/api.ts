@@ -4,7 +4,9 @@ type PublicEnvName =
   | "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID";
 
 function getPublicEnv(name: PublicEnvName): string | undefined {
-  const value = (process.env as Record<string, string | undefined>)[name]?.trim();
+  const value = (process.env as Record<string, string | undefined>)[
+    name
+  ]?.trim();
   return value || undefined;
 }
 
