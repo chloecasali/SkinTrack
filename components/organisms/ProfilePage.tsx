@@ -15,6 +15,10 @@ export default function ProfilePage() {
   const { firstname, email } = useProfile();
   const language = useAppLanguage();
   const { t } = useTranslation();
+  const handleDisconnect = async () => {
+    await clearToken();
+    router.replace(AUTH_PATHS.login);
+  };
 
   return (
     <View className="flex-1 bg-white">
@@ -81,8 +85,7 @@ export default function ProfilePage() {
         <DisconnectButton
           title={t("profile.disconnect")}
           onPress={() => {
-            clearToken();
-            router.replace(AUTH_PATHS.login);
+            void handleDisconnect();
           }}
         />
       </View>
