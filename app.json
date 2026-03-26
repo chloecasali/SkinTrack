@@ -31,6 +31,14 @@
     "plugins": [
       "expo-router",
       [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow SkinTrack to access your camera to scan product barcodes.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",

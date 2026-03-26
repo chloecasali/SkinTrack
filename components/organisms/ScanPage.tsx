@@ -1,9 +1,25 @@
 import { Linking, Pressable, Text, View } from "react-native";
-import { CameraView, useCameraPermissions } from "expo-camera";
-import { useEffect, type ReactNode } from "react";
+import {
+  CameraView,
+  type BarcodeScanningResult,
+  type BarcodeType,
+  useCameraPermissions,
+} from "expo-camera";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import NavBar from "@/components/molecules/NavBar";
 
 type ScanPermissionState = "checking" | "requestable" | "blocked" | "granted";
+type ScannedBarcode = Pick<BarcodeScanningResult, "data" | "type">;
+
+const SCANNABLE_BARCODE_TYPES: BarcodeType[] = [
+  "ean13",
+  "ean8",
+  "upc_a",
+  "upc_e",
+  "code128",
+  "itf14",
+];
 
 function ScreenLayout({
   children,
@@ -50,25 +66,65 @@ function PermissionState({
   );
 }
 
-function ScanCameraView() {
+function ScanCameraView({
+  scannedBarcode,
+  onBarcodeScanned,
+  onScanAgain,
+}: {
+  scannedBarcode: ScannedBarcode | null;
+  onBarcodeScanned: (result: BarcodeScanningResult) => void;
+  onScanAgain: () => void;
+}) {
+  const { t } = useTranslation();
+
   return (
     <ScreenLayout backgroundClassName="bg-black">
-      <CameraView className="absolute inset-0" />
+      <CameraView
+        className="absolute inset-0"
+        barcodeScannerSettings={{ barcodeTypes: SCANNABLE_BARCODE_TYPES }}
+        onBarcodeScanned={scannedBarcode ? undefined : onBarcodeScanned}
+      />
 
       <View className="absolute inset-0 items-center justify-center">
-        <View
-          className="rounded-xl"
-          style={{
-            width: 260,
-            height: 160,
-            borderWidth: 2,
-            borderColor: "rgba(255,255,255,0.9)",
-            backgroundColor: "rgba(255,255,255,0.02)",
-          }}
-        />
-        <Text className="mt-6 text-sm text-gray-200">
-          Place the barcode inside the frame
-        </Text>
+        {scannedBarcode ? (
+          <View className="mx-6 w-full max-w-sm rounded-2xl bg-white/95 px-5 py-5">
+            <Text className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              {t("scan.scannedCode")}
+            </Text>
+            <Text className="mt-2 text-base font-semibold text-slate-900">
+              {scannedBarcode.data}
+            </Text>
+            <Text className="mt-1 text-sm text-slate-500">
+              {scannedBarcode.type}
+            </Text>
+
+            <Pressable
+              onPress={onScanAgain}
+              className="mt-4 rounded-xl bg-slate-900 px-5 py-3"
+              style={({ pressed }) => (pressed ? { opacity: 0.75 } : undefined)}
+            >
+              <Text className="text-center text-sm font-medium text-white">
+                {t("scan.scanAgain")}
+              </Text>
+            </Pressable>
+          </View>
+        ) : (
+          <>
+            <View
+              className="rounded-xl"
+              style={{
+                width: 260,
+                height: 160,
+                borderWidth: 2,
+                borderColor: "rgba(255,255,255,0.9)",
+                backgroundColor: "rgba(255,255,255,0.02)",
+              }}
+            />
+            <Text className="mt-6 text-sm text-gray-200">
+              {t("scan.placeBarcode")}
+            </Text>
+          </>
+        )}
       </View>
     </ScreenLayout>
   );
@@ -89,7 +145,12 @@ function getPermissionState(
 }
 
 export default function ScanPage() {
+  const { t } = useTranslation();
   const [permission, requestPermission] = useCameraPermissions();
+  const [scannedBarcode, setScannedBarcode] = useState<ScannedBarcode | null>(
+    null,
+  );
+  const scanLockedRef = useRef(false);
   const permissionState = getPermissionState(permission);
 
   useEffect(() => {
@@ -106,15 +167,38 @@ export default function ScanPage() {
     void Linking.openSettings();
   };
 
+  const handleBarcodeScanned = (result: BarcodeScanningResult) => {
+    if (scanLockedRef.current) {
+      return;
+    }
+
+    const data = result.data?.trim();
+
+    if (!data) {
+      return;
+    }
+
+    scanLockedRef.current = true;
+    setScannedBarcode({
+      data,
+      type: result.type,
+    });
+  };
+
+  const handleScanAgain = () => {
+    scanLockedRef.current = false;
+    setScannedBarcode(null);
+  };
+
   switch (permissionState) {
     case "checking":
-      return <PermissionState title="Checking camera permission..." />;
+      return <PermissionState title={t("scan.checkingPermission")} />;
 
     case "requestable":
       return (
         <PermissionState
-          title="Camera permission is required to scan a barcode."
-          actionLabel="Allow camera access"
+          title={t("scan.permissionRequired")}
+          actionLabel={t("scan.allowCameraAccess")}
           onPress={handleRequestPermission}
         />
       );
@@ -122,16 +206,22 @@ export default function ScanPage() {
     case "blocked":
       return (
         <PermissionState
-          title="Camera access is disabled. Enable it in Settings to scan a barcode."
-          actionLabel="Open Settings"
+          title={t("scan.permissionBlocked")}
+          actionLabel={t("scan.openSettings")}
           onPress={handleOpenSettings}
         />
       );
 
     case "granted":
-      return <ScanCameraView />;
+      return (
+        <ScanCameraView
+          scannedBarcode={scannedBarcode}
+          onBarcodeScanned={handleBarcodeScanned}
+          onScanAgain={handleScanAgain}
+        />
+      );
 
     default:
-      return <PermissionState title="Checking camera permission..." />;
+      return <PermissionState title={t("scan.checkingPermission")} />;
   }
 }

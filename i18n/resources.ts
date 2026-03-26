@@ -88,6 +88,17 @@ export const resources = {
         calendar: "Calendar",
         profile: "Profile",
       },
+      scan: {
+        checkingPermission: "Checking camera permission...",
+        permissionRequired: "Camera permission is required to scan a barcode.",
+        allowCameraAccess: "Allow camera access",
+        permissionBlocked:
+          "Camera access is disabled. Enable it in Settings to scan a barcode.",
+        openSettings: "Open Settings",
+        placeBarcode: "Place the barcode inside the frame",
+        scannedCode: "Scanned code",
+        scanAgain: "Scan again",
+      },
       profile: {
         settings: "Settings",
         privacy: "Privacy",
@@ -197,6 +208,18 @@ export const resources = {
         scan: "Scan",
         calendar: "Calendrier",
         profile: "Profil",
+      },
+      scan: {
+        checkingPermission: "Vérification de l'autorisation de la caméra...",
+        permissionRequired:
+          "L'autorisation de la caméra est requise pour scanner un code-barres.",
+        allowCameraAccess: "Autoriser l'accès à la caméra",
+        permissionBlocked:
+          "L'accès à la caméra est désactivé. Activez-le dans Réglages pour scanner un code-barres.",
+        openSettings: "Ouvrir Réglages",
+        placeBarcode: "Placez le code-barres dans le cadre",
+        scannedCode: "Code scanné",
+        scanAgain: "Scanner à nouveau",
       },
       profile: {
         settings: "Paramètres",
