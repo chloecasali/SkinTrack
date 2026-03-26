@@ -1,5 +1,5 @@
 import ScanPage from "@/components/organisms/ScanPage";
 
-export default function ProfileScreen() {
+export default function ScanScreen() {
   return <ScanPage />;
 }
