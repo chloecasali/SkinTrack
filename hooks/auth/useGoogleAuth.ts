@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import * as WebBrowser from "expo-web-browser";
 import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import { Platform } from "react-native";
@@ -12,8 +11,6 @@ import {
 import { getLocalizedErrorMessage } from "@/hooks/default";
 import { loginWithGoogle } from "@/services/auth/google";
 import { useCompleteAuth } from "@/hooks/auth/useCompleteAuth";
-
-WebBrowser.maybeCompleteAuthSession();
 
 const GOOGLE_CLIENT_ID_PLACEHOLDER = "__missing_google_client_id__";
 
