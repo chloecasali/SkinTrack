@@ -44,16 +44,13 @@ export default function ScanPage() {
 
   return (
     <View className="flex-1 bg-black">
-      {/* CAMERA */}
       <CameraView style={StyleSheet.absoluteFill} />
 
-      {/* OVERLAY */}
       <View style={styles.overlay}>
         <View style={styles.scanArea} />
         <Text style={styles.hint}>Place the barcode inside the frame</Text>
       </View>
 
-      {/* NAVBAR */}
       <NavBar activeTab="scan" />
     </View>
   );
