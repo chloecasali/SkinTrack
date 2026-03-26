@@ -3,7 +3,7 @@ import * as WebBrowser from "expo-web-browser";
 import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import { Platform } from "react-native";
-import { APP_IOS_BUNDLE_ID, APP_SCHEME } from "@/constants/app";
+import { APP_SCHEME } from "@/constants/app";
 import {
   GOOGLE_ANDROID_CLIENT_ID,
   GOOGLE_IOS_CLIENT_ID,
@@ -14,21 +14,31 @@ import { useCompleteAuth } from "@/hooks/auth/useCompleteAuth";
 
 WebBrowser.maybeCompleteAuthSession();
 
+const GOOGLE_CLIENT_ID_PLACEHOLDER = "__missing_google_client_id__";
+
 const googleRedirectUri = AuthSession.makeRedirectUri({
-  scheme: Platform.OS === "ios" ? APP_IOS_BUNDLE_ID : APP_SCHEME,
+  scheme: APP_SCHEME,
   path: "oauthredirect",
-  native: `${
-    Platform.OS === "ios" ? APP_IOS_BUNDLE_ID : APP_SCHEME
-  }:/oauthredirect`,
+  native: `${APP_SCHEME}:/oauthredirect`,
 });
 
 export function useGoogleAuth() {
   const completeAuth = useCompleteAuth();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const platformGoogleClientId =
+    Platform.OS === "ios" ? GOOGLE_IOS_CLIENT_ID : GOOGLE_ANDROID_CLIENT_ID;
+  const googleConfigError = platformGoogleClientId
+    ? null
+    : `Google sign-in is not configured. Missing ${
+        Platform.OS === "ios"
+          ? "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID"
+          : "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID"
+      }.`;
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     iosClientId: GOOGLE_IOS_CLIENT_ID,
     androidClientId: GOOGLE_ANDROID_CLIENT_ID,
+    clientId: platformGoogleClientId ?? GOOGLE_CLIENT_ID_PLACEHOLDER,
     redirectUri: googleRedirectUri,
     scopes: ["openid", "profile", "email"],
     selectAccount: true,
@@ -83,6 +93,11 @@ export function useGoogleAuth() {
   const handleGoogleAuth = async () => {
     setErrorMsg(null);
 
+    if (googleConfigError) {
+      setErrorMsg(googleConfigError);
+      return;
+    }
+
     if (!request) {
       setErrorMsg("Google sign-in is not ready yet.");
       return;
@@ -109,9 +124,9 @@ export function useGoogleAuth() {
   };
 
   return {
-    errorMsg,
+    errorMsg: errorMsg ?? googleConfigError,
     handleGoogleAuth,
     loading,
-    ready: Boolean(request),
+    ready: Boolean(request) && !googleConfigError,
   };
 }
