@@ -42,7 +42,7 @@ export function useProfile() {
     };
 
     fetchProfile();
-  }, [t, token]);
+  }, [token]);
 
   return { loading, firstname, email, errorMsg };
 }
