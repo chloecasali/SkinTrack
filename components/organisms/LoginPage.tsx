@@ -24,7 +24,7 @@ export default function LoginPage() {
       <LoginForm />
 
       <Text className="mt-6 text-center text-sm text-gray-500">
-        Or continue with
+        {t("auth.login.orContinueWith")}
       </Text>
 
       {errorMsg && (

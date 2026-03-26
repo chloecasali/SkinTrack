@@ -3,12 +3,13 @@ import * as WebBrowser from "expo-web-browser";
 import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import { Platform } from "react-native";
+import { useTranslation } from "react-i18next";
 import { APP_SCHEME } from "@/constants/app";
 import {
   GOOGLE_ANDROID_CLIENT_ID,
   GOOGLE_IOS_CLIENT_ID,
 } from "@/constants/api";
-import { getErrorMessage } from "@/hooks/default";
+import { getLocalizedErrorMessage } from "@/hooks/default";
 import { loginWithGoogle } from "@/services/auth/google";
 import { useCompleteAuth } from "@/hooks/auth/useCompleteAuth";
 
@@ -23,6 +24,7 @@ const googleRedirectUri = AuthSession.makeRedirectUri({
 
 export function useGoogleAuth() {
   const completeAuth = useCompleteAuth();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const platformGoogleClientId =
@@ -33,14 +35,15 @@ export function useGoogleAuth() {
         : null;
   const googleConfigError =
     Platform.OS === "web"
-      ? "Google sign-in is only available on iOS and Android."
+      ? t("errors.googleMobileOnly")
       : platformGoogleClientId
         ? null
-        : `Google sign-in is not configured. Missing ${
-            Platform.OS === "ios"
-              ? "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID"
-              : "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID"
-          }.`;
+        : t("errors.googleNotConfigured", {
+            envVar:
+              Platform.OS === "ios"
+                ? "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID"
+                : "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID",
+          });
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     iosClientId: GOOGLE_IOS_CLIENT_ID,
     androidClientId: GOOGLE_ANDROID_CLIENT_ID,
@@ -54,7 +57,7 @@ export function useGoogleAuth() {
     if (!response) return;
 
     if (response.type === "error") {
-      setErrorMsg(getErrorMessage(response.error, "Google sign-in failed."));
+      setErrorMsg(t("errors.googleSignInFailed"));
       setLoading(false);
       return;
     }
@@ -67,7 +70,7 @@ export function useGoogleAuth() {
     const idToken = response.params.id_token;
 
     if (!idToken) {
-      setErrorMsg("Google sign-in did not return an ID token.");
+      setErrorMsg(t("errors.googleIdTokenMissing"));
       setLoading(false);
       return;
     }
@@ -80,7 +83,9 @@ export function useGoogleAuth() {
         await completeAuth(token);
       } catch (error) {
         if (isMounted) {
-          setErrorMsg(getErrorMessage(error, "Google login failed."));
+          setErrorMsg(
+            getLocalizedErrorMessage(error, t, "errors.googleSignInFailed"),
+          );
         }
       } finally {
         if (isMounted) {
@@ -105,7 +110,7 @@ export function useGoogleAuth() {
     }
 
     if (!request) {
-      setErrorMsg("Google sign-in is not ready yet.");
+      setErrorMsg(t("errors.googleNotReady"));
       return;
     }
 
@@ -115,7 +120,7 @@ export function useGoogleAuth() {
       const result = await promptAsync();
 
       if (result.type === "error") {
-        setErrorMsg(getErrorMessage(result.error, "Google sign-in failed."));
+        setErrorMsg(t("errors.googleSignInFailed"));
         setLoading(false);
         return;
       }
@@ -124,7 +129,7 @@ export function useGoogleAuth() {
         setLoading(false);
       }
     } catch (error) {
-      setErrorMsg(getErrorMessage(error, "Google sign-in failed."));
+      setErrorMsg(t("errors.googleSignInFailed"));
       setLoading(false);
     }
   };

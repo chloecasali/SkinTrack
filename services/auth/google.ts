@@ -1,3 +1,7 @@
+import {
+  AUTH_GOOGLE_ID_TOKEN_MISSING_ERROR,
+  AUTH_GOOGLE_LOGIN_FAILED_ERROR,
+} from "@/constants/errors";
 import { API_PATHS } from "@/constants/paths";
 import {
   requireAuthToken,
@@ -9,7 +13,7 @@ export async function loginWithGoogle(idToken: string): Promise<string> {
   const normalizedIdToken = idToken.trim();
 
   if (!normalizedIdToken) {
-    throw new Error("Missing Google ID token.");
+    throw new Error(AUTH_GOOGLE_ID_TOKEN_MISSING_ERROR);
   }
 
   const res = await fetch(apiUrl(API_PATHS.googleAuth), {
@@ -21,6 +25,9 @@ export async function loginWithGoogle(idToken: string): Promise<string> {
     body: JSON.stringify({ idToken: normalizedIdToken }),
   });
 
-  const data = await ensureOk<AuthTokenResponse>(res, "Google login failed");
+  const data = await ensureOk<AuthTokenResponse>(
+    res,
+    AUTH_GOOGLE_LOGIN_FAILED_ERROR,
+  );
   return requireAuthToken(data);
 }

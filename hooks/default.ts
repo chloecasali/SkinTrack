@@ -2,6 +2,9 @@
 import type { TFunction } from "i18next";
 import {
   AUTH_FETCH_ACCOUNT_FAILED_ERROR,
+  AUTH_GOOGLE_ID_TOKEN_MISSING_ERROR,
+  AUTH_GOOGLE_LOGIN_FAILED_ERROR,
+  AUTH_EMPTY_TOKEN_ERROR,
   AUTH_LOGIN_FAILED_ERROR,
   AUTH_NO_TOKEN_RECEIVED_ERROR,
   AUTH_REGISTER_FAILED_ERROR,
@@ -77,6 +80,9 @@ export function getErrorMessage(
 
 const APP_ERROR_TRANSLATION_KEYS = {
   [AUTH_FETCH_ACCOUNT_FAILED_ERROR]: "errors.fetchAccountFailed",
+  [AUTH_GOOGLE_ID_TOKEN_MISSING_ERROR]: "errors.googleIdTokenMissing",
+  [AUTH_GOOGLE_LOGIN_FAILED_ERROR]: "errors.googleSignInFailed",
+  [AUTH_EMPTY_TOKEN_ERROR]: "errors.emptyAuthToken",
   [AUTH_LOGIN_FAILED_ERROR]: "errors.loginFailed",
   [AUTH_NO_TOKEN_RECEIVED_ERROR]: "errors.noTokenReceived",
   [AUTH_REGISTER_FAILED_ERROR]: "errors.registrationFailed",
