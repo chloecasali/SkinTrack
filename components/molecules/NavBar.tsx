@@ -36,6 +36,7 @@ const NAV_TABS: NavTab[] = [
     key: "scan",
     labelKey: "nav.scan",
     icon: "scan-outline",
+    href: APP_PATHS.scan,
   },
   {
     key: "calendar",

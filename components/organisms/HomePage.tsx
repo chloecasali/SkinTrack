@@ -37,7 +37,6 @@ export default function HomePage() {
           </View>
         </View>
 
-        {/* QUESTION CARD */}
         <View className="border border-gray-200 rounded-2xl p-4 mb-6">
           <Text className="text-sm text-slate-800 mb-4">
             {t("home.question")}
@@ -49,7 +48,6 @@ export default function HomePage() {
           </View>
         </View>
 
-        {/* SEARCH */}
         <View className="flex-row items-center border border-gray-200 rounded-xl px-3 py-3 mb-8">
           <Ionicons name="search-outline" size={18} color="#9ca3af" />
           <TextInput
@@ -59,7 +57,6 @@ export default function HomePage() {
           />
         </View>
 
-        {/* ROUTINE */}
         <Text className="text-base font-semibold text-slate-900 mb-4">
           {t("home.routineTitle")}
         </Text>
@@ -85,7 +82,6 @@ export default function HomePage() {
         </ScrollView>
       </ScrollView>
 
-      {/* NAVBAR */}
       <NavBar activeTab="home" />
     </View>
   );
