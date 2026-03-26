@@ -14,9 +14,7 @@ export default function ProfilePage() {
 
   return (
     <View className="flex-1 bg-white">
-      {/* CONTENT */}
       <View className="flex-1 px-6 pt-16">
-        {/* Header */}
         <View className="items-center mb-10">
           <View className="h-20 w-20 rounded-full bg-gray-100 items-center justify-center mb-4">
             <Ionicons name="person-outline" size={36} color="#64748b" />
@@ -28,14 +26,12 @@ export default function ProfilePage() {
           <Text className="text-sm text-gray-400 mt-1">{email}</Text>
         </View>
 
-        {/* Section */}
         <View className="gap-4">
           <ProfileItem icon="settings-outline" label="Settings" />
           <ProfileItem icon="shield-checkmark-outline" label="Privacy" />
           <ProfileItem icon="help-circle-outline" label="Help" />
         </View>
 
-        {/* Logout */}
         <DisconnectButton
           title="Disconnect"
           onPress={() => {
@@ -45,7 +41,6 @@ export default function ProfilePage() {
         />
       </View>
 
-      {/* NAVBAR */}
       <NavBar activeTab="profile" />
     </View>
   );

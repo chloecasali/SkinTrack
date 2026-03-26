@@ -7,11 +7,7 @@ type ProfileItemProps = {
   onPress?: () => void;
 };
 
-export default function ProfileItem({
-  icon,
-  label,
-  onPress,
-}: ProfileItemProps) {
+export default function ProfileItem({ label, onPress }: ProfileItemProps) {
   return (
     <Pressable
       onPress={onPress}
@@ -20,7 +16,6 @@ export default function ProfileItem({
       style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
     >
       <View className="flex-row items-center gap-3">
-        {/*<Ionicons name={icon} size={20} color="#64748b" />*/}
         <Text className="text-slate-800 text-sm">{label}</Text>
       </View>
 
