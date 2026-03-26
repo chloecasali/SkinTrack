@@ -7,7 +7,7 @@ import {
   isEmailValid,
   normalizeEmail,
 } from "@/hooks/default";
-import { APP_AUTH_PASSWORD, APP_AUTH_REGISTER } from "@/constants/app";
+import { AUTH_PATHS } from "@/constants/paths";
 import { getAccount } from "@/services/auth/login";
 
 export function useAccount() {
@@ -36,7 +36,7 @@ export function useAccount() {
       await getAccount(normalizedEmail);
 
       router.replace({
-        pathname: APP_AUTH_PASSWORD,
+        pathname: AUTH_PATHS.password,
         params: { email: normalizedEmail },
       });
     } catch (error: any) {
@@ -44,7 +44,7 @@ export function useAccount() {
         error instanceof Error &&
         error.message === AUTH_ACCOUNT_NOT_FOUND_ERROR
       ) {
-        router.replace(APP_AUTH_REGISTER);
+        router.replace(AUTH_PATHS.register);
         return;
       }
 

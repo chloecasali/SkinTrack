@@ -26,9 +26,3 @@ export const GOOGLE_IOS_CLIENT_ID = getPublicEnv(
 export const GOOGLE_ANDROID_CLIENT_ID = getPublicEnv(
   "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID",
 );
-
-export const API_AUTH_LOGIN = "/auth/login";
-export const API_AUTH_REGISTER = "/auth/register";
-export const API_AUTH_GOOGLE = "/auth/google";
-export const API_ME = "/me";
-export const API_USERS = "/users";

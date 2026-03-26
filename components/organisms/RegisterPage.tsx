@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import RegisterForm from "@/components/molecules/RegisterForm";
-import { APP_AUTH_LOGIN } from "@/constants/app";
+import { AUTH_PATHS } from "@/constants/paths";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function RegisterPage() {
       <TouchableOpacity
         className="mt-6 self-center"
         activeOpacity={0.6}
-        onPress={() => router.push(APP_AUTH_LOGIN)}
+        onPress={() => router.push(AUTH_PATHS.login)}
       >
         <Text className="text-sm text-gray-500">
           {t("auth.register.alreadyHaveAccount")}{" "}

@@ -5,7 +5,7 @@ import { Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
 import { router, useLocalSearchParams } from "expo-router";
-import { APP_AUTH_LOGIN } from "@/constants/app";
+import { AUTH_PATHS } from "@/constants/paths";
 
 export default function PasswordForm() {
   const { email } = useLocalSearchParams<{ email: string }>();
@@ -15,7 +15,7 @@ export default function PasswordForm() {
 
   useEffect(() => {
     if (!email) {
-      router.replace(APP_AUTH_LOGIN);
+      router.replace(AUTH_PATHS.login);
     }
   }, [email]);
 

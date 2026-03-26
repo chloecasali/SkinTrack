@@ -1,4 +1,4 @@
-import { API_AUTH_GOOGLE } from "@/constants/api";
+import { API_PATHS } from "@/constants/paths";
 import {
   requireAuthToken,
   type AuthTokenResponse,
@@ -12,7 +12,7 @@ export async function loginWithGoogle(idToken: string): Promise<string> {
     throw new Error("Missing Google ID token.");
   }
 
-  const res = await fetch(apiUrl(API_AUTH_GOOGLE), {
+  const res = await fetch(apiUrl(API_PATHS.googleAuth), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

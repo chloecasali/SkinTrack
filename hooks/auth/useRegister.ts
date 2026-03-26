@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { register as registerService } from "@/services/auth/register";
-import { APP_AUTH_LOGIN } from "@/constants/app";
+import { AUTH_PATHS } from "@/constants/paths";
 import {
   getLocalizedErrorMessage,
   isEmailValid,
@@ -51,7 +51,7 @@ export function useRegister() {
 
       await registerService(firstname.trim(), normalizeEmail(email), password);
 
-      router.replace(APP_AUTH_LOGIN);
+      router.replace(AUTH_PATHS.login);
     } catch (e: any) {
       setErrorMsg(
         getLocalizedErrorMessage(e, t, "errors.unableToRegisterRightNow"),

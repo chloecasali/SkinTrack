@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useRouter } from "expo-router";
-import { APP_HOME } from "@/constants/app";
+import { APP_PATHS } from "@/constants/paths";
 import { persistSessionToken } from "@/services/auth/session";
 
 export function useCompleteAuth() {
@@ -9,7 +9,7 @@ export function useCompleteAuth() {
   return useCallback(
     async (token: string) => {
       await persistSessionToken(token);
-      router.replace(APP_HOME);
+      router.replace(APP_PATHS.home);
     },
     [router],
   );

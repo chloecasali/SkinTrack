@@ -24,7 +24,7 @@
       "package": "com.skintrack"
     },
     "web": {
-      "output": "server",
+      "output": "static",
       "favicon": "./assets/images/favicon.png",
       "bundler": "metro"
     },
