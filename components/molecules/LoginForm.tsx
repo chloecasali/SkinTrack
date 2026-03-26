@@ -14,7 +14,7 @@ export default function LoginForm() {
       <InputField
         label={t("auth.fields.emailLabel")}
         value={email}
-        onChangeText={(t) => setEmail(t.toLowerCase())}
+        onChangeText={(text) => setEmail(text.toLowerCase())}
         placeholder={t("auth.fields.emailPlaceholder")}
         keyboardType="email-address"
       />
