@@ -45,7 +45,7 @@ export default function NavBar({ activeTab }: NavBarProps) {
         label={t("nav.calendar")}
         icon="calendar-outline"
         active={activeTab === "calendar"}
-        onPress={() => router.push("/calendar")}
+        onPress={() => router.push("/")}
       />
 
       <NavButton
