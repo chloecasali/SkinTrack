@@ -1,64 +1,9 @@
-import {
-  Linking,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Linking, Pressable, Text, View } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { useEffect, type ReactNode } from "react";
 import NavBar from "@/components/molecules/NavBar";
 
-type ScanPermissionState =
-  | "checking"
-  | "requestable"
-  | "blocked"
-  | "granted";
-
-const styles = StyleSheet.create({
-  permissionContent: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 24,
-    backgroundColor: "#ffffff",
-  },
-  permissionText: {
-    textAlign: "center",
-    fontSize: 14,
-    color: "#6b7280",
-  },
-  permissionButton: {
-    marginTop: 16,
-    borderRadius: 12,
-    backgroundColor: "#0f172a",
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-  },
-  permissionButtonText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#ffffff",
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  scanArea: {
-    width: 260,
-    height: 160,
-    borderWidth: 2,
-    borderColor: "rgba(255,255,255,0.9)",
-    borderRadius: 12,
-    backgroundColor: "rgba(255,255,255,0.02)",
-  },
-  hint: {
-    marginTop: 24,
-    color: "#e5e7eb",
-    fontSize: 14,
-  },
-});
+type ScanPermissionState = "checking" | "requestable" | "blocked" | "granted";
 
 function ScreenLayout({
   children,
@@ -86,18 +31,18 @@ function PermissionState({
 }) {
   return (
     <ScreenLayout>
-      <View style={styles.permissionContent}>
-        <Text style={styles.permissionText}>{title}</Text>
+      <View className="flex-1 items-center justify-center bg-white px-6">
+        <Text className="text-center text-sm text-gray-500">{title}</Text>
 
         {actionLabel && onPress && (
           <Pressable
             onPress={onPress}
-            style={({ pressed }) => [
-              styles.permissionButton,
-              pressed && { opacity: 0.75 },
-            ]}
+            className="mt-4 rounded-xl bg-slate-900 px-5 py-3"
+            style={({ pressed }) => (pressed ? { opacity: 0.75 } : undefined)}
           >
-            <Text style={styles.permissionButtonText}>{actionLabel}</Text>
+            <Text className="text-sm font-medium text-white">
+              {actionLabel}
+            </Text>
           </Pressable>
         )}
       </View>
@@ -108,11 +53,22 @@ function PermissionState({
 function ScanCameraView() {
   return (
     <ScreenLayout backgroundClassName="bg-black">
-      <CameraView style={StyleSheet.absoluteFill} />
+      <CameraView className="absolute inset-0" />
 
-      <View style={styles.overlay}>
-        <View style={styles.scanArea} />
-        <Text style={styles.hint}>Place the barcode inside the frame</Text>
+      <View className="absolute inset-0 items-center justify-center">
+        <View
+          className="rounded-xl"
+          style={{
+            width: 260,
+            height: 160,
+            borderWidth: 2,
+            borderColor: "rgba(255,255,255,0.9)",
+            backgroundColor: "rgba(255,255,255,0.02)",
+          }}
+        />
+        <Text className="mt-6 text-sm text-gray-200">
+          Place the barcode inside the frame
+        </Text>
       </View>
     </ScreenLayout>
   );
