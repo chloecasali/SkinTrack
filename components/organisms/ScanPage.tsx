@@ -1,4 +1,4 @@
-import { Linking, Pressable, Text, View } from "react-native";
+import { Linking, Platform, Pressable, Text, View } from "react-native";
 import {
   CameraView,
   type BarcodeScanningResult,
@@ -38,10 +38,12 @@ function ScreenLayout({
 
 function PermissionState({
   title,
+  detail,
   actionLabel,
   onPress,
 }: {
   title: string;
+  detail?: string;
   actionLabel?: string;
   onPress?: () => void;
 }) {
@@ -49,6 +51,11 @@ function PermissionState({
     <ScreenLayout>
       <View className="flex-1 items-center justify-center bg-white px-6">
         <Text className="text-center text-sm text-gray-500">{title}</Text>
+        {detail ? (
+          <Text className="mt-3 text-center text-sm text-red-500">
+            {detail}
+          </Text>
+        ) : null}
 
         {actionLabel && onPress && (
           <Pressable
@@ -150,8 +157,10 @@ export default function ScanPage() {
   const [scannedBarcode, setScannedBarcode] = useState<ScannedBarcode | null>(
     null,
   );
+  const [settingsError, setSettingsError] = useState<string | null>(null);
   const scanLockedRef = useRef(false);
   const permissionState = getPermissionState(permission);
+  const canOpenSettings = Platform.OS !== "web";
 
   useEffect(() => {
     if (permission?.status === "undetermined") {
@@ -160,11 +169,23 @@ export default function ScanPage() {
   }, [permission?.status, requestPermission]);
 
   const handleRequestPermission = () => {
+    setSettingsError(null);
     void requestPermission();
   };
 
-  const handleOpenSettings = () => {
-    void Linking.openSettings();
+  const handleOpenSettings = async () => {
+    setSettingsError(null);
+
+    if (!canOpenSettings) {
+      setSettingsError(t("scan.settingsUnavailable"));
+      return;
+    }
+
+    try {
+      await Linking.openSettings();
+    } catch {
+      setSettingsError(t("scan.settingsUnavailable"));
+    }
   };
 
   const handleBarcodeScanned = (result: BarcodeScanningResult) => {
@@ -207,8 +228,11 @@ export default function ScanPage() {
       return (
         <PermissionState
           title={t("scan.permissionBlocked")}
-          actionLabel={t("scan.openSettings")}
-          onPress={handleOpenSettings}
+          detail={settingsError ?? undefined}
+          actionLabel={canOpenSettings ? t("scan.openSettings") : undefined}
+          onPress={
+            canOpenSettings ? () => void handleOpenSettings() : undefined
+          }
         />
       );
 

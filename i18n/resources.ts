@@ -95,6 +95,8 @@ export const resources = {
         permissionBlocked:
           "Camera access is disabled. Enable it in Settings to scan a barcode.",
         openSettings: "Open Settings",
+        settingsUnavailable:
+          "Settings cannot be opened on this device right now.",
         placeBarcode: "Place the barcode inside the frame",
         scannedCode: "Scanned code",
         scanAgain: "Scan again",
@@ -217,6 +219,8 @@ export const resources = {
         permissionBlocked:
           "L'accès à la caméra est désactivé. Activez-le dans Réglages pour scanner un code-barres.",
         openSettings: "Ouvrir Réglages",
+        settingsUnavailable:
+          "Impossible d'ouvrir les Réglages sur cet appareil pour le moment.",
         placeBarcode: "Placez le code-barres dans le cadre",
         scannedCode: "Code scanné",
         scanAgain: "Scanner à nouveau",
