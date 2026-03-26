@@ -37,7 +37,7 @@ export function useAccount() {
 
       router.replace({
         pathname: APP_AUTH_PASSWORD,
-        params: { email },
+        params: { email: normalizedEmail },
       });
     } catch (error: any) {
       if (

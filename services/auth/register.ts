@@ -7,7 +7,7 @@ export async function register(
   email: string,
   password: string,
 ): Promise<void> {
-  const res = await fetch(apiUrl(APP_AUTH_REGISTER), {
+  const res = await fetch(apiUrl(API_AUTH_REGISTER), {
     method: "POST",
     headers: {
       "Content-Type": "application/ld+json",
