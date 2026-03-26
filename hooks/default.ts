@@ -88,19 +88,23 @@ export function getLocalizedErrorMessage(
   t: TFunction,
   fallbackKey = "errors.unexpected",
 ): string {
-  const message = getErrorMessage(err);
+  const rawMessage = getErrorMessage(err);
+  const normalizedMessage =
+    typeof rawMessage === "string"
+      ? rawMessage.replace(/\s*\(\d+\)\s*$/, "")
+      : rawMessage;
   const translationKey =
     APP_ERROR_TRANSLATION_KEYS[
-      message as keyof typeof APP_ERROR_TRANSLATION_KEYS
+      normalizedMessage as keyof typeof APP_ERROR_TRANSLATION_KEYS
     ];
 
   if (translationKey) {
     return t(translationKey);
   }
 
-  if (!err || message === "Unexpected error occurred.") {
+  if (!err || rawMessage === "Unexpected error occurred.") {
     return t(fallbackKey);
   }
 
-  return message;
+  return rawMessage;
 }
