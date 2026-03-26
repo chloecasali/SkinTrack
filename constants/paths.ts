@@ -8,6 +8,7 @@ export const APP_PATHS = {
   root: "/",
   home: "/home",
   profile: "/profile",
+  scan: "/scan",
 } as const;
 
 export const API_PATHS = {
