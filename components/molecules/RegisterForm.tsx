@@ -1,9 +1,11 @@
 import InputField from "@/components/atoms/InputField";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
 import { Text } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useRegister } from "@/hooks/auth/useRegister";
 
 export default function RegisterForm() {
+  const { t } = useTranslation();
   const {
     firstname,
     email,
@@ -19,25 +21,25 @@ export default function RegisterForm() {
   return (
     <>
       <InputField
-        label="Firstname"
+        label={t("auth.fields.firstnameLabel")}
         value={firstname}
         onChangeText={setFirstname}
-        placeholder="John"
+        placeholder={t("auth.fields.firstnamePlaceholder")}
       />
 
       <InputField
-        label="Email"
+        label={t("auth.fields.emailLabel")}
         value={email}
         onChangeText={(t) => setEmail(t.toLowerCase())}
-        placeholder="example@mail.com"
+        placeholder={t("auth.fields.emailPlaceholder")}
         keyboardType="email-address"
       />
 
       <InputField
-        label="Password"
+        label={t("auth.fields.passwordLabel")}
         value={password}
         onChangeText={setPassword}
-        placeholder="••••••••"
+        placeholder={t("auth.fields.passwordPlaceholder")}
         secureTextEntry
       />
 
@@ -46,7 +48,11 @@ export default function RegisterForm() {
       )}
 
       <PrimaryButton
-        title={loading ? "Creating account..." : "Create account"}
+        title={
+          loading
+            ? t("auth.register.creatingAccount")
+            : t("auth.register.createAccount")
+        }
         onPress={register}
         disabled={loading}
       />

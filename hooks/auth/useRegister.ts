@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { register as registerService } from "@/services/auth/register";
 import { APP_AUTH_LOGIN } from "@/constants/app";
 import {
-  getErrorMessage,
+  getLocalizedErrorMessage,
   isEmailValid,
   normalizeEmail,
   validatePassword,
@@ -11,6 +12,7 @@ import {
 
 export function useRegister() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [firstname, setFirstname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,19 +24,19 @@ export function useRegister() {
     const normalizedEmail = normalizeEmail(email);
 
     if (!trimmedFirstname) {
-      return "Firstname is required.";
+      return t("validation.firstnameRequired");
     }
     if (!isEmailValid(normalizedEmail)) {
-      return "Please enter a valid email address.";
+      return t("validation.validEmail");
     }
-    return validatePassword(password);
+    return validatePassword(password, t);
   };
 
   const register = async () => {
     setErrorMsg(null);
 
     if (!firstname || !email || !password) {
-      setErrorMsg("Please fill in all fields.");
+      setErrorMsg(t("validation.fillAllFields"));
       return;
     }
 
@@ -51,7 +53,9 @@ export function useRegister() {
 
       router.replace(APP_AUTH_LOGIN);
     } catch (e: any) {
-      setErrorMsg(getErrorMessage(e, "Unable to register right now."));
+      setErrorMsg(
+        getLocalizedErrorMessage(e, t, "errors.unableToRegisterRightNow"),
+      );
     } finally {
       setLoading(false);
     }

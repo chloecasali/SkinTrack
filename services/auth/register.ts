@@ -1,4 +1,5 @@
 import { apiUrl, ensureOk } from "@/services/default";
+import { AUTH_REGISTER_FAILED_ERROR } from "@/constants/errors";
 import { APP_AUTH_REGISTER } from "@/constants/app";
 
 export async function register(
@@ -13,5 +14,5 @@ export async function register(
     },
     body: JSON.stringify({ firstname, email, password }),
   });
-  await ensureOk(res, "Registration failed");
+  await ensureOk(res, AUTH_REGISTER_FAILED_ERROR);
 }

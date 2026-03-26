@@ -3,9 +3,11 @@ import { View, Text } from "react-native";
 export default function RoutineCard({
   step,
   title,
+  brandName,
 }: {
   step: string;
   title: string;
+  brandName: string;
 }) {
   return (
     <View className="w-36 border border-gray-200 rounded-2xl p-3">
@@ -15,7 +17,7 @@ export default function RoutineCard({
 
       <Text className="text-sm font-medium text-slate-900">{title}</Text>
 
-      <Text className="text-xs text-gray-400 mt-1">Brand Name</Text>
+      <Text className="text-xs text-gray-400 mt-1">{brandName}</Text>
     </View>
   );
 }

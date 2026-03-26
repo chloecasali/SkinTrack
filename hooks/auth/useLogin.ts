@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { getErrorMessage, normalizeEmail } from "@/hooks/default";
+import { useTranslation } from "react-i18next";
+import { getLocalizedErrorMessage, normalizeEmail } from "@/hooks/default";
 import { APP_HOME } from "@/constants/app";
 import { login } from "@/services/auth/login";
 import { setToken } from "@/services/auth/token";
@@ -9,12 +10,13 @@ export function useLogin() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleLogin = async (email: string, password: string) => {
     setErrorMsg(null);
 
     if (!email || !password) {
-      setErrorMsg("Missing credentials.");
+      setErrorMsg(t("validation.missingCredentials"));
       return;
     }
     try {
@@ -23,7 +25,7 @@ export function useLogin() {
       await setToken(token);
       router.replace(APP_HOME);
     } catch (error: any) {
-      setErrorMsg(getErrorMessage(error));
+      setErrorMsg(getLocalizedErrorMessage(error, t, "errors.loginFailed"));
     } finally {
       setLoading(false);
     }
