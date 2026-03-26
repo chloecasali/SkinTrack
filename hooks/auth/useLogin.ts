@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { getLocalizedErrorMessage, normalizeEmail } from "@/hooks/default";
-import { APP_HOME } from "@/constants/app";
 import { login } from "@/services/auth/login";
-import { setToken } from "@/services/auth/token";
+import { useCompleteAuth } from "@/hooks/auth/useCompleteAuth";
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const router = useRouter();
   const { t } = useTranslation();
+  const completeAuth = useCompleteAuth();
 
   const handleLogin = async (email: string, password: string) => {
     setErrorMsg(null);
@@ -22,8 +20,7 @@ export function useLogin() {
     try {
       setLoading(true);
       const token = await login(normalizeEmail(email), password);
-      await setToken(token);
-      router.replace(APP_HOME);
+      await completeAuth(token);
     } catch (error: any) {
       setErrorMsg(getLocalizedErrorMessage(error, t, "errors.loginFailed"));
     } finally {

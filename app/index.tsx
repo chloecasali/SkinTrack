@@ -1,5 +1,5 @@
 import { Redirect } from "expo-router";
-import { APP_AUTH_LOGIN, APP_HOME } from "@/constants/app";
+import { APP_PATHS, AUTH_PATHS } from "@/constants/paths";
 import { useToken } from "@/services/auth/token";
 import { ActivityIndicator, View } from "react-native";
 
@@ -13,5 +13,5 @@ export default function Index() {
     );
   }
 
-  return <Redirect href={token ? APP_HOME : APP_AUTH_LOGIN} />;
+  return <Redirect href={token ? APP_PATHS.home : AUTH_PATHS.login} />;
 }

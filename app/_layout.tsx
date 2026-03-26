@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import * as WebBrowser from "expo-web-browser";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
@@ -19,6 +20,8 @@ export default function RootLayout() {
 
   useEffect(() => {
     let isMounted = true;
+
+    WebBrowser.maybeCompleteAuthSession();
 
     void Promise.allSettled([initToken(), initLanguage()]).then((results) => {
       results.forEach((result, index) => {

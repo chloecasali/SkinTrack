@@ -2,7 +2,7 @@ import { Pressable, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import NavBar from "@/components/molecules/NavBar";
-import { APP_AUTH_LOGIN } from "@/constants/app";
+import { AUTH_PATHS } from "@/constants/paths";
 import { clearToken } from "@/services/auth/token";
 import ProfileItem from "@/components/atoms/ProfileItem";
 import { router } from "expo-router";
@@ -15,6 +15,10 @@ export default function ProfilePage() {
   const { firstname, email } = useProfile();
   const language = useAppLanguage();
   const { t } = useTranslation();
+  const handleDisconnect = async () => {
+    await clearToken();
+    router.replace(AUTH_PATHS.login);
+  };
 
   return (
     <View className="flex-1 bg-white">
@@ -81,8 +85,7 @@ export default function ProfilePage() {
         <DisconnectButton
           title={t("profile.disconnect")}
           onPress={() => {
-            clearToken();
-            router.replace(APP_AUTH_LOGIN);
+            void handleDisconnect();
           }}
         />
       </View>

@@ -1,3 +1,4 @@
+import { API_PATHS } from "@/constants/paths";
 import { apiUrl, ensureOk } from "@/services/default";
 import {
   AUTH_ACCOUNT_NOT_FOUND_ERROR,
@@ -5,18 +6,20 @@ import {
   AUTH_LOGIN_FAILED_ERROR,
   AUTH_NO_TOKEN_RECEIVED_ERROR,
 } from "@/constants/errors";
-import { APP_AUTH_LOGIN } from "@/constants/app";
 
 type HydraCollection = {
   totalItems: number;
 };
 
 export async function getAccount(email: string): Promise<void> {
-  const res = await fetch(apiUrl(`users?email=${email}`), {
-    headers: {
-      Accept: "application/ld+json",
+  const res = await fetch(
+    apiUrl(`${API_PATHS.users}?email=${encodeURIComponent(email)}`),
+    {
+      headers: {
+        Accept: "application/ld+json",
+      },
     },
-  });
+  );
 
   const data = await ensureOk<HydraCollection>(
     res,
@@ -29,7 +32,7 @@ export async function getAccount(email: string): Promise<void> {
 }
 
 export async function login(email: string, password: string): Promise<string> {
-  const res = await fetch(apiUrl(APP_AUTH_LOGIN), {
+  const res = await fetch(apiUrl(API_PATHS.authLogin), {
     method: "POST",
     headers: {
       "Content-Type": "application/ld+json",
