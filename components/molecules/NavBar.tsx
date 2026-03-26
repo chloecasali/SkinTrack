@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import NavButton from "@/components/atoms/NavButton";
 
@@ -11,6 +12,7 @@ type NavBarProps = {
 export default function NavBar({ activeTab }: NavBarProps) {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <View
@@ -19,35 +21,35 @@ export default function NavBar({ activeTab }: NavBarProps) {
                  flex-row bg-white border-t border-gray-200 pt-2"
     >
       <NavButton
-        label="Bathroom"
+        label={t("nav.bathroom")}
         icon="home-outline"
         active={activeTab === "home"}
         onPress={() => router.push("/")}
       />
 
       <NavButton
-        label="Search"
+        label={t("nav.search")}
         icon="search-outline"
         active={activeTab === "search"}
         onPress={() => router.push("/search")}
       />
 
       <NavButton
-        label="Scan"
+        label={t("nav.scan")}
         icon="scan-outline"
         active={activeTab === "scan"}
         onPress={() => router.push("/scan")}
       />
 
       <NavButton
-        label="Calendar"
+        label={t("nav.calendar")}
         icon="calendar-outline"
         active={activeTab === "calendar"}
-        onPress={() => router.push("/calendar")}
+        onPress={() => router.push("/")}
       />
 
       <NavButton
-        label="Profile"
+        label={t("nav.profile")}
         icon="person-outline"
         active={activeTab === "profile"}
         onPress={() => router.push("/profile")}

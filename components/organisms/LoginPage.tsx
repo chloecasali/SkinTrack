@@ -1,18 +1,22 @@
 import { useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import LoginForm from "@/components/molecules/LoginForm";
 import { APP_AUTH_REGISTER } from "@/constants/app";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <View className="flex-1 bg-white px-6 pt-24">
       <Text className="text-2xl font-semibold text-slate-900 mb-2">
-        Welcome
+        {t("auth.login.title")}
       </Text>
 
-      <Text className="text-sm text-gray-500 mb-8">Sign in to continue</Text>
+      <Text className="text-sm text-gray-500 mb-8">
+        {t("auth.login.subtitle")}
+      </Text>
 
       <LoginForm />
 
@@ -24,8 +28,10 @@ export default function LoginPage() {
         }}
       >
         <Text className="text-sm text-gray-500">
-          Don’t have an account?{" "}
-          <Text className="text-slate-900 font-medium">Create one</Text>
+          {t("auth.login.noAccount")}{" "}
+          <Text className="text-slate-900 font-medium">
+            {t("auth.login.createOne")}
+          </Text>
         </Text>
       </TouchableOpacity>
     </View>

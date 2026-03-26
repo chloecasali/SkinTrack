@@ -1,4 +1,5 @@
 import { apiUrl, ensureOk } from "@/services/default";
+import { PROFILE_FETCH_FAILED_ERROR } from "@/constants/errors";
 
 export type MeResponse = {
   email?: string;
@@ -16,6 +17,6 @@ export async function fetchMe(token: string): Promise<MeResponse> {
     },
   });
 
-  const data = await ensureOk<MeResponse>(res, "Failed to fetch profile");
+  const data = await ensureOk<MeResponse>(res, PROFILE_FETCH_FAILED_ERROR);
   return data || {};
 }

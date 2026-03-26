@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { fetchMe, MeResponse } from "@/services/auth/me";
-import { extractFirstname, getErrorMessage } from "@/hooks/default";
+import { extractFirstname, getLocalizedErrorMessage } from "@/hooks/default";
 import { useToken } from "@/services/auth/token";
 
 export type { MeResponse };
 
 export function useProfile() {
+  const { t } = useTranslation();
   const token = useToken();
   const [loading, setLoading] = useState(true);
   const [firstname, setFirstname] = useState<string | null>(null);
@@ -15,7 +17,7 @@ export function useProfile() {
   useEffect(() => {
     if (token === undefined) return;
     if (!token) {
-      setErrorMsg("Not authenticated.");
+      setErrorMsg(t("errors.notAuthenticated"));
       setFirstname(null);
       setEmail(null);
       setLoading(false);
@@ -31,7 +33,9 @@ export function useProfile() {
         setFirstname(extractFirstname(data));
         setEmail(data.email ?? null);
       } catch (error: any) {
-        setErrorMsg(getErrorMessage(error, "Unable to fetch user profile."));
+        setErrorMsg(
+          getLocalizedErrorMessage(error, t, "errors.fetchProfileFailed"),
+        );
       } finally {
         setLoading(false);
       }

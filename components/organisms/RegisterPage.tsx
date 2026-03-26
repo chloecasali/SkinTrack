@@ -1,19 +1,21 @@
 import { useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import RegisterForm from "@/components/molecules/RegisterForm";
 import { APP_AUTH_LOGIN } from "@/constants/app";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <View className="flex-1 bg-white px-6 pt-24">
       <Text className="text-2xl font-semibold text-slate-900 mb-2">
-        Create an account
+        {t("auth.register.title")}
       </Text>
 
       <Text className="text-sm text-gray-500 mb-8">
-        Get started in a few seconds
+        {t("auth.register.subtitle")}
       </Text>
 
       <RegisterForm />
@@ -24,8 +26,10 @@ export default function RegisterPage() {
         onPress={() => router.push(APP_AUTH_LOGIN)}
       >
         <Text className="text-sm text-gray-500">
-          Already have an account?{" "}
-          <Text className="text-slate-900 font-medium">Sign in</Text>
+          {t("auth.register.alreadyHaveAccount")}{" "}
+          <Text className="text-slate-900 font-medium">
+            {t("auth.register.signIn")}
+          </Text>
         </Text>
       </TouchableOpacity>
     </View>

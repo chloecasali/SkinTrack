@@ -1,4 +1,12 @@
 // Shared auth helpers to keep hooks small and consistent
+import type { TFunction } from "i18next";
+import {
+  AUTH_FETCH_ACCOUNT_FAILED_ERROR,
+  AUTH_LOGIN_FAILED_ERROR,
+  AUTH_NO_TOKEN_RECEIVED_ERROR,
+  AUTH_REGISTER_FAILED_ERROR,
+  PROFILE_FETCH_FAILED_ERROR,
+} from "@/constants/errors";
 import type { MeResponse } from "@/services/auth/me";
 
 export function normalizeEmail(email: string): string {
@@ -13,9 +21,12 @@ export function isEmailValid(email: string): boolean {
 
 // Password validator used by registration
 // Returns null when valid, otherwise a human-readable message
-export function validatePassword(password: string): string | null {
+export function validatePassword(
+  password: string,
+  t: TFunction,
+): string | null {
   if (!password || password.length < 8) {
-    return "Password must be at least 8 characters.";
+    return t("validation.passwordMin");
   }
   const uppercase = /[A-Z]/.test(password);
   const lowercase = /[a-z]/.test(password);
@@ -23,7 +34,7 @@ export function validatePassword(password: string): string | null {
   const special = /[^A-Za-z0-9]/.test(password);
 
   if (!uppercase || !lowercase || !number || !special) {
-    return "Password must include uppercase, lowercase, number and special character.";
+    return t("validation.passwordComplex");
   }
   return null;
 }
@@ -59,7 +70,41 @@ export function getErrorMessage(
       anyErr?.title ||
       fallback
     );
-  } catch (_) {
+  } catch {
     return fallback;
   }
+}
+
+const APP_ERROR_TRANSLATION_KEYS = {
+  [AUTH_FETCH_ACCOUNT_FAILED_ERROR]: "errors.fetchAccountFailed",
+  [AUTH_LOGIN_FAILED_ERROR]: "errors.loginFailed",
+  [AUTH_NO_TOKEN_RECEIVED_ERROR]: "errors.noTokenReceived",
+  [AUTH_REGISTER_FAILED_ERROR]: "errors.registrationFailed",
+  [PROFILE_FETCH_FAILED_ERROR]: "errors.fetchProfileFailed",
+} as const;
+
+export function getLocalizedErrorMessage(
+  err: unknown,
+  t: TFunction,
+  fallbackKey = "errors.unexpected",
+): string {
+  const rawMessage = getErrorMessage(err);
+  const normalizedMessage =
+    typeof rawMessage === "string"
+      ? rawMessage.replace(/\s*\(\d+\)\s*$/, "")
+      : rawMessage;
+  const translationKey =
+    APP_ERROR_TRANSLATION_KEYS[
+      normalizedMessage as keyof typeof APP_ERROR_TRANSLATION_KEYS
+    ];
+
+  if (translationKey) {
+    return t(translationKey);
+  }
+
+  if (!err || rawMessage === "Unexpected error occurred.") {
+    return t(fallbackKey);
+  }
+
+  return rawMessage;
 }
