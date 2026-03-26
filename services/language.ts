@@ -45,7 +45,11 @@ async function persistLanguage(value: AppLanguage): Promise<void> {
   if (Platform.OS === "web") {
     if (typeof window === "undefined") return;
 
-    window.localStorage.setItem(APP_LANGUAGE_KEY, value);
+    try {
+      window.localStorage.setItem(APP_LANGUAGE_KEY, value);
+    } catch (error) {
+      console.error("Failed to persist language preference", error);
+    }
     return;
   }
 
