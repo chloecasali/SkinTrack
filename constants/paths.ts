@@ -5,7 +5,9 @@ export const AUTH_PATHS = {
 } as const;
 
 export const APP_PATHS = {
+  root: "/",
   home: "/home",
+  profile: "/profile",
 } as const;
 
 export const API_PATHS = {

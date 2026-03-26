@@ -1,11 +1,15 @@
+import type { ComponentProps } from "react";
 import { Pressable, Text, View, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
+
 type NavButtonProps = {
   label: string;
-  icon: string;
+  icon: IoniconName;
   active?: boolean;
-  onPress: () => void;
+  onPress?: () => void;
+  disabled?: boolean;
 };
 
 export default function NavButton({
@@ -13,12 +17,17 @@ export default function NavButton({
   icon,
   active = false,
   onPress,
+  disabled = false,
 }: NavButtonProps) {
+  const isDisabled = disabled || !onPress;
+
   return (
     <Pressable
       onPress={onPress}
+      disabled={isDisabled}
       className="flex-1 items-center justify-center py-2"
       style={({ pressed }) => [
+        isDisabled && { opacity: 0.45 },
         pressed && {
           ...(Platform.OS === "ios"
             ? {
@@ -32,16 +41,22 @@ export default function NavButton({
               }),
         },
       ]}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: isDisabled, selected: active }}
     >
       <View className="items-center gap-1">
         <Ionicons
           name={icon}
           size={22}
-          color={active ? "#0f172a" : "#9ca3af"}
+          color={active ? "#0f172a" : isDisabled ? "#cbd5e1" : "#9ca3af"}
         />
         <Text
           className={`text-xs ${
-            active ? "text-slate-900 font-medium" : "text-gray-400"
+            active
+              ? "text-slate-900 font-medium"
+              : isDisabled
+                ? "text-slate-300"
+                : "text-gray-400"
           }`}
         >
           {label}
