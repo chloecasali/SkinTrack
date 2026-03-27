@@ -8,6 +8,14 @@ import { Platform } from "react-native";
 const tintColorLight = "#0a7ea4";
 const tintColorDark = "#fff";
 
+export const Palette = {
+  wine: "#5B0F2A",
+  charcoal: "#14151B",
+  warmNude: "#D2B6A4",
+  skinBeige: "#E8D8CF",
+  cream: "#FAF7F8",
+} as const;
+
 export const Colors = {
   light: {
     text: "#11181C",
