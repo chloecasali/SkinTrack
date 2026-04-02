@@ -1,6 +1,6 @@
 import { Image, Platform, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColorScheme } from "@/hooks/use-app-theme";
 
 type GoogleAuthProps = {
   onPress: () => void;
@@ -35,7 +35,7 @@ export default function GoogleAuth({
   loading = false,
 }: GoogleAuthProps) {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme();
+  const colorScheme = useAppColorScheme();
   const platform = Platform.OS === "android" ? "android" : "ios";
   const theme = colorScheme === "dark" ? "dark" : "light";
   const buttonSize =

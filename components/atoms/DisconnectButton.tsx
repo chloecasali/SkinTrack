@@ -1,6 +1,7 @@
-import { TouchableOpacity, Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import { useAppTheme } from "@/hooks/use-app-theme";
 
-interface PrimaryButtonProps {
+interface DisconnectButtonProps {
   title: string;
   onPress: () => void;
   disabled?: boolean;
@@ -10,14 +11,24 @@ export default function DisconnectButton({
   title,
   onPress,
   disabled,
-}: PrimaryButtonProps) {
+}: DisconnectButtonProps) {
+  const { colors } = useAppTheme();
+
   return (
     <TouchableOpacity
-      className="mt-10 py-3 rounded-xl border border-gray-200 items-center"
+      className="mt-6 items-center rounded-full border py-4"
+      style={{
+        borderColor: colors.divider,
+        backgroundColor: colors.elevated,
+      }}
       onPress={onPress}
       disabled={disabled}
+      activeOpacity={0.8}
     >
-      <Text className="text-red-500 font-medium text-center text-lg">
+      <Text
+        className="font-sans-semibold text-base"
+        style={{ color: colors.text }}
+      >
         {title}
       </Text>
     </TouchableOpacity>

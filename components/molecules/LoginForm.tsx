@@ -4,11 +4,14 @@ import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
 import { useAccount } from "@/hooks/auth/useAccount";
 import InputField from "@/components/atoms/InputField";
+import { useAppTheme } from "@/hooks/use-app-theme";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const { loading, errorMsg, handleAccount } = useAccount();
   const { t } = useTranslation();
+  const { colors } = useAppTheme();
+
   return (
     <View className="w-full">
       <InputField
@@ -19,7 +22,12 @@ export default function LoginForm() {
         keyboardType="email-address"
       />
       {errorMsg && (
-        <Text className="text-sm text-red-500 mb-4">{errorMsg}</Text>
+        <Text
+          className="mb-4 font-sans text-sm"
+          style={{ color: colors.error }}
+        >
+          {errorMsg}
+        </Text>
       )}
       <PrimaryButton
         title={

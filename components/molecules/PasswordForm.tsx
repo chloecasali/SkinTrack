@@ -6,12 +6,14 @@ import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
 import { router, useLocalSearchParams } from "expo-router";
 import { AUTH_PATHS } from "@/constants/paths";
+import { useAppTheme } from "@/hooks/use-app-theme";
 
 export default function PasswordForm() {
   const { email } = useLocalSearchParams<{ email: string }>();
   const [password, setPassword] = useState("");
   const { loading, errorMsg, handleLogin } = useLogin();
   const { t } = useTranslation();
+  const { colors } = useAppTheme();
 
   useEffect(() => {
     if (!email) {
@@ -29,7 +31,12 @@ export default function PasswordForm() {
         secureTextEntry
       />
       {errorMsg && (
-        <Text className="text-sm text-red-500 mb-4">{errorMsg}</Text>
+        <Text
+          className="mb-4 font-sans text-sm"
+          style={{ color: colors.error }}
+        >
+          {errorMsg}
+        </Text>
       )}
       <PrimaryButton
         title={

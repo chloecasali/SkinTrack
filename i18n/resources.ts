@@ -20,12 +20,19 @@ export const resources = {
   en: {
     translation: {
       common: {
+        comingSoon: "Coming soon",
+        preview: "Preview",
         languages: {
           en: "English",
           fr: "French",
         },
       },
       auth: {
+        heroPrivate: "Private ritual",
+        heroTrackTitle: "Track",
+        heroTrackBody: "Keep every skincare step in one calm space.",
+        heroScanTitle: "Scan",
+        heroScanBody: "Save products and routine details faster.",
         fields: {
           firstnameLabel: "First name",
           firstnamePlaceholder: "John",
@@ -35,8 +42,9 @@ export const resources = {
           passwordPlaceholder: "••••••••",
         },
         login: {
-          title: "Welcome",
-          subtitle: "Sign in to continue",
+          title: "Your skincare, curated.",
+          subtitle:
+            "Track every ritual, scan products, and keep your routine elegant.",
           findingAccount: "Finding account...",
           googleButtonA11yLabel: "Continue with Google",
           orContinueWith: "Or continue with",
@@ -45,40 +53,56 @@ export const resources = {
           createOne: "Create one",
         },
         register: {
-          title: "Create an account",
-          subtitle: "Get started in a few seconds",
+          title: "Create your private ritual",
+          subtitle:
+            "Build a refined routine space in a few seconds and make it yours.",
           creatingAccount: "Creating account...",
           createAccount: "Create account",
           alreadyHaveAccount: "Already have an account?",
           signIn: "Sign in",
         },
         password: {
-          title: "We found your account!",
-          subtitle: "Enter your password to continue",
+          title: "Welcome back",
+          subtitle: "Enter your password to reopen your SkinTrack ritual.",
           signingIn: "Signing in...",
           signIn: "Sign in",
         },
       },
       home: {
-        title: "SkinTrack",
-        greeting: "Hi {{name}} 👋",
-        guest: "Guest",
-        streak: "Streak: {{count}} days in a row",
-        question: "Did you apply your skincare tonight?",
+        eyebrow: "Bathroom",
+        greeting: "Hello, {{name}}",
+        guest: "there",
+        heroSubtitle:
+          "A lighter routine, a clearer ritual, and a better skin day.",
+        heroProgressLabel: "Routine health",
+        checkInEyebrow: "Daily check-in",
+        checkInTitle: "Routine today",
+        checkInSubtitle: "Capture today's ritual in one tap.",
+        checkInYesSubtitle: "Logged and feeling consistent.",
+        checkInNoSubtitle: "Skip today and reset tonight.",
         yes: "Yes",
         no: "No",
-        searchPlaceholder: "Search products...",
-        routineTitle: "Your Night Routine",
-        steps: {
-          one: "Step 1",
-          two: "Step 2",
-          three: "Step 3",
-        },
-        routine: {
-          cleanser: "Cleanser",
-          serum: "Serum",
-          moisturizer: "Moisturizer",
-          brandName: "Brand Name",
+        consistencyLabel: "Consistency",
+        consistencyValue: "{{count}} days",
+        routineEyebrow: "Daily flow",
+        morningTitle: "Morning routine",
+        nightTitle: "Night routine",
+        featureEyebrow: "Editorial pick",
+        featureTitle: "Your calm-skin rhythm is ready.",
+        featureBody:
+          "Keep the routine soft, layer from fluid to cream, and lean on barrier support when skin feels reactive.",
+        featureAction: "Open",
+        actionToday: "Today",
+        actionTonight: "Tonight",
+        recommendationEyebrow: "For you",
+        recommendationTitle: "Recommended products",
+        actionForYou: "Curated",
+        tip: {
+          eyebrow: "Tip of the day",
+          title: "Layer light to rich",
+          body: "Apply watery textures first, then serum, then cream.",
+          compact: "Water first. Cream last.",
+          dismiss: "Got it",
         },
       },
       nav: {
@@ -88,7 +112,50 @@ export const resources = {
         calendar: "Calendar",
         profile: "Profile",
       },
+      search: {
+        title: "Search",
+        subtitle: "Find products, brands, and ingredients.",
+        placeholder: "Search products or ingredients",
+        discoveryEyebrow: "Discovery",
+        discoveryTitle: "Build a shelf that fits the way your skin feels.",
+        discoveryBody:
+          "Start with a product type, concern, or finish and SkinTrack will narrow the field.",
+        defaultEyebrow: "Browse",
+        defaultTitle: "Start here",
+        defaultSubtitle: "Try a product, brand, or skin concern.",
+        resultsEyebrow: "Matches",
+        resultsTitle: "Results",
+        resultsCount: "{{count}} matches",
+        emptyTitle: "No match yet",
+        emptyBody: "Try another product, brand, or ingredient.",
+      },
+      calendar: {
+        title: "Routine calendar",
+        subtitle:
+          "Your visual habit tracker is coming soon with ritual history and rhythm insights.",
+        preview:
+          "Expect a premium streak view, daily check-ins, and a clearer picture of your skincare consistency.",
+        todayTitle: "Today's routine",
+        todaySubtitle: "A clearer day view for the steps that matter.",
+        stepsLabel: "Steps",
+        stepsTitle: "Routine agenda",
+        completedLabel: "Completed",
+        shareTitle: "Share your experience.",
+        shareBody:
+          "Explore gentle routines from other users and compare what keeps their skin balanced.",
+        explore: "Explore",
+        weekdays: {
+          mon: "Mon",
+          tue: "Tue",
+          wed: "Wed",
+          thu: "Thu",
+          fri: "Fri",
+        },
+      },
       scan: {
+        title: "Product scan",
+        subtitle:
+          "Align the barcode and SkinTrack will capture it in one pass.",
         checkingPermission: "Checking camera permission...",
         permissionRequired: "Camera permission is required to scan a barcode.",
         allowCameraAccess: "Allow camera access",
@@ -100,14 +167,41 @@ export const resources = {
         placeBarcode: "Place the barcode inside the frame",
         scannedCode: "Scanned code",
         scanAgain: "Scan again",
+        readyEyebrow: "Scanner ready",
+        readyTitle: "Hold the pack steady.",
+        readyBody:
+          "Keep the barcode inside the frame and SkinTrack will lock as soon as it reads a valid code.",
+        tipEyebrow: "Best light",
+        lightTip:
+          "Use soft, even light and avoid glare on glossy packaging for faster detection.",
       },
       profile: {
+        title: "Your profile",
+        status: "Daily ritual member",
+        statusBody: "Calm, consistent, and saved in your own routine space.",
+        skinSummary: "Skin health",
+        preferencesEyebrow: "Preferences",
+        preferencesTitle: "Preferences",
+        preferencesSubtitle: "Your daily setup.",
+        supportEyebrow: "Support",
+        supportTitle: "Support",
+        supportSubtitle: "Help and privacy.",
         settings: "Settings",
         privacy: "Privacy",
         help: "Help",
         disconnect: "Disconnect",
         language: {
           title: "Language",
+          subtitle: "Choose the app language.",
+        },
+        theme: {
+          title: "Appearance",
+          subtitle: "Choose how the app looks.",
+          options: {
+            system: "System",
+            light: "Light",
+            dark: "Dark",
+          },
         },
       },
       validation: {
@@ -143,12 +237,21 @@ export const resources = {
   fr: {
     translation: {
       common: {
+        comingSoon: "Bientôt disponible",
+        preview: "Aperçu",
         languages: {
           en: "Anglais",
           fr: "Français",
         },
       },
       auth: {
+        heroPrivate: "Rituel privé",
+        heroTrackTitle: "Suivi",
+        heroTrackBody:
+          "Gardez chaque étape skincare dans un espace calme et clair.",
+        heroScanTitle: "Scan",
+        heroScanBody:
+          "Enregistrez plus vite les produits et les détails de routine.",
         fields: {
           firstnameLabel: "Prénom",
           firstnamePlaceholder: "Jean",
@@ -158,8 +261,9 @@ export const resources = {
           passwordPlaceholder: "••••••••",
         },
         login: {
-          title: "Bienvenue",
-          subtitle: "Connectez-vous pour continuer",
+          title: "Votre routine, avec élégance.",
+          subtitle:
+            "Suivez chaque rituel, scannez vos produits et gardez une routine soignée.",
           findingAccount: "Recherche du compte...",
           googleButtonA11yLabel: "Continuer avec Google",
           orContinueWith: "Ou continuer avec",
@@ -168,50 +272,112 @@ export const resources = {
           createOne: "Créer un compte",
         },
         register: {
-          title: "Créer un compte",
-          subtitle: "Commencez en quelques secondes",
+          title: "Créez votre rituel privé",
+          subtitle:
+            "Créez un espace routine raffiné en quelques secondes et faites-le vôtre.",
           creatingAccount: "Création du compte...",
           createAccount: "Créer un compte",
           alreadyHaveAccount: "Vous avez déjà un compte ?",
           signIn: "Se connecter",
         },
         password: {
-          title: "Nous avons trouvé votre compte !",
-          subtitle: "Entrez votre mot de passe pour continuer",
+          title: "Bon retour",
+          subtitle:
+            "Entrez votre mot de passe pour retrouver votre rituel SkinTrack.",
           signingIn: "Connexion en cours...",
           signIn: "Se connecter",
         },
       },
       home: {
-        title: "SkinTrack",
-        greeting: "Bonjour {{name}} 👋",
-        guest: "Invité",
-        streak: "Série : {{count}} jours d'affilée",
-        question: "Avez-vous appliqué votre routine ce soir ?",
+        eyebrow: "Accueil",
+        greeting: "Bonjour, {{name}}",
+        guest: "vous",
+        heroSubtitle:
+          "Une routine plus légère, un rituel plus clair, et une meilleure journée pour la peau.",
+        heroProgressLabel: "Santé routine",
+        checkInEyebrow: "Check-in du jour",
+        checkInTitle: "Routine du jour",
+        checkInSubtitle: "Capturez le rituel du jour en un tap.",
+        checkInYesSubtitle: "Ajoutée et bien tenue.",
+        checkInNoSubtitle: "Pas aujourd'hui, reprise ce soir.",
         yes: "Oui",
         no: "Non",
-        searchPlaceholder: "Rechercher des produits...",
-        routineTitle: "Votre routine du soir",
-        steps: {
-          one: "Étape 1",
-          two: "Étape 2",
-          three: "Étape 3",
-        },
-        routine: {
-          cleanser: "Nettoyant",
-          serum: "Sérum",
-          moisturizer: "Hydratant",
-          brandName: "Nom de la marque",
+        consistencyLabel: "Régularité",
+        consistencyValue: "{{count}} jours",
+        routineEyebrow: "Rythme quotidien",
+        morningTitle: "Routine du matin",
+        nightTitle: "Routine du soir",
+        featureEyebrow: "Sélection éditoriale",
+        featureTitle: "Votre rythme peau apaisée est prêt.",
+        featureBody:
+          "Gardez la routine légère, appliquez du plus fluide au plus riche et misez sur la barrière quand la peau réagit.",
+        featureAction: "Ouvrir",
+        actionToday: "Aujourd'hui",
+        actionTonight: "Ce soir",
+        recommendationEyebrow: "Pour vous",
+        recommendationTitle: "Produits recommandés",
+        actionForYou: "Sélection",
+        tip: {
+          eyebrow: "Conseil du jour",
+          title: "Du léger au riche",
+          body: "Commencez par l'eau, puis le sérum, puis la crème.",
+          compact: "Eau d'abord. Crème en dernier.",
+          dismiss: "Compris",
         },
       },
       nav: {
-        bathroom: "Salle de bain",
+        bathroom: "Accueil",
         search: "Recherche",
         scan: "Scan",
         calendar: "Calendrier",
         profile: "Profil",
       },
+      search: {
+        title: "Recherche",
+        subtitle: "Trouvez produits, marques et ingrédients.",
+        placeholder: "Rechercher un produit ou ingrédient",
+        discoveryEyebrow: "Découverte",
+        discoveryTitle:
+          "Construisez une routine qui suit vraiment l'état de votre peau.",
+        discoveryBody:
+          "Commencez par un type de produit, un besoin ou un fini, et SkinTrack affine la sélection.",
+        defaultEyebrow: "Parcourir",
+        defaultTitle: "Pour commencer",
+        defaultSubtitle: "Essayez un produit, une marque ou un besoin.",
+        resultsEyebrow: "Résultats",
+        resultsTitle: "Résultats",
+        resultsCount: "{{count}} résultats",
+        emptyTitle: "Aucun résultat",
+        emptyBody: "Essayez un autre produit, une marque ou un ingrédient.",
+      },
+      calendar: {
+        title: "Calendrier routine",
+        subtitle:
+          "Votre suivi visuel d'habitudes arrive bientôt avec l'historique des rituels et des insights de rythme.",
+        preview:
+          "Bientôt : vue premium des séries, check-ins quotidiens et vision plus claire de votre régularité skincare.",
+        todayTitle: "Routine du jour",
+        todaySubtitle:
+          "Une vue plus claire des étapes qui comptent aujourd'hui.",
+        stepsLabel: "Étapes",
+        stepsTitle: "Agenda routine",
+        completedLabel: "Terminées",
+        shareTitle: "Partagez votre expérience.",
+        shareBody:
+          "Explorez des routines douces d'autres utilisateurs et comparez ce qui garde leur peau équilibrée.",
+        explore: "Explorer",
+        weekdays: {
+          mon: "Lun",
+          tue: "Mar",
+          wed: "Mer",
+          thu: "Jeu",
+          fri: "Ven",
+        },
+      },
       scan: {
+        title: "Scan produit",
+        subtitle:
+          "Alignez le code-barres et SkinTrack le capturera en un seul passage.",
         checkingPermission: "Vérification de l'autorisation de la caméra...",
         permissionRequired:
           "L'autorisation de la caméra est requise pour scanner un code-barres.",
@@ -224,14 +390,42 @@ export const resources = {
         placeBarcode: "Placez le code-barres dans le cadre",
         scannedCode: "Code scanné",
         scanAgain: "Scanner à nouveau",
+        readyEyebrow: "Scanner prêt",
+        readyTitle: "Tenez le produit bien stable.",
+        readyBody:
+          "Gardez le code-barres dans le cadre et SkinTrack validera dès qu'un code valable est détecté.",
+        tipEyebrow: "Bonne lumière",
+        lightTip:
+          "Utilisez une lumière douce et régulière et évitez les reflets sur les emballages brillants.",
       },
       profile: {
+        title: "Votre profil",
+        status: "Membre rituel quotidien",
+        statusBody:
+          "Calme, régulier et enregistré dans votre propre espace routine.",
+        skinSummary: "Santé peau",
+        preferencesEyebrow: "Préférences",
+        preferencesTitle: "Préférences",
+        preferencesSubtitle: "Votre configuration quotidienne.",
+        supportEyebrow: "Support",
+        supportTitle: "Support",
+        supportSubtitle: "Aide et confidentialité.",
         settings: "Paramètres",
         privacy: "Confidentialité",
         help: "Aide",
         disconnect: "Se déconnecter",
         language: {
           title: "Langue",
+          subtitle: "Choisissez la langue de l'app.",
+        },
+        theme: {
+          title: "Apparence",
+          subtitle: "Choisissez le mode de l'app.",
+          options: {
+            system: "Système",
+            light: "Clair",
+            dark: "Sombre",
+          },
         },
       },
       validation: {
