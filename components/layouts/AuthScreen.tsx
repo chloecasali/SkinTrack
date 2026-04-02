@@ -45,35 +45,6 @@ export default function AuthScreen({
         >
           <View className="px-5 pt-4">
             <View className="mb-10">
-              <View className="flex-row items-center justify-between gap-4">
-                <View
-                  className="self-start rounded-full border px-4 py-2"
-                  style={{
-                    borderColor: colors.border,
-                    backgroundColor: colors.glass,
-                  }}
-                >
-                  <Text
-                    className="font-sans-medium text-[11px] uppercase tracking-[2.4px]"
-                    style={{ color: colors.primary }}
-                  >
-                    SkinTrack
-                  </Text>
-                </View>
-
-                <View
-                  className="rounded-full px-3.5 py-2"
-                  style={{ backgroundColor: colors.glass }}
-                >
-                  <Text
-                    className="font-sans-medium text-[11px] uppercase tracking-[2px]"
-                    style={{ color: colors.textMuted }}
-                  >
-                    {t("auth.heroPrivate")}
-                  </Text>
-                </View>
-              </View>
-
               <Text
                 className="mt-6 max-w-[320px] font-lora text-[42px] leading-[46px]"
                 style={{ color: colors.text }}
@@ -99,44 +70,6 @@ export default function AuthScreen({
                 },
               ]}
             >
-              <View className="mb-6 flex-row gap-3">
-                <View
-                  className="flex-1 rounded-[24px] px-4 py-3"
-                  style={{ backgroundColor: colors.panelSoft }}
-                >
-                  <Text
-                    className="font-sans-medium text-[11px] uppercase tracking-[2px]"
-                    style={{ color: colors.primary }}
-                  >
-                    {t("auth.heroTrackTitle")}
-                  </Text>
-                  <Text
-                    className="mt-2 font-sans text-sm leading-5"
-                    style={{ color: colors.textMuted }}
-                  >
-                    {t("auth.heroTrackBody")}
-                  </Text>
-                </View>
-
-                <View
-                  className="flex-1 rounded-[24px] px-4 py-3"
-                  style={{ backgroundColor: colors.panelMuted }}
-                >
-                  <Text
-                    className="font-sans-medium text-[11px] uppercase tracking-[2px]"
-                    style={{ color: colors.primary }}
-                  >
-                    {t("auth.heroScanTitle")}
-                  </Text>
-                  <Text
-                    className="mt-2 font-sans text-sm leading-5"
-                    style={{ color: colors.textMuted }}
-                  >
-                    {t("auth.heroScanBody")}
-                  </Text>
-                </View>
-              </View>
-
               {children}
             </View>
 

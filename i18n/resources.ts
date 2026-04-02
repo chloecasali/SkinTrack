@@ -245,7 +245,7 @@ export const resources = {
         },
       },
       auth: {
-        heroPrivate: "Rituel privé",
+        heroPrivate: "Rituel p",
         heroTrackTitle: "Suivi",
         heroTrackBody:
           "Gardez chaque étape skincare dans un espace calme et clair.",
@@ -261,9 +261,9 @@ export const resources = {
           passwordPlaceholder: "••••••••",
         },
         login: {
-          title: "Votre routine, avec élégance.",
+          title: "Votre routine, étape par étape.",
           subtitle:
-            "Suivez chaque rituel, scannez vos produits et gardez une routine soignée.",
+            "Suivez chaque routine, scannez vos produits et gardez vos routines au même endroit.",
           findingAccount: "Recherche du compte...",
           googleButtonA11yLabel: "Continuer avec Google",
           orContinueWith: "Ou continuer avec",
