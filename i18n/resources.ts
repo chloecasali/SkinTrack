@@ -22,6 +22,7 @@ export const resources = {
       common: {
         comingSoon: "Coming soon",
         preview: "Preview",
+        back: "Go back",
         languages: {
           en: "English",
           fr: "French",
@@ -63,6 +64,7 @@ export const resources = {
         },
         password: {
           title: "Welcome back",
+          titleWithFirstname: "Welcome back, {{firstname}}",
           subtitle: "Enter your password to reopen your SkinTrack ritual.",
           signingIn: "Signing in...",
           signIn: "Sign in",
@@ -239,6 +241,7 @@ export const resources = {
       common: {
         comingSoon: "Bientôt disponible",
         preview: "Aperçu",
+        back: "Retour",
         languages: {
           en: "Anglais",
           fr: "Français",
@@ -254,7 +257,7 @@ export const resources = {
           "Enregistrez plus vite les produits et les détails de routine.",
         fields: {
           firstnameLabel: "Prénom",
-          firstnamePlaceholder: "Jean",
+          firstnamePlaceholder: "Marie",
           emailLabel: "E-mail",
           emailPlaceholder: "exemple@mail.com",
           passwordLabel: "Mot de passe",
@@ -263,7 +266,7 @@ export const resources = {
         login: {
           title: "Votre routine, étape par étape.",
           subtitle:
-            "Suivez chaque routine, scannez vos produits et gardez vos routines au même endroit.",
+            "Suivez chaque routine de soin, scannez vos produits et améliorer votre peau de jour en jour.",
           findingAccount: "Recherche du compte...",
           googleButtonA11yLabel: "Continuer avec Google",
           orContinueWith: "Ou continuer avec",
@@ -272,18 +275,18 @@ export const resources = {
           createOne: "Créer un compte",
         },
         register: {
-          title: "Créez votre rituel privé",
+          title: "Créez votre espace",
           subtitle:
-            "Créez un espace routine raffiné en quelques secondes et faites-le vôtre.",
+            "Démarrez votre suivi dès aujourd’hui pour une routine enfin maîtrisée.",
           creatingAccount: "Création du compte...",
           createAccount: "Créer un compte",
           alreadyHaveAccount: "Vous avez déjà un compte ?",
           signIn: "Se connecter",
         },
         password: {
-          title: "Bon retour",
-          subtitle:
-            "Entrez votre mot de passe pour retrouver votre rituel SkinTrack.",
+          title: "Bon retour !",
+          titleWithFirstname: "Bon retour {{firstname}} !",
+          subtitle: "Entrez votre mot de passe pour retrouver votre suivi.",
           signingIn: "Connexion en cours...",
           signIn: "Se connecter",
         },
