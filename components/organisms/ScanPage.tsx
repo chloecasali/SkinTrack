@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Linking, Platform, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { BlurView } from "expo-blur";
 import {
   CameraView,
   type BarcodeScanningResult,
@@ -101,13 +100,6 @@ function ScanFrame() {
   return (
     <View className="relative h-72 w-full max-w-xs items-center justify-center">
       <View
-        className="h-60 w-60 rounded-[36px] border"
-        style={{
-          borderColor: colors.scanFrameBorder,
-          backgroundColor: colors.scanFrameFill,
-        }}
-      />
-      <View
         className="absolute left-8 top-10 h-12 w-12 rounded-tl-[22px] border-l-[3px] border-t-[3px]"
         style={{ borderColor: colors.scanFrameBorder }}
       />
@@ -141,7 +133,7 @@ function ScanCameraView({
   onScanAgain: () => void;
 }) {
   const { t } = useTranslation();
-  const { colors, shadows } = useAppTheme();
+  const { colors } = useAppTheme();
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.shell }}>
@@ -158,41 +150,6 @@ function ScanCameraView({
 
       <SafeAreaView className="flex-1" edges={["top"]}>
         <View className="flex-1 px-5 pt-4">
-          <View
-            className="overflow-hidden rounded-[34px] border"
-            style={{
-              borderColor: colors.borderSoft,
-              backgroundColor: colors.scanGlass,
-            }}
-          >
-            <BlurView
-              intensity={28}
-              tint={colors.blurTint}
-              className="absolute inset-0"
-            />
-
-            <View className="px-5 py-5">
-              <Text
-                className="font-sans-medium text-[11px] uppercase tracking-[2px]"
-                style={{ color: colors.textOnDark }}
-              >
-                {t("nav.scan")}
-              </Text>
-              <Text
-                className="mt-3 font-lora text-[34px] leading-10"
-                style={{ color: colors.textOnDark }}
-              >
-                {t("scan.title")}
-              </Text>
-              <Text
-                className="mt-3 max-w-[290px] font-sans text-base leading-6"
-                style={{ color: colors.textOnDark }}
-              >
-                {t("scan.subtitle")}
-              </Text>
-            </View>
-          </View>
-
           <View className="flex-1 items-center justify-center">
             {!scannedBarcode ? (
               <>
@@ -210,83 +167,6 @@ function ScanCameraView({
                 </View>
               </>
             ) : null}
-          </View>
-
-          <View
-            className="mb-28 overflow-hidden rounded-[34px] border p-5"
-            style={[
-              shadows.card,
-              { borderColor: colors.border, backgroundColor: colors.panel },
-            ]}
-          >
-            {scannedBarcode ? (
-              <>
-                <Text
-                  className="font-sans-medium text-[11px] uppercase tracking-[2px]"
-                  style={{ color: colors.primary }}
-                >
-                  {t("scan.scannedCode")}
-                </Text>
-                <Text
-                  className="mt-3 font-lora text-[30px] leading-8"
-                  style={{ color: colors.text }}
-                >
-                  {scannedBarcode.data}
-                </Text>
-                <Text
-                  className="mt-2 font-sans text-sm"
-                  style={{ color: colors.textMuted }}
-                >
-                  {scannedBarcode.type}
-                </Text>
-
-                <View className="mt-5">
-                  <PrimaryButton
-                    title={t("scan.scanAgain")}
-                    onPress={onScanAgain}
-                  />
-                </View>
-              </>
-            ) : (
-              <>
-                <Text
-                  className="font-sans-medium text-[11px] uppercase tracking-[2px]"
-                  style={{ color: colors.primary }}
-                >
-                  {t("scan.readyEyebrow")}
-                </Text>
-                <Text
-                  className="mt-3 font-lora text-[30px] leading-8"
-                  style={{ color: colors.text }}
-                >
-                  {t("scan.readyTitle")}
-                </Text>
-                <Text
-                  className="mt-3 font-sans text-[15px] leading-6"
-                  style={{ color: colors.textMuted }}
-                >
-                  {t("scan.readyBody")}
-                </Text>
-
-                <View
-                  className="mt-4 rounded-[24px] px-4 py-4"
-                  style={{ backgroundColor: colors.panelSoft }}
-                >
-                  <Text
-                    className="font-sans-medium text-[11px] uppercase tracking-[2px]"
-                    style={{ color: colors.primary }}
-                  >
-                    {t("scan.tipEyebrow")}
-                  </Text>
-                  <Text
-                    className="mt-2 font-sans text-sm leading-6"
-                    style={{ color: colors.textMuted }}
-                  >
-                    {t("scan.lightTip")}
-                  </Text>
-                </View>
-              </>
-            )}
           </View>
         </View>
       </SafeAreaView>
