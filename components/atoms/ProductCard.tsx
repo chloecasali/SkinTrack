@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { type AccentTone } from "@/constants/theme";
+import { type ProductType } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
 
 type ProductCardProps = {
@@ -12,7 +12,7 @@ type ProductCardProps = {
   highlight: string;
   imageUrl?: string;
   imageFallbackLabel?: string;
-  tone?: AccentTone;
+  productType: ProductType;
 };
 
 export default function ProductCard({
@@ -22,15 +22,15 @@ export default function ProductCard({
   highlight,
   imageUrl,
   imageFallbackLabel,
-  tone = "sand",
+  productType,
 }: ProductCardProps) {
   const [imageFailed, setImageFailed] = useState(false);
-  const { accents, colors, shadows } = useAppTheme();
-  const toneStyle = accents[tone];
+  const { colors, productAccents, shadows } = useAppTheme();
+  const productStyle = productAccents[productType];
 
   return (
     <View
-      className="mr-4 w-[186px] rounded-[30px] border p-4"
+      className="overflow-hidden rounded-[34px] border"
       style={[
         shadows.card,
         {
@@ -39,75 +39,67 @@ export default function ProductCard({
         },
       ]}
     >
-      <View
-        className="mb-4 overflow-hidden rounded-[26px] px-3 pb-3 pt-3"
-        style={{ backgroundColor: toneStyle.surface }}
-      >
-        <View className="flex-row items-center justify-between gap-3">
-          <View
-            className="rounded-full px-3 py-1.5"
-            style={{ backgroundColor: toneStyle.highlight }}
-          >
-            <Text
-              className="font-sans-medium text-[11px] uppercase tracking-[1.8px]"
-              style={{ color: toneStyle.accent }}
+      <View className="flex-row">
+        <View className="w-[40%] min-h-[170px] overflow-hidden">
+          {!imageFailed && imageUrl ? (
+            <Image
+              source={{ uri: imageUrl }}
+              contentFit="cover"
+              transition={150}
+              onError={() => setImageFailed(true)}
+              style={{ width: "100%", height: "100%" }}
+            />
+          ) : (
+            <View
+              className="flex-1 items-center justify-center px-5"
+              style={{ backgroundColor: productStyle.surface }}
             >
-              {category}
-            </Text>
-          </View>
-
-          <View
-            className="h-8 w-8 items-center justify-center rounded-full"
-            style={{ backgroundColor: colors.glass }}
-          >
-            <Ionicons name="heart-outline" size={15} color={colors.primary} />
-          </View>
+              <Text
+                className="text-center font-lora text-[28px] leading-8"
+                style={{ color: productStyle.accent }}
+              >
+                {imageFallbackLabel || brand}
+              </Text>
+            </View>
+          )}
         </View>
 
-        {!imageFailed && imageUrl ? (
-          <Image
-            source={{ uri: imageUrl }}
-            contentFit="contain"
-            transition={150}
-            onError={() => setImageFailed(true)}
-            style={{ width: "100%", height: 130, marginTop: 12 }}
-          />
-        ) : (
-          <View
-            className="mt-4 h-[130px] items-center justify-center rounded-[20px] border"
-            style={{
-              borderColor: colors.borderSoft,
-              backgroundColor: colors.glass,
-            }}
-          >
-            <Text
-              className="font-lora text-2xl"
-              style={{ color: colors.textSubtle }}
-            >
-              {imageFallbackLabel || brand}
-            </Text>
-          </View>
-        )}
-      </View>
+        <View className="flex-1 px-5 py-5">
+          <View className="flex-row items-start justify-between gap-4">
+            <View className="flex-1">
+              <Text
+                className="font-sans-semibold text-[13px] uppercase tracking-[2px]"
+                style={{ color: productStyle.accent }}
+              >
+                {category}
+              </Text>
+            </View>
 
-      <Text
-        className="font-lora text-[22px] leading-7"
-        style={{ color: colors.text }}
-      >
-        {name}
-      </Text>
-      <Text
-        className="mt-1 font-sans text-sm"
-        style={{ color: colors.textMuted }}
-      >
-        {brand}
-      </Text>
-      <Text
-        className="mt-3 font-sans-medium text-sm"
-        style={{ color: colors.primary }}
-      >
-        {highlight}
-      </Text>
+            <View
+              className="h-11 w-11 items-center justify-center rounded-full border"
+              style={{
+                borderColor: colors.border,
+                backgroundColor: colors.elevated,
+              }}
+            >
+              <Ionicons name="heart-outline" size={20} color={colors.text} />
+            </View>
+          </View>
+
+          <Text
+            className="mt-4 font-lora text-[24px] leading-8"
+            style={{ color: colors.text }}
+          >
+            {name}
+          </Text>
+          <Text
+            className="mt-4 font-sans text-[16px] leading-7"
+            style={{ color: colors.textMuted }}
+          >
+            {highlight}
+          </Text>
+        </View>
+      </View>
     </View>
   );
 }
