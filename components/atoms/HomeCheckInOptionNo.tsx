@@ -1,5 +1,5 @@
 import { Pressable, Text } from "react-native";
-import { AppThemes, Palette } from "@/constants/theme";
+import { Palette } from "@/constants/theme";
 
 type HomeCheckInOptionProps = {
   label: string;
@@ -19,8 +19,7 @@ export default function HomeCheckInOptionNo({
       accessibilityState={{ selected }}
       className="h-[54px] flex-1 items-center justify-center rounded-[18px] border"
       style={{
-        borderColor: AppThemes.light.borderSoft,
-        backgroundColor: Palette.cream,
+        borderColor: Palette.skinBeige,
       }}
     >
       <Text

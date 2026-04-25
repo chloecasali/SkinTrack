@@ -31,10 +31,17 @@ export default function HomeCheckInCard({
       ]}
     >
       <Text
-        className="font-lora text-[22px] leading-[28px]"
+        className="font-lora text-[18px] leading-[28px]"
         style={{ color: colors.text }}
       >
         {title}
+      </Text>
+
+      <Text
+        className="mt-1 font-sans text-[13px]"
+        style={{ color: colors.textSubtle }}
+      >
+        {subtitle}
       </Text>
 
       <View className="mt-6 flex-row gap-3">

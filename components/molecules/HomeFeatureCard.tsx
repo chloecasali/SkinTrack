@@ -12,16 +12,15 @@ export default function HomeFeatureCard({
   eyebrow,
   title,
 }: HomeFeatureCardProps) {
-  const { colors, shadows } = useAppTheme();
+  const { shadows } = useAppTheme();
 
   return (
     <View
-      className="rounded-[18px] border px-7 py-7"
+      className="rounded-[18px] border px-4 py-4"
       style={[
         shadows.card,
         {
-          borderColor: Palette.skinBeige,
-          backgroundColor: colors.panel,
+          borderColor: Palette.warmNude,
         },
       ]}
     >
@@ -30,13 +29,13 @@ export default function HomeFeatureCard({
           className="mt-1 h-10 w-10 items-center justify-center rounded-full"
           style={{ backgroundColor: Palette.skinBeige }}
         >
-          <Lightbulb size={18} color={Palette.charcoal} strokeWidth={2} />
+          <Lightbulb size={18} color={Palette.cream} strokeWidth={2} />
         </View>
 
         <View className="flex-1 pt-1">
           <Text
-            className="font-sans-semibold text-[17px] uppercase leading-[22px]"
-            style={{ color: Palette.charcoal, letterSpacing: 0.7 }}
+            className="font-sans-semibold text-[12px] uppercase leading-[22px]"
+            style={{ color: Palette.charcoal, letterSpacing: 0.1 }}
           >
             {eyebrow}
           </Text>

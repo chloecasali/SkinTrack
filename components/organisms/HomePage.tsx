@@ -146,6 +146,13 @@ export default function HomePage() {
         greeting={t("home.greeting", { name: greetingName })}
       />
 
+      <HomeStatsRow
+        consistencyLabel={t("home.consistencyLabel")}
+        daysUnit={t("home.daysUnit")}
+        streakCount={STREAK_COUNT}
+        heroProgressLabel={t("home.heroProgressLabel")}
+        progressPercent={CHALLENGE_PROGRESS}
+      />
       <HomeCheckInCard
         title={t("home.checkInTitle")}
         subtitle={t("home.checkInSubtitle")}
@@ -153,13 +160,6 @@ export default function HomePage() {
         yesLabel={t("home.yes")}
         noLabel={t("home.no")}
         onSelect={setDidRoutine}
-      />
-      <HomeStatsRow
-        consistencyLabel={t("home.consistencyLabel")}
-        daysUnit={t("home.daysUnit")}
-        streakCount={STREAK_COUNT}
-        heroProgressLabel={t("home.heroProgressLabel")}
-        progressPercent={CHALLENGE_PROGRESS}
       />
 
       <HomeFeatureCard

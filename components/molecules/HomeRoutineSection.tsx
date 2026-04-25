@@ -3,7 +3,7 @@ import { ScrollView, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import RoutineCard from "@/components/atoms/RoutineCard";
 import type { ProductImageSource } from "@/constants/mock-content";
-import type { ProductType } from "@/constants/theme";
+import { Palette, ProductType } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
 
 export type HomeRoutineSectionItem = {
@@ -38,7 +38,7 @@ export default function HomeRoutineSection({
     <View className="gap-4">
       <View className="flex-row items-center justify-between gap-4">
         <View className="flex-row items-center gap-3">
-          <Ionicons name={section.icon} size={28} color={section.iconColor} />
+          <Ionicons name={section.icon} size={28} color={Palette.warmNude} />
           <Text
             className="font-lora text-[32px] leading-9"
             style={{ color: colors.text }}

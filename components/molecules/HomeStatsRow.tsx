@@ -27,12 +27,12 @@ export default function HomeStatsRow({
         <View className="h-10 w-12 items-center justify-center rounded-full">
           <View
             className="absolute inset-0 rounded-full"
-            style={{ backgroundColor: Palette.skinBeige }}
+            style={{ backgroundColor: Palette.cream }}
           />
           <Ionicons
             name="sparkles-outline"
             size={22}
-            color={Palette.charcoal}
+            color={Palette.warmNude}
           />
         </View>
 
@@ -69,7 +69,7 @@ export default function HomeStatsRow({
         <View className="mt-32 flex-row items-center gap-3">
           <Text
             className="font-sans-semibold text-[15px]"
-            style={{ color: Palette.wine }}
+            style={{ color: Palette.warmNude }}
           >
             {progressPercent}%
           </Text>
@@ -81,7 +81,7 @@ export default function HomeStatsRow({
               className="h-full rounded-full"
               style={{
                 width: `${progressPercent}%`,
-                backgroundColor: Palette.wine,
+                backgroundColor: Palette.warmNude,
               }}
             />
           </View>
