@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Image } from "expo-image";
+import { Image, type ImageSource } from "expo-image";
 import { Palette, type ProductType } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
+
+type ProductImageSource = ImageSource | string | number;
 
 type RoutineCardProps = {
   step: string;
   title: string;
   brandName: string;
   categoryLabel: string;
-  imageUrl?: string;
+  imageSource?: ProductImageSource;
   imageFallbackLabel?: string;
   productType: ProductType;
 };
@@ -19,7 +21,7 @@ export default function RoutineCard({
   title,
   brandName,
   categoryLabel,
-  imageUrl,
+  imageSource,
   imageFallbackLabel,
   productType,
 }: RoutineCardProps) {
@@ -39,12 +41,14 @@ export default function RoutineCard({
         className="overflow-hidden rounded-[20px]"
         style={{
           backgroundColor:
-            imageFailed || !imageUrl ? productStyle.surface : colors.glass,
+            imageFailed || imageSource === undefined || imageSource === null
+              ? productStyle.surface
+              : colors.glass,
         }}
       >
-        {!imageFailed && imageUrl ? (
+        {!imageFailed && imageSource !== undefined && imageSource !== null ? (
           <Image
-            source={{ uri: imageUrl }}
+            source={imageSource}
             contentFit="cover"
             transition={150}
             onError={() => setImageFailed(true)}
@@ -69,13 +73,13 @@ export default function RoutineCard({
             className="absolute inset-0"
             style={{
               borderRadius: 16,
-              borderColor: Palette.wine,
+              borderColor: Palette.charcoal,
               backgroundColor: colors.glassStrong,
             }}
           />
           <Text
             className="font-sans-semibold text-[16px]"
-            style={{ color: Palette.wine }}
+            style={{ color: Palette.charcoal }}
           >
             {step}
           </Text>

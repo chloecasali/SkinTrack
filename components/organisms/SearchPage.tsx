@@ -20,8 +20,8 @@ import {
 import { useAppTheme } from "@/hooks/use-app-theme";
 
 function SearchResultCard({ item }: { item: SearchItem }) {
-  const { accents, colors, shadows } = useAppTheme();
-  const toneStyle = accents[item.tone ?? "peach"];
+  const { colors, productAccents, shadows } = useAppTheme();
+  const productStyle = productAccents[item.productType];
 
   return (
     <View
@@ -34,15 +34,15 @@ function SearchResultCard({ item }: { item: SearchItem }) {
       <View className="flex-row gap-4">
         <View
           className="w-24 rounded-[24px] px-3 py-3"
-          style={{ backgroundColor: toneStyle.surface }}
+          style={{ backgroundColor: productStyle.surface }}
         >
           <View
             className="self-start rounded-full px-3 py-1.5"
-            style={{ backgroundColor: toneStyle.highlight }}
+            style={{ backgroundColor: productStyle.highlight }}
           >
             <Text
               className="font-sans-medium text-[11px] uppercase tracking-[1.8px]"
-              style={{ color: toneStyle.accent }}
+              style={{ color: productStyle.accent }}
             >
               {item.category}
             </Text>
@@ -132,11 +132,6 @@ export default function SearchPage() {
           { borderColor: colors.border, backgroundColor: colors.panelSoft },
         ]}
       >
-        <View
-          className="absolute -right-8 -top-5 h-36 w-36 rounded-full"
-          style={{ backgroundColor: colors.accentLilac }}
-        />
-
         <SectionHeader
           eyebrow={t("nav.search")}
           title={t("search.title")}
@@ -226,11 +221,6 @@ export default function SearchPage() {
               },
             ]}
           >
-            <View
-              className="absolute -left-8 bottom-4 h-32 w-32 rounded-full"
-              style={{ backgroundColor: colors.accentPeach }}
-            />
-
             <Text
               className="font-sans-medium text-[11px] uppercase tracking-[2px]"
               style={{ color: colors.primary }}

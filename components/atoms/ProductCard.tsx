@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Image } from "expo-image";
+import { Image, type ImageSource } from "expo-image";
 import { type ProductType } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
+
+type ProductImageSource = ImageSource | string | number;
 
 type ProductCardProps = {
   category: string;
   name: string;
   brand: string;
   highlight: string;
-  imageUrl?: string;
+  imageSource?: ProductImageSource;
   imageFallbackLabel?: string;
   productType: ProductType;
 };
@@ -20,7 +22,7 @@ export default function ProductCard({
   name,
   brand,
   highlight,
-  imageUrl,
+  imageSource,
   imageFallbackLabel,
   productType,
 }: ProductCardProps) {
@@ -41,9 +43,9 @@ export default function ProductCard({
     >
       <View className="flex-row">
         <View className="w-[40%] min-h-[170px] overflow-hidden">
-          {!imageFailed && imageUrl ? (
+          {!imageFailed && imageSource !== undefined && imageSource !== null ? (
             <Image
-              source={{ uri: imageUrl }}
+              source={imageSource}
               contentFit="cover"
               transition={150}
               onError={() => setImageFailed(true)}

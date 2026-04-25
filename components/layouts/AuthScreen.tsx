@@ -28,21 +28,6 @@ export default function AuthScreen({
 
   return (
     <View className="flex-1" style={{ backgroundColor: colors.shell }}>
-      <View className="absolute inset-0 overflow-hidden">
-        <View
-          className="absolute -right-20 -top-12 h-72 w-72 rounded-full"
-          style={{ backgroundColor: colors.accentPeach }}
-        />
-        <View
-          className="absolute left-[-64px] top-32 h-52 w-52 rounded-full"
-          style={{ backgroundColor: colors.accentLilac }}
-        />
-        <View
-          className="absolute bottom-16 right-10 h-28 w-28 rounded-full"
-          style={{ backgroundColor: colors.accentMint }}
-        />
-      </View>
-
       <SafeAreaView className="flex-1" edges={["top", "bottom"]}>
         <ScrollView
           className="flex-1"

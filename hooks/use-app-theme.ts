@@ -2,6 +2,7 @@ import {
   AccentTonePalettes,
   AppShadowPalettes,
   AppThemes,
+  ProductTypePalettes,
   type ResolvedAppColorScheme,
 } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -22,6 +23,7 @@ export function useAppTheme() {
     isDark: scheme === "dark",
     colors: AppThemes[scheme],
     accents: AccentTonePalettes[scheme],
+    productAccents: ProductTypePalettes[scheme],
     shadows: AppShadowPalettes[scheme],
   };
 }

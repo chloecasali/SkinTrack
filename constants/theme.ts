@@ -16,7 +16,6 @@ export const Palette = {
 export const AppThemes = {
   light: {
     shell: "#F7F2EF",
-    shellTopWash: "rgba(255,255,255,0.45)",
     panel: "#FFFDFC",
     panelSoft: "#F8F1EC",
     panelMuted: "#F4ECE6",
@@ -55,10 +54,6 @@ export const AppThemes = {
     iconSurface: "#F8F1EC",
     iconContrastSurface: Palette.charcoal,
     badgeBackground: "#F8F1EC",
-    accentPeach: "rgba(237,210,192,0.55)",
-    accentLilac: "rgba(232,224,244,0.45)",
-    accentMint: "rgba(220,235,221,0.60)",
-    accentSand: "rgba(229,215,204,0.35)",
     error: "#DC2626",
     blurTint: "light" as const,
     statusBarStyle: "dark" as const,
@@ -66,7 +61,6 @@ export const AppThemes = {
   },
   dark: {
     shell: "#17141B",
-    shellTopWash: "rgba(255,255,255,0.04)",
     panel: "#241F27",
     panelSoft: "#2C2530",
     panelMuted: "#342B38",
@@ -105,10 +99,6 @@ export const AppThemes = {
     iconSurface: "#342B38",
     iconContrastSurface: "#D4B6C3",
     badgeBackground: "#342B38",
-    accentPeach: "rgba(127,93,78,0.34)",
-    accentLilac: "rgba(119,97,145,0.28)",
-    accentMint: "rgba(79,107,89,0.24)",
-    accentSand: "rgba(109,93,84,0.22)",
     error: "#F87171",
     blurTint: "dark" as const,
     statusBarStyle: "light" as const,
@@ -117,6 +107,67 @@ export const AppThemes = {
 } as const;
 
 export const AppColors = AppThemes.light;
+
+function hexToRgba(hex: string, alpha: number): string {
+  const normalized = hex.replace("#", "");
+  const fullHex =
+    normalized.length === 3
+      ? normalized
+          .split("")
+          .map((char) => `${char}${char}`)
+          .join("")
+      : normalized;
+
+  const value = Number.parseInt(fullHex, 16);
+  const red = (value >> 16) & 255;
+  const green = (value >> 8) & 255;
+  const blue = value & 255;
+
+  return `rgba(${red},${green},${blue},${alpha})`;
+}
+
+export const ProductTypeBaseColors = {
+  cleanser: "#4A90E2",
+  moisturizer: "#2EC4B6",
+  serum: "#F2994A",
+  peeling: "#9B5DE5",
+  mask: "#EC4899",
+  makeupRemover: "#34C759",
+  toner: "#8B5E3C",
+  acnePatch: "#EF4444",
+  eyecream: "#F4C542",
+} as const;
+
+export type ProductType = keyof typeof ProductTypeBaseColors;
+
+type ProductTypePalette = {
+  surface: string;
+  accent: string;
+  highlight: string;
+};
+
+function buildProductTypePalette(
+  surfaceAlpha: number,
+  highlightAlpha: number,
+): Record<ProductType, ProductTypePalette> {
+  return Object.fromEntries(
+    (Object.entries(ProductTypeBaseColors) as Array<[ProductType, string]>).map(
+      ([productType, accent]) => [
+        productType,
+        {
+          accent,
+          surface: hexToRgba(accent, surfaceAlpha),
+          highlight: hexToRgba(accent, highlightAlpha),
+        },
+      ],
+    ),
+  ) as Record<ProductType, ProductTypePalette>;
+}
+
+export const ProductTypePalettes = {
+  light: buildProductTypePalette(0.18, 0.1),
+  dark: buildProductTypePalette(0.22, 0.14),
+} as const;
 
 export const AccentTonePalettes = {
   light: {
@@ -167,6 +218,7 @@ export const AccentTonePalettes = {
 
 export type AccentTone = keyof typeof AccentTonePalettes.light;
 export const AccentTones = AccentTonePalettes.light;
+export const ProductTypeColors = ProductTypePalettes.light;
 
 export const AppShadowPalettes = {
   light: {
@@ -184,13 +236,6 @@ export const AppShadowPalettes = {
       shadowRadius: 24,
       elevation: 6,
     },
-    glow: {
-      shadowColor: "#D7B9A8",
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.35,
-      shadowRadius: 36,
-      elevation: 0,
-    },
   },
   dark: {
     floating: {
@@ -206,13 +251,6 @@ export const AppShadowPalettes = {
       shadowOpacity: 0.22,
       shadowRadius: 26,
       elevation: 8,
-    },
-    glow: {
-      shadowColor: "#6E5663",
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.24,
-      shadowRadius: 42,
-      elevation: 0,
     },
   },
 } as const;

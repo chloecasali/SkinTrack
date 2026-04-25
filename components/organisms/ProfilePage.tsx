@@ -37,15 +37,6 @@ export default function ProfilePage() {
           { borderColor: colors.border, backgroundColor: colors.panelSoft },
         ]}
       >
-        <View
-          className="absolute -right-8 top-0 h-36 w-36 rounded-full"
-          style={{ backgroundColor: colors.accentPeach }}
-        />
-        <View
-          className="absolute left-[-20px] bottom-0 h-24 w-24 rounded-full"
-          style={{ backgroundColor: colors.accentLilac }}
-        />
-
         <View className="flex-row items-start justify-between gap-4">
           <View className="flex-1">
             <View

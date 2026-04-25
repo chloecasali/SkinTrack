@@ -1,4 +1,7 @@
-import type { AccentTone } from "@/constants/theme";
+import type { ImageSource } from "expo-image";
+import type { ProductType } from "@/constants/theme";
+
+export type ProductImageSource = ImageSource | string | number;
 
 export type RoutineItem = {
   step: string;
@@ -6,7 +9,9 @@ export type RoutineItem = {
   brandName: string;
   note: string;
   duration?: string;
-  tone?: AccentTone;
+  imageSource?: ProductImageSource;
+  imageFallbackLabel?: string;
+  productType: ProductType;
 };
 
 export type RoutineSection = {
@@ -19,9 +24,9 @@ export type RecommendedProduct = {
   name: string;
   brand: string;
   highlight: string;
-  imageUrl: string;
+  imageSource?: ProductImageSource;
   imageFallbackLabel?: string;
-  tone?: AccentTone;
+  productType: ProductType;
 };
 
 export type SearchItem = {
@@ -31,7 +36,7 @@ export type SearchItem = {
   category: string;
   benefit: string;
   tags: string[];
-  tone?: AccentTone;
+  productType: ProductType;
 };
 
 export type CalendarDay = {
@@ -45,9 +50,22 @@ export type CalendarRoutineStep = {
   id: string;
   title: string;
   subtitle: string;
-  tone: AccentTone;
+  productType: ProductType;
   completed?: boolean;
 };
+
+const productImages = {
+  morningCleanser: require("../assets/images/products/routine-cleanser-ela-de-pure.jpg"),
+  morningSerum: require("../assets/images/products/routine-serum-hydralift.jpg"),
+  morningMoisturizer: require("../assets/images/products/routine-cream-dr-dennis-gross.jpg"),
+  nightBalm: require("../assets/images/products/routine-balm-jars.jpg"),
+  nightToner: require("../assets/images/products/routine-toner-pump-beige.jpg"),
+  nightSerum: require("../assets/images/products/routine-retinol-serum.jpg"),
+  nightCream: require("../assets/images/products/routine-recovery-cream.jpg"),
+  recommendationEssence: require("../assets/images/products/recommendation-essence-flatlay.jpg"),
+  recommendationMask: require("../assets/images/products/recommendation-mask-jar.jpg"),
+  recommendationBarrier: require("../assets/images/products/recommendation-barrier-flatlay.jpg"),
+} as const;
 
 export const routineSections: RoutineSection[] = [
   {
@@ -58,8 +76,7 @@ export const routineSections: RoutineSection[] = [
         title: "Hydrating Soft Cleanser",
         brandName: "Aesop",
         note: "A soft cleanse to start the day.",
-        imageUrl:
-          "https://www.drjart.com/media/export/cms/products/1000x1000/dj_sku_H7T901_1000x1000_0.jpg",
+        imageSource: productImages.morningCleanser,
         imageFallbackLabel: "Cleanser",
         productType: "cleanser",
       },
@@ -68,8 +85,7 @@ export const routineSections: RoutineSection[] = [
         title: "Vitamin C Glow Serum",
         brandName: "La De Pluie",
         note: "Glow support before SPF.",
-        imageUrl:
-          "https://us.medik8.com/cdn/shop/files/20230922-PDPAsset1-Press_Glow-Packshot-US_todayshow2_grande.jpg?v=1762269828",
+        imageSource: productImages.morningSerum,
         imageFallbackLabel: "Serum",
         productType: "serum",
       },
@@ -78,8 +94,7 @@ export const routineSections: RoutineSection[] = [
         title: "Light Barrier Cream",
         brandName: "Lucent Atelier",
         note: "Hydration with a soft finish.",
-        imageUrl:
-          "https://us.laneige.com/cdn/shop/files/N_WBGM_24AD_Product_02_large.jpg?v=1703778546",
+        imageSource: productImages.morningMoisturizer,
         imageFallbackLabel: "Cream",
         productType: "moisturizer",
       },
@@ -93,8 +108,7 @@ export const routineSections: RoutineSection[] = [
         title: "Melting Cleansing Balm",
         brandName: "Botanicals",
         note: "A comforting first cleanse.",
-        imageUrl:
-          "https://www.drjart.com/media/export/cms/products/1000x1000/dj_sku_H7T901_1000x1000_0.jpg",
+        imageSource: productImages.nightBalm,
         imageFallbackLabel: "Balm",
         duration: "2 min",
         productType: "makeupRemover",
@@ -104,8 +118,7 @@ export const routineSections: RoutineSection[] = [
         title: "Purifying Toner",
         brandName: "Simple",
         note: "Rebalance skin after cleansing.",
-        imageUrl:
-          "https://us.laneige.com/cdn/shop/files/N_WBGM_24AD_Product_02_large.jpg?v=1703778546",
+        imageSource: productImages.nightToner,
         imageFallbackLabel: "Toner",
         duration: "1 min",
         productType: "toner",
@@ -116,8 +129,7 @@ export const routineSections: RoutineSection[] = [
         brandName: "La De Pluie",
         note: "Repair and glow while you sleep.",
         duration: "1 min",
-        imageUrl:
-          "https://us.medik8.com/cdn/shop/files/20230922-PDPAsset1-Press_Glow-Packshot-US_todayshow2_grande.jpg?v=1762269828",
+        imageSource: productImages.nightSerum,
         imageFallbackLabel: "Night",
         productType: "serum",
       },
@@ -127,8 +139,7 @@ export const routineSections: RoutineSection[] = [
         brandName: "Botanicals",
         note: "Seal comfort in overnight.",
         duration: "1 min",
-        imageUrl:
-          "https://us.laneige.com/cdn/shop/files/N_WBGM_24AD_Product_02_large.jpg?v=1703778546",
+        imageSource: productImages.nightCream,
         imageFallbackLabel: "Cream",
         productType: "moisturizer",
       },
@@ -142,8 +153,7 @@ export const recommendedProducts: RecommendedProduct[] = [
     name: "Floral Renewal Essence",
     brand: "Botanicals",
     highlight: "Deep hydration with a natural glow finish.",
-    imageUrl:
-      "https://www.drjart.com/media/export/cms/products/1000x1000/dj_sku_H7T901_1000x1000_0.jpg",
+    imageSource: productImages.recommendationEssence,
     imageFallbackLabel: "Essence",
     productType: "moisturizer",
   },
@@ -152,8 +162,7 @@ export const recommendedProducts: RecommendedProduct[] = [
     name: "Rose Clay Detox Mask",
     brand: "Purity",
     highlight: "Cleanses pores while keeping the skin calm.",
-    imageUrl:
-      "https://us.laneige.com/cdn/shop/files/N_WBGM_24AD_Product_02_large.jpg?v=1703778546",
+    imageSource: productImages.recommendationMask,
     imageFallbackLabel: "Mask",
     productType: "mask",
   },
@@ -162,8 +171,7 @@ export const recommendedProducts: RecommendedProduct[] = [
     name: "Overnight Barrier Cream",
     brand: "Recovery",
     highlight: "Restores comfort and softness by the morning.",
-    imageUrl:
-      "https://us.medik8.com/cdn/shop/files/20230922-PDPAsset1-Press_Glow-Packshot-US_todayshow2_grande.jpg?v=1762269828",
+    imageSource: productImages.recommendationBarrier,
     imageFallbackLabel: "Cream",
     productType: "moisturizer",
   },

@@ -82,7 +82,7 @@ export default function HomePage() {
           title: item.title,
           brandName: item.brandName,
           categoryLabel: t(`home.productTypes.${item.productType}`),
-          imageUrl: item.imageUrl,
+          imageSource: item.imageSource,
           imageFallbackLabel: item.imageFallbackLabel,
           productType: item.productType,
         })),
@@ -98,7 +98,7 @@ export default function HomePage() {
           title: item.title,
           brandName: item.brandName,
           categoryLabel: t(`home.productTypes.${item.productType}`),
-          imageUrl: item.imageUrl,
+          imageSource: item.imageSource,
           imageFallbackLabel: item.imageFallbackLabel,
           productType: item.productType,
         })),
@@ -171,12 +171,6 @@ export default function HomePage() {
       {routineSectionsDisplay.map((section) => (
         <HomeRoutineSection key={section.key} section={section} />
       ))}
-
-      <HomeRecommendationsSection
-        title={t("home.recommendationTitle")}
-        actionLabel={t("home.actionForYou")}
-        products={recommendedProducts}
-      />
     </AppScreen>
   );
 }
