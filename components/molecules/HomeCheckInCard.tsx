@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
-import HomeCheckInOptionYes from "@/components/atoms/HomeCheckInOptionYes";
+import HomeCheckInOption from "@/components/atoms/HomeCheckInOption";
 import { useAppTheme } from "@/hooks/use-app-theme";
-import HomeCheckInOptionNo from "@/components/atoms/HomeCheckInOptionNo";
 
 type HomeCheckInCardProps = {
   title: string;
@@ -45,13 +44,15 @@ export default function HomeCheckInCard({
       </Text>
 
       <View className="mt-6 flex-row gap-3">
-        <HomeCheckInOptionYes
+        <HomeCheckInOption
           label={yesLabel}
+          variant="yes"
           selected={selectedValue === true}
           onPress={() => onSelect(true)}
         />
-        <HomeCheckInOptionNo
+        <HomeCheckInOption
           label={noLabel}
+          variant="no"
           selected={selectedValue === false}
           onPress={() => onSelect(false)}
         />

@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Text, View } from "react-native";
-import { Image, type ImageSource } from "expo-image";
+import ProductImageFrame from "@/components/atoms/ProductImageFrame";
 import { Palette, type ProductType } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
-
-type ProductImageSource = ImageSource | string | number;
+import type { ProductImageSource } from "@/types/product";
 
 type RoutineCardProps = {
   step: string;
@@ -25,7 +23,6 @@ export default function RoutineCard({
   imageFallbackLabel,
   productType,
 }: RoutineCardProps) {
-  const [imageFailed, setImageFailed] = useState(false);
   const { colors, productAccents } = useAppTheme();
   const productStyle = productAccents[productType];
 
@@ -37,37 +34,17 @@ export default function RoutineCard({
         backgroundColor: colors.panel,
       }}
     >
-      <View
-        className="overflow-hidden rounded-[20px]"
-        style={{
-          backgroundColor:
-            imageFailed || imageSource === undefined || imageSource === null
-              ? productStyle.surface
-              : colors.glass,
-        }}
+      <ProductImageFrame
+        imageSource={imageSource}
+        imageStyle={{ width: "100%", height: 190 }}
+        imageBackgroundColor={colors.glass}
+        fallbackLabel={imageFallbackLabel || categoryLabel}
+        fallbackBackgroundColor={productStyle.surface}
+        fallbackTextColor={productStyle.accent}
+        containerClassName="overflow-hidden rounded-[20px]"
+        fallbackClassName="h-[190px] items-center justify-center px-8"
+        fallbackTextClassName="text-center font-lora text-[30px] leading-8"
       >
-        {!imageFailed && imageSource !== undefined && imageSource !== null ? (
-          <Image
-            source={imageSource}
-            contentFit="cover"
-            transition={150}
-            onError={() => setImageFailed(true)}
-            style={{ width: "100%", height: 190 }}
-          />
-        ) : (
-          <View
-            className="h-[190px] items-center justify-center px-8"
-            style={{ backgroundColor: productStyle.surface }}
-          >
-            <Text
-              className="text-center font-lora text-[30px] leading-8"
-              style={{ color: productStyle.accent }}
-            >
-              {imageFallbackLabel || categoryLabel}
-            </Text>
-          </View>
-        )}
-
         <View className="absolute left-4 top-4 rounded-[16px] px-3 py-2">
           <View
             className="absolute inset-0"
@@ -83,7 +60,7 @@ export default function RoutineCard({
             {step}
           </Text>
         </View>
-      </View>
+      </ProductImageFrame>
 
       <Text
         className="mt-5 font-sans-semibold text-[13px] uppercase tracking-[1.8px]"

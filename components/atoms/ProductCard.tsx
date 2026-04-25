@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, type ImageSource } from "expo-image";
-import { type ProductType } from "@/constants/theme";
+import ProductImageFrame from "@/components/atoms/ProductImageFrame";
+import type { ProductType } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
-
-type ProductImageSource = ImageSource | string | number;
+import type { ProductImageSource } from "@/types/product";
 
 type ProductCardProps = {
   category: string;
@@ -26,7 +24,6 @@ export default function ProductCard({
   imageFallbackLabel,
   productType,
 }: ProductCardProps) {
-  const [imageFailed, setImageFailed] = useState(false);
   const { colors, productAccents, shadows } = useAppTheme();
   const productStyle = productAccents[productType];
 
@@ -42,29 +39,16 @@ export default function ProductCard({
       ]}
     >
       <View className="flex-row">
-        <View className="w-[40%] min-h-[170px] overflow-hidden">
-          {!imageFailed && imageSource !== undefined && imageSource !== null ? (
-            <Image
-              source={imageSource}
-              contentFit="cover"
-              transition={150}
-              onError={() => setImageFailed(true)}
-              style={{ width: "100%", height: "100%" }}
-            />
-          ) : (
-            <View
-              className="flex-1 items-center justify-center px-5"
-              style={{ backgroundColor: productStyle.surface }}
-            >
-              <Text
-                className="text-center font-lora text-[28px] leading-8"
-                style={{ color: productStyle.accent }}
-              >
-                {imageFallbackLabel || brand}
-              </Text>
-            </View>
-          )}
-        </View>
+        <ProductImageFrame
+          imageSource={imageSource}
+          imageStyle={{ width: "100%", height: "100%" }}
+          fallbackLabel={imageFallbackLabel || brand}
+          fallbackBackgroundColor={productStyle.surface}
+          fallbackTextColor={productStyle.accent}
+          containerClassName="w-[40%] min-h-[170px] overflow-hidden"
+          fallbackClassName="flex-1 items-center justify-center px-5"
+          fallbackTextClassName="text-center font-lora text-[28px] leading-8"
+        />
 
         <View className="flex-1 px-5 py-5">
           <View className="flex-row items-start justify-between gap-4">

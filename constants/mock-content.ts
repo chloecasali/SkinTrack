@@ -1,7 +1,7 @@
-import type { ImageSource } from "expo-image";
 import type { ProductType } from "@/constants/theme";
+import type { ProductImageSource } from "@/types/product";
 
-export type ProductImageSource = ImageSource | string | number;
+export type { ProductImageSource };
 
 export type RoutineItem = {
   step: string;
