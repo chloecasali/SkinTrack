@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import HomeStatCard from "@/components/atoms/HomeStatCard";
 import { useAppTheme } from "@/hooks/use-app-theme";
-import {Palette} from "@/constants/theme";
+import { Palette } from "@/constants/theme";
 
 type HomeStatsRowProps = {
   consistencyLabel: string;
@@ -19,7 +19,7 @@ export default function HomeStatsRow({
   heroProgressLabel,
   progressPercent,
 }: HomeStatsRowProps) {
-  const { colors, accents } = useAppTheme();
+  const { colors} = useAppTheme();
 
   return (
     <View className="flex-row gap-4">

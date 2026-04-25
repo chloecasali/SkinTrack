@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { useAppTheme } from "@/hooks/use-app-theme";
-import {Palette} from "@/constants/theme";
+import { Palette } from "@/constants/theme";
 
 type HomeHeroHeaderProps = {
   dateLabel: string;
@@ -11,7 +11,7 @@ export default function HomeHeroHeader({
   dateLabel,
   greeting,
 }: HomeHeroHeaderProps) {
-  const { colors, accents } = useAppTheme();
+  const { colors} = useAppTheme();
 
   return (
     <View className="mt-4 flex-row items-start justify-between gap-5">

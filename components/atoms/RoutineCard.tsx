@@ -68,12 +68,11 @@ export default function RoutineCard({
           </View>
         )}
 
-        <View className="absolute left-4 top-4 rounded-[16px] border px-3 py-2">
+        <View className="absolute left-4 top-4 rounded-[16px] px-3 py-2">
           <View
             className="absolute inset-0"
             style={{
               borderRadius: 16,
-              borderColor: Palette.charcoal,
               backgroundColor: colors.glassStrong,
             }}
           />

@@ -4,14 +4,13 @@ import AppScreen from "@/components/layouts/AppScreen";
 import HomeCheckInCard from "@/components/molecules/HomeCheckInCard";
 import HomeFeatureCard from "@/components/molecules/HomeFeatureCard";
 import HomeHeroHeader from "@/components/molecules/HomeHeroHeader";
-import HomeRecommendationsSection from "@/components/molecules/HomeRecommendationsSection";
 import HomeRoutineSection, {
   type HomeRoutineSectionData,
 } from "@/components/molecules/HomeRoutineSection";
 import HomeStatsRow from "@/components/molecules/HomeStatsRow";
 import HomeTipModal from "@/components/molecules/HomeTipModal";
 import { useProfile } from "@/hooks/auth/useProfile";
-import { recommendedProducts, routineSections } from "@/constants/mock-content";
+import { routineSections } from "@/constants/mock-content";
 import { readPreference, writePreference } from "@/services/preferences";
 import { useAppTheme } from "@/hooks/use-app-theme";
 import { useAppLanguage } from "@/services/language";
