@@ -19,7 +19,7 @@ export default function HomeStatsRow({
   heroProgressLabel,
   progressPercent,
 }: HomeStatsRowProps) {
-  const { colors} = useAppTheme();
+  const { colors } = useAppTheme();
 
   return (
     <View className="flex-row gap-4">

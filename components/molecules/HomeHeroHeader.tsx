@@ -11,7 +11,7 @@ export default function HomeHeroHeader({
   dateLabel,
   greeting,
 }: HomeHeroHeaderProps) {
-  const { colors} = useAppTheme();
+  const { colors } = useAppTheme();
 
   return (
     <View className="mt-4 flex-row items-start justify-between gap-5">
