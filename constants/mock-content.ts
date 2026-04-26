@@ -278,7 +278,6 @@ export const calendarRoutineStepsByDay: Record<
       title: "Skin cleanser",
       subtitle: "Fresh morning cleanse.",
       productType: "cleanser",
-      completed: true,
     },
     {
       id: "mon-antioxidants",
@@ -313,6 +312,13 @@ export const calendarRoutineStepsByDay: Record<
       subtitle: "Brighten and protect the barrier.",
       productType: "serum",
       completed: true,
+    },
+    {
+      id: "tue-toner",
+      title: "Balancing toner",
+      subtitle: "Sweep gently across dry areas.",
+      completed: false,
+      productType: "toner",
     },
     {
       id: "tue-moisture",
