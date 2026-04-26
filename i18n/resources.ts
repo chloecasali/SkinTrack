@@ -20,7 +20,8 @@ export const resources = {
   en: {
     translation: {
       common: {
-        comingSoon: "Coming soon",
+        comingSoon: "Coming Soon!",
+        comingSoonPatience: "Be patient, it will come...",
         preview: "Preview",
         back: "Go back",
         languages: {
@@ -251,7 +252,8 @@ export const resources = {
   fr: {
     translation: {
       common: {
-        comingSoon: "Bientôt disponible",
+        comingSoon: "Bientôt disponible !",
+        comingSoonPatience: "Un peu de patience, ça arrive...",
         preview: "Aperçu",
         back: "Retour",
         languages: {

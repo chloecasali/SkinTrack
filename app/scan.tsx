@@ -1,5 +1,5 @@
-import ScanPage from "@/components/organisms/ScanPage";
+import ComingSoonPage from "@/components/organisms/ComingSoonPage";
 
 export default function ScanScreen() {
-  return <ScanPage />;
+  return <ComingSoonPage feature="scan" />;
 }

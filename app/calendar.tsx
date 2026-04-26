@@ -1,5 +1,5 @@
-// import CalendarPage from "@/components/organisms/CalendarPage";
-//
-// export default function CalendarScreen() {
-//   return <CalendarPage />;
-// }
+import ComingSoonPage from "@/components/organisms/ComingSoonPage";
+
+export default function CalendarScreen() {
+  return <ComingSoonPage feature="calendar" />;
+}

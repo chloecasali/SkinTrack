@@ -1,5 +1,5 @@
-import SearchPage from "@/components/organisms/SearchPage";
+import ComingSoonPage from "@/components/organisms/ComingSoonPage";
 
 export default function SearchScreen() {
-  return <SearchPage />;
+  return <ComingSoonPage feature="search" />;
 }
