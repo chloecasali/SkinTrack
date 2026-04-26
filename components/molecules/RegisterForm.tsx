@@ -1,13 +1,11 @@
 import InputField from "@/components/atoms/InputField";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
-import { Text } from "react-native";
+import AuthErrorText from "@/components/atoms/AuthErrorText";
 import { useTranslation } from "react-i18next";
 import { useRegister } from "@/hooks/auth/useRegister";
-import { useAppTheme } from "@/hooks/use-app-theme";
 
 export default function RegisterForm() {
   const { t } = useTranslation();
-  const { colors } = useAppTheme();
   const {
     firstname,
     email,
@@ -45,14 +43,9 @@ export default function RegisterForm() {
         secureTextEntry
       />
 
-      {errorMsg && (
-        <Text
-          className="mb-3 mt-1 font-sans text-sm"
-          style={{ color: colors.error }}
-        >
-          {errorMsg}
-        </Text>
-      )}
+      {errorMsg ? (
+        <AuthErrorText className="mb-3 mt-1">{errorMsg}</AuthErrorText>
+      ) : null}
 
       <PrimaryButton
         title={

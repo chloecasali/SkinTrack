@@ -1,8 +1,4 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -18,14 +14,12 @@ import {
 } from "@expo-google-fonts/source-sans-3";
 import { initToken } from "@/services/auth/token";
 import { initLanguage } from "@/services/language";
-import { initThemeMode } from "@/services/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
-import { AppThemes } from "@/constants/theme";
 import "@/i18n";
 import "@/global.css";
 
 export default function RootLayout() {
-  const { scheme, colors } = useAppTheme();
+  const { colors } = useAppTheme();
   const [ready, setReady] = useState(false);
   const [fontsLoaded] = useFonts({
     Lora_600SemiBold,
@@ -41,15 +35,10 @@ export default function RootLayout() {
 
     WebBrowser.maybeCompleteAuthSession();
 
-    void Promise.allSettled([
-      initToken(),
-      initLanguage(),
-      initThemeMode(),
-    ]).then((results) => {
+    void Promise.allSettled([initToken(), initLanguage()]).then((results) => {
       results.forEach((result, index) => {
         if (result.status === "rejected") {
-          const label =
-            index === 0 ? "token" : index === 1 ? "language" : "theme";
+          const label = index === 0 ? "token" : "language";
           console.error(`Failed to initialize ${label}:`, result.reason);
         }
       });
@@ -68,18 +57,15 @@ export default function RootLayout() {
     return (
       <View
         className="flex-1 items-center justify-center"
-        style={{ backgroundColor: AppThemes[scheme].shell }}
+        style={{ backgroundColor: colors.shell }}
       >
-        <ActivityIndicator
-          size="large"
-          color={AppThemes[scheme].activityIndicator}
-        />
+        <ActivityIndicator size="large" color={colors.activityIndicator} />
       </View>
     );
   }
 
   return (
-    <ThemeProvider value={scheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }} />
       <StatusBar style={colors.statusBarStyle} />
     </ThemeProvider>

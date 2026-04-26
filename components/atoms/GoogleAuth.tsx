@@ -1,6 +1,5 @@
 import { Image, Platform, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useAppColorScheme } from "@/hooks/use-app-theme";
 
 type GoogleAuthProps = {
   onPress: () => void;
@@ -19,14 +18,8 @@ const ANDROID_BUTTON_SIZE = {
 } as const;
 
 const googleButtonSources = {
-  android: {
-    light: require("../../assets/images/google/Android/light/continue.png"),
-    dark: require("../../assets/images/google/Android/dark/continue.png"),
-  },
-  ios: {
-    light: require("../../assets/images/google/iOS/light/continue.png"),
-    dark: require("../../assets/images/google/iOS/dark/continue.png"),
-  },
+  android: require("../../assets/images/google/Android/light/continue.png"),
+  ios: require("../../assets/images/google/iOS/light/continue.png"),
 } as const;
 
 export default function GoogleAuth({
@@ -35,12 +28,10 @@ export default function GoogleAuth({
   loading = false,
 }: GoogleAuthProps) {
   const { t } = useTranslation();
-  const colorScheme = useAppColorScheme();
   const platform = Platform.OS === "android" ? "android" : "ios";
-  const theme = colorScheme === "dark" ? "dark" : "light";
   const buttonSize =
     platform === "android" ? ANDROID_BUTTON_SIZE : IOS_BUTTON_SIZE;
-  const buttonSource = googleButtonSources[platform][theme];
+  const buttonSource = googleButtonSources[platform];
   const isDisabled = disabled || loading;
 
   return (

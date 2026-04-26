@@ -217,15 +217,6 @@ export const resources = {
           title: "Language",
           subtitle: "Choose the app language.",
         },
-        theme: {
-          title: "Appearance",
-          subtitle: "Choose how the app looks.",
-          options: {
-            system: "System",
-            light: "Light",
-            dark: "Dark",
-          },
-        },
       },
       validation: {
         enterEmail: "Please enter an email.",
@@ -460,15 +451,6 @@ export const resources = {
         language: {
           title: "Langue",
           subtitle: "Choisissez la langue de l'app.",
-        },
-        theme: {
-          title: "Apparence",
-          subtitle: "Choisissez le mode de l'app.",
-          options: {
-            system: "Système",
-            light: "Clair",
-            dark: "Sombre",
-          },
         },
       },
       validation: {
