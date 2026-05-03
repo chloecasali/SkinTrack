@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import ProductImageFrame from "@/components/atoms/ProductImageFrame";
-import { Palette, type ProductType } from "@/constants/theme";
+import { type ProductType } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
 import type { ProductImageSource } from "@/types/product";
 
@@ -55,7 +55,7 @@ export default function RoutineCard({
           />
           <Text
             className="font-sans-semibold text-[16px]"
-            style={{ color: Palette.charcoal }}
+            style={{ color: colors.text }}
           >
             {step}
           </Text>

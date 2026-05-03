@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import AppScreen from "@/components/layouts/AppScreen";
 import { useAppTheme } from "@/hooks/use-app-theme";
 
-type Feature = "search" | "calendar" | "scan";
+type Feature = "search" | "calendar" | "scan" | "profile";
 
 type ComingSoonPageProps = {
   feature: Feature;

@@ -29,7 +29,7 @@ export default function HomeChallengeProgressStat({
         {label}
       </Text>
 
-      <View className="mt-32 flex-row items-center gap-3">
+      <View className="mt-20 flex-row items-center gap-3">
         <Text
           className="font-sans-semibold text-[15px]"
           style={{ color: Palette.warmNude }}

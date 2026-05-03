@@ -36,7 +36,7 @@ export default function HomeTipModal({
         <Pressable className="absolute inset-0" onPress={onDismiss} />
 
         <View
-          className="w-full overflow-hidden rounded-[38px] border px-6 py-8"
+          className="w-full overflow-hidden rounded-[20px] border px-6 py-8"
           style={{
             ...shadows.floating,
             maxWidth: 340,

@@ -23,12 +23,12 @@ export default function HomeCheckInCard({
 
   return (
     <View
-      className="rounded-[38px]"
+      className="rounded-[20px]"
       style={[shadows.floating, { backgroundColor: colors.panel }]}
     >
       <View
-        className="overflow-hidden rounded-[38px] border"
-        style={{ borderColor: colors.border, backgroundColor: colors.panel }}
+        className="overflow-hidden rounded-[20px]"
+        style={{ backgroundColor: colors.panel }}
       >
         <Svg
           height="100%"
@@ -45,7 +45,11 @@ export default function HomeCheckInCard({
               fy="0%"
               r="90%"
             >
-              <Stop offset="0" stopColor={Palette.skinBeige} stopOpacity={0.5} />
+              <Stop
+                offset="0"
+                stopColor={Palette.skinBeige}
+                stopOpacity={0.5}
+              />
               <Stop offset="0.38" stopColor={Palette.cream} stopOpacity={0.5} />
               <Stop offset="1" stopColor={colors.panel} stopOpacity={1} />
             </RadialGradient>
@@ -55,14 +59,14 @@ export default function HomeCheckInCard({
 
         <View className="px-6 py-6">
           <Text
-            className="font-lora text-[18px] leading-[28px]"
+            className="font-lora text-[22px] leading-[28px]"
             style={{ color: colors.text }}
           >
             {title}
           </Text>
 
           <Text
-            className="mt-1 font-sans text-[13px]"
+            className="mt-1 font-sans text-[14px]"
             style={{ color: colors.textMuted }}
           >
             {subtitle}

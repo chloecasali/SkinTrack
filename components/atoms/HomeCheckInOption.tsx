@@ -1,5 +1,5 @@
 import { Pressable, Text } from "react-native";
-import { Palette } from "@/constants/theme";
+import { useAppTheme } from "@/hooks/use-app-theme";
 
 type HomeCheckInOptionVariant = "yes" | "no";
 
@@ -9,42 +9,21 @@ type HomeCheckInOptionProps = {
   onPress?: () => void;
 };
 
-const optionColors: Record<
-  HomeCheckInOptionVariant,
-  {
-    backgroundColor?: string;
-    borderColor: string;
-    shadowColor?: string;
-    textColor: string;
-  }
-> = {
-  yes: {
-    backgroundColor: Palette.wine,
-    borderColor: Palette.wine,
-    shadowColor: Palette.wine,
-    textColor: Palette.cream,
-  },
-  no: {
-    borderColor: Palette.skinBeige,
-    textColor: Palette.charcoal,
-  },
-};
-
-const selectedButtonShadow = {
-  shadowColor: Palette.wine,
-  shadowOffset: { width: 0, height: 10 },
-  shadowOpacity: 0.16,
-  shadowRadius: 18,
-  elevation: 5,
-} as const;
-
 export default function HomeCheckInOption({
   label,
   variant,
   onPress,
 }: HomeCheckInOptionProps) {
-  const colors = optionColors[variant];
+  const { colors } = useAppTheme();
   const isDisabled = !onPress;
+  const isYes = variant === "yes";
+  const optionShadow = {
+    shadowColor: colors.checkInYesShadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.16,
+    shadowRadius: 18,
+    elevation: 5,
+  } as const;
 
   return (
     <Pressable
@@ -52,18 +31,18 @@ export default function HomeCheckInOption({
       disabled={isDisabled}
       accessibilityRole="button"
       accessibilityState={{ disabled: isDisabled }}
-      className="h-[54px] flex-1 items-center justify-center rounded-[18px] border"
+      className="h-[54px] flex-1 items-center justify-center rounded-[20px] border"
       style={[
-        colors.shadowColor ? selectedButtonShadow : undefined,
+        isYes ? optionShadow : undefined,
         {
-          borderColor: colors.borderColor,
-          backgroundColor: colors.backgroundColor,
+          borderColor: isYes ? colors.checkInYesBorder : colors.checkInNoBorder,
+          backgroundColor: isYes ? colors.checkInYesBackground : undefined,
         },
       ]}
     >
       <Text
         className="font-sans-semibold text-[15px]"
-        style={{ color: colors.textColor }}
+        style={{ color: isYes ? colors.checkInYesText : colors.checkInNoText }}
       >
         {label}
       </Text>

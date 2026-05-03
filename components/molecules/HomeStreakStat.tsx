@@ -19,19 +19,22 @@ export default function HomeStreakStat({
 
   return (
     <HomeStatCard>
-      <HomeStatIconBadge
-        iconName="sparkles-outline"
-        iconColor={Palette.warmNude}
-        backgroundColor={Palette.cream}
-      />
+      <View className="flex-row items-center gap-3">
+        <HomeStatIconBadge
+          iconName="sparkles-outline"
+          iconColor={Palette.warmNude}
+          backgroundColor={Palette.cream}
+        />
 
-      <Text
-        className="mt-4 font-sans-semibold text-[15px]"
-        style={{ color: colors.textMuted }}
-      >
-        {label}
-      </Text>
-      <View className="mt-14 flex-row items-end gap-2">
+        <Text
+          className="flex-1 font-sans-semibold text-[15px]"
+          style={{ color: colors.textMuted }}
+        >
+          {label}
+        </Text>
+      </View>
+
+      <View className="mt-8 flex-row items-end gap-2">
         <Text
           className="font-lora text-[40px] leading-[42px]"
           style={{ color: colors.text }}

@@ -262,7 +262,7 @@ export const resources = {
         },
       },
       auth: {
-        heroPrivate: "Rituel p",
+        heroPrivate: "Rituel privé",
         heroTrackTitle: "Suivi",
         heroTrackBody:
           "Gardez chaque étape skincare dans un espace calme et clair.",
@@ -280,7 +280,7 @@ export const resources = {
         login: {
           title: "Votre routine, étape par étape.",
           subtitle:
-            "Suivez chaque routine de soin, scannez vos produits et améliorer votre peau de jour en jour.",
+            "Suivez chaque routine de soin, scannez vos produits et améliorez votre peau de jour en jour.",
           findingAccount: "Recherche du compte...",
           googleButtonA11yLabel: "Continuer avec Google",
           orContinueWith: "Ou continuer avec",
@@ -312,7 +312,7 @@ export const resources = {
         heroSubtitle: "Prenons soin de vous aujourd'hui",
         heroProgressLabel: "Défi Sans Sucre",
         checkInEyebrow: "Rappel",
-        checkInTitle: "Avez-vous fait votre routine de soin ce matin ?",
+        checkInTitle: "Avez-vous fait votre routine ce matin ?",
         checkInSubtitle:
           "Validez votre routine pour maintenir votre peau éclatante et prolonger votre série.",
         checkInYesSubtitle: "Routine validée. Votre série continue.",

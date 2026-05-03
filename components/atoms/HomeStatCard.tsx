@@ -18,7 +18,7 @@ export default function HomeStatCard({
 
   return (
     <View
-      className={`flex-1 rounded-[34px] border px-5 py-5 ${className}`.trim()}
+      className={`min-h-[150px] flex-1 rounded-[34px] border px-5 py-5 ${className}`.trim()}
       style={[
         shadows.card,
         { borderColor: colors.border, backgroundColor: colors.panel },

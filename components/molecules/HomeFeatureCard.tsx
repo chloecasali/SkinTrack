@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
 import { Lightbulb } from "lucide-react-native";
 import { useAppTheme } from "@/hooks/use-app-theme";
-import { Palette } from "@/constants/theme";
 
 type HomeFeatureCardProps = {
   eyebrow: string;
@@ -12,36 +11,36 @@ export default function HomeFeatureCard({
   eyebrow,
   title,
 }: HomeFeatureCardProps) {
-  const { shadows } = useAppTheme();
+  const { colors, shadows } = useAppTheme();
 
   return (
     <View
-      className="rounded-[18px] border px-4 py-4"
+      className="rounded-[20px] border px-6 py-8"
       style={[
-        shadows.card,
+        shadows.featureCard,
         {
-          borderColor: Palette.warmNude,
+          borderColor: colors.featureCardBorder,
         },
       ]}
     >
       <View className="flex-row items-start gap-5">
         <View
-          className="mt-1 h-10 w-10 items-center justify-center rounded-full"
-          style={{ backgroundColor: Palette.skinBeige }}
+          className="mt-1 h-12 w-12 items-center justify-center rounded-full"
+          style={{ backgroundColor: colors.featureIconBackground }}
         >
-          <Lightbulb size={18} color={Palette.cream} strokeWidth={2} />
+          <Lightbulb size={22} color={colors.featureIcon} strokeWidth={2} />
         </View>
 
         <View className="flex-1 pt-1">
           <Text
-            className="font-sans-semibold text-[12px] uppercase leading-[22px]"
-            style={{ color: Palette.charcoal, letterSpacing: 0.1 }}
+            className="font-sans-bold text-[16px] uppercase leading-[18px]"
+            style={{ color: colors.featureEyebrowText, letterSpacing: 0.2 }}
           >
             {eyebrow}
           </Text>
           <Text
-            className="mt-2 font-lora text-[12px] leading-[18px]"
-            style={{ color: Palette.charcoal }}
+            className="mt-1 font-lora text-[13px] leading-[20px]"
+            style={{ color: colors.featureTitleText }}
           >
             {title}
           </Text>

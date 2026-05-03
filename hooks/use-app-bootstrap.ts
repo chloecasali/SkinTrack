@@ -27,7 +27,7 @@ const BOOTSTRAP_TASKS = [
 
 export function useAppBootstrap(): boolean {
   const [bootstrapReady, setBootstrapReady] = useState(false);
-  const [fontsLoaded] = useFonts(ROOT_FONTS);
+  const [fontsLoaded, fontError] = useFonts(ROOT_FONTS);
 
   useEffect(() => {
     let isMounted = true;
@@ -54,5 +54,11 @@ export function useAppBootstrap(): boolean {
     };
   }, []);
 
-  return bootstrapReady && fontsLoaded;
+  useEffect(() => {
+    if (fontError) {
+      console.error("Failed to load app fonts:", fontError);
+    }
+  }, [fontError]);
+
+  return bootstrapReady && (fontsLoaded || Boolean(fontError));
 }
