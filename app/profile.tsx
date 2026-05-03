@@ -1,5 +1,5 @@
-import ProfilePage from "@/components/organisms/ProfilePage";
+import ComingSoonPage from "@/components/organisms/ComingSoonPage";
 
 export default function ProfileScreen() {
-  return <ProfilePage />;
+  return <ComingSoonPage feature="profile" />;
 }

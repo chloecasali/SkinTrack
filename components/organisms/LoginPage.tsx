@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import AuthFooterLink from "@/components/molecules/AuthFooterLink";
 import LoginForm from "@/components/molecules/LoginForm";
 import { AUTH_PATHS } from "@/constants/paths";
-import GoogleAuth from "@/components/atoms/GoogleAuth";
+import GoogleAuthButton from "@/components/atoms/GoogleAuthButton";
 import { useGoogleAuth } from "@/hooks/auth/useGoogleAuth";
 import AuthScreen from "@/components/layouts/AuthScreen";
 import { useAppTheme } from "@/hooks/use-app-theme";
@@ -47,8 +47,9 @@ export default function LoginPage() {
         </Text>
       ) : null}
 
-      <GoogleAuth
+      <GoogleAuthButton
         onPress={handleGoogleAuth}
+        accessibilityLabel={t("auth.login.googleButtonA11yLabel")}
         disabled={!ready || loading}
         loading={loading}
       />

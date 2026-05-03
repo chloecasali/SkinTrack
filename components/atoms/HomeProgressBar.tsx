@@ -6,11 +6,17 @@ type HomeProgressBarProps = {
   fillColor: string;
 };
 
+function clampProgressPercent(progressPercent: number): number {
+  return Math.min(Math.max(progressPercent, 0), 100);
+}
+
 export default function HomeProgressBar({
   progressPercent,
   trackColor,
   fillColor,
 }: HomeProgressBarProps) {
+  const clampedProgressPercent = clampProgressPercent(progressPercent);
+
   return (
     <View
       className="h-3 flex-1 overflow-hidden rounded-full"
@@ -19,7 +25,7 @@ export default function HomeProgressBar({
       <View
         className="h-full rounded-full"
         style={{
-          width: `${progressPercent}%`,
+          width: `${clampedProgressPercent}%`,
           backgroundColor: fillColor,
         }}
       />

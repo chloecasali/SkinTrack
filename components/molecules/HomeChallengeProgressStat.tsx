@@ -9,11 +9,16 @@ type HomeChallengeProgressStatProps = {
   progressPercent: number;
 };
 
+function clampProgressPercent(progressPercent: number): number {
+  return Math.min(Math.max(progressPercent, 0), 100);
+}
+
 export default function HomeChallengeProgressStat({
   label,
   progressPercent,
 }: HomeChallengeProgressStatProps) {
   const { colors } = useAppTheme();
+  const clampedProgressPercent = clampProgressPercent(progressPercent);
 
   return (
     <HomeStatCard>
@@ -29,10 +34,10 @@ export default function HomeChallengeProgressStat({
           className="font-sans-semibold text-[15px]"
           style={{ color: Palette.warmNude }}
         >
-          {progressPercent}%
+          {clampedProgressPercent}%
         </Text>
         <HomeProgressBar
-          progressPercent={progressPercent}
+          progressPercent={clampedProgressPercent}
           trackColor={colors.panelSoft}
           fillColor={Palette.warmNude}
         />

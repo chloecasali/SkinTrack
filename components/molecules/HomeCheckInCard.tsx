@@ -1,20 +1,20 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import Svg, { Defs, RadialGradient, Rect, Stop } from "react-native-svg";
 import HomeCheckInOption from "@/components/atoms/HomeCheckInOption";
+import { Palette } from "@/constants/theme";
 import { useAppTheme } from "@/hooks/use-app-theme";
 
 type HomeCheckInCardProps = {
   title: string;
   subtitle: string;
-  selectedValue: boolean | null;
   yesLabel: string;
   noLabel: string;
-  onSelect: (value: boolean) => void;
+  onSelect?: (value: boolean) => void;
 };
 
 export default function HomeCheckInCard({
   title,
   subtitle,
-  selectedValue,
   yesLabel,
   noLabel,
   onSelect,
@@ -23,39 +23,64 @@ export default function HomeCheckInCard({
 
   return (
     <View
-      className="rounded-[38px] border px-6 py-6"
-      style={[
-        shadows.floating,
-        { borderColor: colors.border, backgroundColor: colors.panel },
-      ]}
+      className="rounded-[38px]"
+      style={[shadows.floating, { backgroundColor: colors.panel }]}
     >
-      <Text
-        className="font-lora text-[18px] leading-[28px]"
-        style={{ color: colors.text }}
+      <View
+        className="overflow-hidden rounded-[38px] border"
+        style={{ borderColor: colors.border, backgroundColor: colors.panel }}
       >
-        {title}
-      </Text>
+        <Svg
+          height="100%"
+          width="100%"
+          style={StyleSheet.absoluteFill}
+          pointerEvents="none"
+        >
+          <Defs>
+            <RadialGradient
+              id="checkInCardGradient"
+              cx="100%"
+              cy="0%"
+              fx="100%"
+              fy="0%"
+              r="90%"
+            >
+              <Stop offset="0" stopColor={Palette.skinBeige} stopOpacity={0.5} />
+              <Stop offset="0.38" stopColor={Palette.cream} stopOpacity={0.5} />
+              <Stop offset="1" stopColor={colors.panel} stopOpacity={1} />
+            </RadialGradient>
+          </Defs>
+          <Rect width="100%" height="100%" fill="url(#checkInCardGradient)" />
+        </Svg>
 
-      <Text
-        className="mt-1 font-sans text-[13px]"
-        style={{ color: colors.textSubtle }}
-      >
-        {subtitle}
-      </Text>
+        <View className="px-6 py-6">
+          <Text
+            className="font-lora text-[18px] leading-[28px]"
+            style={{ color: colors.text }}
+          >
+            {title}
+          </Text>
 
-      <View className="mt-6 flex-row gap-3">
-        <HomeCheckInOption
-          label={yesLabel}
-          variant="yes"
-          selected={selectedValue === true}
-          onPress={() => onSelect(true)}
-        />
-        <HomeCheckInOption
-          label={noLabel}
-          variant="no"
-          selected={selectedValue === false}
-          onPress={() => onSelect(false)}
-        />
+          <Text
+            className="mt-1 font-sans text-[13px]"
+            style={{ color: colors.textMuted }}
+          >
+            {subtitle}
+          </Text>
+
+          <View className="mt-6 flex-row gap-3">
+            <HomeCheckInOption
+              label={yesLabel}
+              variant="yes"
+              onPress={onSelect ? () => onSelect(true) : undefined}
+            />
+            <HomeCheckInOption
+              label={noLabel}
+              variant="no"
+              onPress={onSelect ? () => onSelect(false) : undefined}
+            />
+          </View>
+        </View>
       </View>
     </View>
   );

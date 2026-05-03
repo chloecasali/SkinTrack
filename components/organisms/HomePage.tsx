@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AppScreen from "@/components/layouts/AppScreen";
 import HomeCheckInCard from "@/components/molecules/HomeCheckInCard";
@@ -16,7 +15,6 @@ import { useHomeRoutineSections } from "@/hooks/home/useHomeRoutineSections";
 export default function HomePage() {
   const { firstname } = useProfile();
   const { t } = useTranslation();
-  const [didRoutine, setDidRoutine] = useState<boolean | null>(null);
   const greetingName = firstname || t("home.guest");
   const homeDate = useHomeDateLabel();
   const routineSectionsDisplay = useHomeRoutineSections();
@@ -48,10 +46,8 @@ export default function HomePage() {
       <HomeCheckInCard
         title={t("home.checkInTitle")}
         subtitle={t("home.checkInSubtitle")}
-        selectedValue={didRoutine}
         yesLabel={t("home.yes")}
         noLabel={t("home.no")}
-        onSelect={setDidRoutine}
       />
 
       <HomeFeatureCard
