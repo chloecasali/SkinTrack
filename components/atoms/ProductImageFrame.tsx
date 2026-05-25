@@ -1,4 +1,9 @@
-import { useState, type ComponentProps, type ReactNode } from "react";
+import {
+  useEffect,
+  useState,
+  type ComponentProps,
+  type ReactNode,
+} from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import { Text, View } from "react-native";
 import { Image } from "expo-image";
@@ -32,6 +37,11 @@ export default function ProductImageFrame({
   imageBackgroundColor,
 }: ProductImageFrameProps) {
   const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [imageSource]);
+
   const hasImage =
     !imageFailed && imageSource !== undefined && imageSource !== null;
 
