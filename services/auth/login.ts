@@ -9,9 +9,37 @@ import {
 
 type HydraCollection = {
   totalItems: number;
+  member?: Array<{
+    firstname?: string | null;
+    firstName?: string | null;
+    givenName?: string | null;
+  }>;
+  "hydra:member"?: Array<{
+    firstname?: string | null;
+    firstName?: string | null;
+    givenName?: string | null;
+  }>;
 };
 
-export async function getAccount(email: string): Promise<void> {
+function extractFirstname(
+  account:
+    | {
+        firstname?: string | null;
+        firstName?: string | null;
+        givenName?: string | null;
+      }
+    | null
+    | undefined,
+): string | null {
+  const firstname =
+    account?.firstname ?? account?.firstName ?? account?.givenName ?? null;
+
+  return firstname?.trim() ? firstname.trim() : null;
+}
+
+export async function getAccount(
+  email: string,
+): Promise<{ firstname: string | null }> {
   const res = await fetch(
     apiUrl(`${API_PATHS.users}?email=${encodeURIComponent(email)}`),
     {
@@ -29,6 +57,10 @@ export async function getAccount(email: string): Promise<void> {
   if (!data || data["totalItems"] === 0) {
     throw new Error(AUTH_ACCOUNT_NOT_FOUND_ERROR);
   }
+
+  return {
+    firstname: extractFirstname(data.member?.[0] ?? data["hydra:member"]?.[0]),
+  };
 }
 
 export async function login(email: string, password: string): Promise<string> {

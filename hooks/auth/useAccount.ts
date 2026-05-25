@@ -33,12 +33,19 @@ export function useAccount() {
     try {
       setLoading(true);
 
-      await getAccount(normalizedEmail);
+      const { firstname } = await getAccount(normalizedEmail);
 
-      router.replace({
-        pathname: AUTH_PATHS.password,
-        params: { email: normalizedEmail },
-      });
+      router.push(
+        firstname
+          ? {
+              pathname: AUTH_PATHS.password,
+              params: { email: normalizedEmail, firstname },
+            }
+          : {
+              pathname: AUTH_PATHS.password,
+              params: { email: normalizedEmail },
+            },
+      );
     } catch (error: any) {
       if (
         error instanceof Error &&

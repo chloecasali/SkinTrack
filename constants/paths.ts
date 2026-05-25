@@ -7,8 +7,10 @@ export const AUTH_PATHS = {
 export const APP_PATHS = {
   root: "/",
   home: "/home",
+  search: "/search",
   profile: "/profile",
   scan: "/scan",
+  calendar: "/calendar",
 } as const;
 
 export const API_PATHS = {

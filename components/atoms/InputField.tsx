@@ -1,4 +1,5 @@
 import { Text, TextInput, View } from "react-native";
+import { useAppTheme } from "@/hooks/use-app-theme";
 
 interface InputFieldProps {
   label: string;
@@ -17,29 +18,36 @@ export default function InputField({
   secureTextEntry,
   keyboardType = "default",
 }: InputFieldProps) {
-  return (
-    <View className="w-full mb-5">
-      <Text className="text-sm font-medium text-slate-700 mb-2">{label}</Text>
+  const { colors } = useAppTheme();
 
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        placeholderTextColor="#94a3b8"
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        className="
-          w-full
-          h-12
-          rounded-xl
-          border
-          border-slate-200
-          px-4
-          text-base
-          text-slate-900
-          bg-white
-        "
-      />
+  return (
+    <View className="mb-5 w-full">
+      <Text
+        className="mb-2 ml-1 font-sans-medium text-[11px] uppercase tracking-[2px]"
+        style={{ color: colors.primary }}
+      >
+        {label}
+      </Text>
+
+      <View
+        className="rounded-[28px] border px-4"
+        style={{
+          borderColor: colors.border,
+          backgroundColor: colors.inputBackground,
+        }}
+      >
+        <TextInput
+          value={value}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          placeholderTextColor={colors.inputPlaceholder}
+          secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
+          selectionColor={colors.primary}
+          className="h-14 w-full font-sans text-base"
+          style={{ color: colors.text }}
+        />
+      </View>
     </View>
   );
 }

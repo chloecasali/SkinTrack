@@ -1,88 +1,63 @@
-import { View, Text, ScrollView, TextInput } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-import RoutineCard from "@/components/atoms/RoutineCard";
-import AnswerButton from "@/components/atoms/AnswerButton";
-import NavBar from "@/components/molecules/NavBar";
+import AppScreen from "@/components/layouts/AppScreen";
+import HomeCheckInCard from "@/components/molecules/HomeCheckInCard";
+import HomeFeatureCard from "@/components/molecules/HomeFeatureCard";
+import HomeHeroHeader from "@/components/molecules/HomeHeroHeader";
+import HomeRoutineSection from "@/components/molecules/HomeRoutineSection";
+import HomeStatsRow from "@/components/molecules/HomeStatsRow";
+import HomeTipModal from "@/components/molecules/HomeTipModal";
+import { HOME_CHALLENGE_PROGRESS, HOME_STREAK_COUNT } from "@/constants/home";
 import { useProfile } from "@/hooks/auth/useProfile";
+import { useHomeDailyTip } from "@/hooks/home/useHomeDailyTip";
+import { useHomeDateLabel } from "@/hooks/home/useHomeDateLabel";
+import { useHomeRoutineSections } from "@/hooks/home/useHomeRoutineSections";
 
 export default function HomePage() {
   const { firstname } = useProfile();
   const { t } = useTranslation();
+  const greetingName = firstname || t("home.guest");
+  const homeDate = useHomeDateLabel();
+  const routineSectionsDisplay = useHomeRoutineSections();
+  const { visible: tipVisible, dismiss: dismissTip } = useHomeDailyTip();
 
   return (
-    <View className="flex-1 bg-white">
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 120 }}
-        className="px-6 pt-14"
-      >
-        <View className="flex-row items-center justify-between mb-6">
-          <Text className="text-lg font-semibold text-slate-900">
-            {t("home.title")}
-          </Text>
+    <AppScreen activeTab="home" scroll contentClassName="gap-7 pb-4">
+      <HomeTipModal
+        visible={tipVisible}
+        onDismiss={dismissTip}
+        eyebrow={t("home.tip.eyebrow")}
+        title={t("home.tip.title")}
+        body={t("home.tip.body")}
+        dismissLabel={t("home.tip.dismiss")}
+      />
 
-          <View className="h-9 w-9 rounded-full bg-gray-200" />
-        </View>
+      <HomeHeroHeader
+        dateLabel={homeDate}
+        greeting={t("home.greeting", { name: greetingName })}
+      />
 
-        <View className="mb-6">
-          <Text className="text-base text-slate-800 mb-2">
-            {t("home.greeting", { name: firstname || t("home.guest") })}
-          </Text>
+      <HomeStatsRow
+        consistencyLabel={t("home.consistencyLabel")}
+        daysUnit={t("home.daysUnit")}
+        streakCount={HOME_STREAK_COUNT}
+        heroProgressLabel={t("home.heroProgressLabel")}
+        progressPercent={HOME_CHALLENGE_PROGRESS}
+      />
+      <HomeCheckInCard
+        title={t("home.checkInTitle")}
+        subtitle={t("home.checkInSubtitle")}
+        yesLabel={t("home.yes")}
+        noLabel={t("home.no")}
+      />
 
-          <View className="self-start flex-row items-center px-3 py-1 rounded-full border border-gray-200">
-            <Ionicons name="flame-outline" size={14} color="#f97316" />
-            <Text className="text-xs text-gray-600 ml-1">
-              {t("home.streak", { count: 4 })}
-            </Text>
-          </View>
-        </View>
+      <HomeFeatureCard
+        eyebrow={t("home.featureEyebrow")}
+        title={t("home.featureTitle")}
+      />
 
-        <View className="border border-gray-200 rounded-2xl p-4 mb-6">
-          <Text className="text-sm text-slate-800 mb-4">
-            {t("home.question")}
-          </Text>
-
-          <View className="flex-row gap-3">
-            <AnswerButton label={t("home.yes")} />
-            <AnswerButton label={t("home.no")} />
-          </View>
-        </View>
-
-        <View className="flex-row items-center border border-gray-200 rounded-xl px-3 py-3 mb-8">
-          <Ionicons name="search-outline" size={18} color="#9ca3af" />
-          <TextInput
-            placeholder={t("home.searchPlaceholder")}
-            placeholderTextColor="#9ca3af"
-            className="ml-2 flex-1 text-sm text-slate-800"
-          />
-        </View>
-
-        <Text className="text-base font-semibold text-slate-900 mb-4">
-          {t("home.routineTitle")}
-        </Text>
-
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View className="flex-row gap-4">
-            <RoutineCard
-              step={t("home.steps.one")}
-              title={t("home.routine.cleanser")}
-              brandName={t("home.routine.brandName")}
-            />
-            <RoutineCard
-              step={t("home.steps.two")}
-              title={t("home.routine.serum")}
-              brandName={t("home.routine.brandName")}
-            />
-            <RoutineCard
-              step={t("home.steps.three")}
-              title={t("home.routine.moisturizer")}
-              brandName={t("home.routine.brandName")}
-            />
-          </View>
-        </ScrollView>
-      </ScrollView>
-
-      <NavBar activeTab="home" />
-    </View>
+      {routineSectionsDisplay.map((section) => (
+        <HomeRoutineSection key={section.key} section={section} />
+      ))}
+    </AppScreen>
   );
 }

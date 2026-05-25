@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react";
-import { Pressable, Text, View, Platform } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useAppTheme } from "@/hooks/use-app-theme";
 
 type IoniconName = ComponentProps<typeof Ionicons>["name"];
 
@@ -19,49 +20,47 @@ export default function NavButton({
   onPress,
   disabled = false,
 }: NavButtonProps) {
+  const { colors } = useAppTheme();
   const isDisabled = disabled || !onPress;
+  const labelColor = active ? colors.navLabelActive : colors.navLabelInactive;
 
   return (
     <Pressable
       onPress={onPress}
       disabled={isDisabled}
-      className="flex-1 items-center justify-center py-2"
-      style={({ pressed }) => [
-        isDisabled && { opacity: 0.45 },
-        pressed && {
-          ...(Platform.OS === "ios"
-            ? {
-                shadowColor: "#000",
-                shadowOpacity: 0.15,
-                shadowRadius: 6,
-                shadowOffset: { width: 0, height: 3 },
-              }
-            : {
-                elevation: 6,
-              }),
-        },
-      ]}
+      className="flex-1 items-center justify-center"
+      style={({ pressed }) => ({
+        opacity: isDisabled ? 0.45 : pressed ? 0.78 : 1,
+      })}
       accessibilityRole="button"
       accessibilityState={{ disabled: isDisabled, selected: active }}
     >
-      <View className="items-center gap-1">
+      <View
+        className="h-11 w-11 items-center justify-center rounded-full"
+        style={{
+          backgroundColor: active
+            ? colors.navIconActiveBackground
+            : colors.navIconBackground,
+        }}
+      >
         <Ionicons
           name={icon}
-          size={22}
-          color={active ? "#0f172a" : isDisabled ? "#cbd5e1" : "#9ca3af"}
-        />
-        <Text
-          className={`text-xs ${
+          size={19}
+          color={
             active
-              ? "text-slate-900 font-medium"
+              ? colors.navIconActive
               : isDisabled
-                ? "text-slate-300"
-                : "text-gray-400"
-          }`}
-        >
-          {label}
-        </Text>
+                ? colors.textSubtle
+                : colors.navIconInactive
+          }
+        />
       </View>
+      <Text
+        className={`mt-1.5 text-[11px] ${active ? "font-sans-semibold" : "font-sans-medium"}`}
+        style={{ color: labelColor }}
+      >
+        {label}
+      </Text>
     </Pressable>
   );
 }

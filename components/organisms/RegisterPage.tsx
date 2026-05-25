@@ -1,37 +1,27 @@
 import { useRouter } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import AuthFooterLink from "@/components/molecules/AuthFooterLink";
 import RegisterForm from "@/components/molecules/RegisterForm";
 import { AUTH_PATHS } from "@/constants/paths";
+import AuthScreen from "@/components/layouts/AuthScreen";
 
 export default function RegisterPage() {
   const router = useRouter();
   const { t } = useTranslation();
 
   return (
-    <View className="flex-1 bg-white px-6 pt-24">
-      <Text className="text-2xl font-semibold text-slate-900 mb-2">
-        {t("auth.register.title")}
-      </Text>
-
-      <Text className="text-sm text-gray-500 mb-8">
-        {t("auth.register.subtitle")}
-      </Text>
-
+    <AuthScreen
+      title={t("auth.register.title")}
+      subtitle={t("auth.register.subtitle")}
+      footer={
+        <AuthFooterLink
+          body={t("auth.register.alreadyHaveAccount")}
+          actionLabel={t("auth.register.signIn")}
+          onPress={() => router.push(AUTH_PATHS.login)}
+        />
+      }
+    >
       <RegisterForm />
-
-      <TouchableOpacity
-        className="mt-6 self-center"
-        activeOpacity={0.6}
-        onPress={() => router.push(AUTH_PATHS.login)}
-      >
-        <Text className="text-sm text-gray-500">
-          {t("auth.register.alreadyHaveAccount")}{" "}
-          <Text className="text-slate-900 font-medium">
-            {t("auth.register.signIn")}
-          </Text>
-        </Text>
-      </TouchableOpacity>
-    </View>
+    </AuthScreen>
   );
 }

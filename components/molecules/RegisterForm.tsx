@@ -1,6 +1,6 @@
 import InputField from "@/components/atoms/InputField";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
-import { Text } from "react-native";
+import AuthErrorText from "@/components/atoms/AuthErrorText";
 import { useTranslation } from "react-i18next";
 import { useRegister } from "@/hooks/auth/useRegister";
 
@@ -43,9 +43,9 @@ export default function RegisterForm() {
         secureTextEntry
       />
 
-      {errorMsg && (
-        <Text className="text-sm text-red-500 mt-1 mb-3">{errorMsg}</Text>
-      )}
+      {errorMsg ? (
+        <AuthErrorText className="mb-3 mt-1">{errorMsg}</AuthErrorText>
+      ) : null}
 
       <PrimaryButton
         title={

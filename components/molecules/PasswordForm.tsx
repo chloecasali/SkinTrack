@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLogin } from "@/hooks/auth/useLogin";
+import AuthErrorText from "@/components/atoms/AuthErrorText";
 import InputField from "@/components/atoms/InputField";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "@/components/atoms/PrimaryButton";
 import { router, useLocalSearchParams } from "expo-router";
@@ -28,9 +29,7 @@ export default function PasswordForm() {
         placeholder={t("auth.fields.passwordPlaceholder")}
         secureTextEntry
       />
-      {errorMsg && (
-        <Text className="text-sm text-red-500 mb-4">{errorMsg}</Text>
-      )}
+      {errorMsg ? <AuthErrorText>{errorMsg}</AuthErrorText> : null}
       <PrimaryButton
         title={
           loading ? t("auth.password.signingIn") : t("auth.password.signIn")

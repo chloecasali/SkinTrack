@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fetchMe, MeResponse } from "@/services/auth/me";
 import { extractFirstname, getLocalizedErrorMessage } from "@/hooks/default";
-import { useToken } from "@/services/auth/token";
+import { clearToken, useToken } from "@/services/auth/token";
+import { isUnauthorizedApiError } from "@/services/default";
 
 export type { MeResponse };
 
@@ -33,6 +34,13 @@ export function useProfile() {
         setFirstname(extractFirstname(data));
         setEmail(data.email ?? null);
       } catch (error: any) {
+        if (isUnauthorizedApiError(error)) {
+          setFirstname(null);
+          setEmail(null);
+          await clearToken();
+          return;
+        }
+
         setErrorMsg(
           getLocalizedErrorMessage(error, t, "errors.fetchProfileFailed"),
         );

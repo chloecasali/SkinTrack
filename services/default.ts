@@ -5,6 +5,22 @@ export function apiUrl(path: string): string {
   return `${API_URL}${path}`;
 }
 
+export class ApiError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+
+export function isUnauthorizedApiError(error: unknown): error is ApiError {
+  return (
+    error instanceof ApiError && (error.status === 401 || error.status === 403)
+  );
+}
+
 // Detect if a response contains JSON
 export function isJsonResponse(res: Response): boolean {
   const contentType = res.headers.get("content-type") ?? "";
@@ -39,7 +55,7 @@ export async function ensureOk<T = any>(
   const data = await parseJsonSafe<T>(res);
   if (!res.ok) {
     const message = getApiErrorMessage(data, `${fallback} (${res.status})`);
-    throw new Error(message);
+    throw new ApiError(message, res.status);
   }
   return data;
 }
